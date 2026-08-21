@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es-AR">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Vistaguay | Inteligencia de Datos para el Agro</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#47C278",
+                        "primary-container": "#47C278",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#004b26",
+                        "background": "#fafafa",
+                        "on-background": "#1a1c1c",
+                        "surface": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-surface-variant": "#3e4a3f",
+                        "outline": "#6d7a6f",
+                        "outline-variant": "#bdcabc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container": "#eeeeee",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "section-padding": "80px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "container-max": "1360px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "stat-xl": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["22px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "label-sm": ["13px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["56px", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "stat-xl": ["40px", { "lineHeight": "1", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-100% / 2));
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll 30s linear infinite;
+        }
+
+        .pause-on-hover:hover .animate-scroll {
+            animation-play-state: paused;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Leaflet custom styling */
+        .leaflet-container {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #fafafa;
+        }
+
+        .leaflet-control-zoom,
+        .leaflet-control-attribution {
+            display: none !important;
+        }
+
+        .leaflet-tooltip {
+            background: #1a1c1c !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 6px 12px !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .leaflet-tooltip-top:before {
+            border-top-color: #1a1c1c !important;
+        }
+    </style>
+    <!-- Leaflet.js for interactive pilot map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/20 selection:text-primary">
+
+    <!-- Section 0: TopNavBar (Shared Component) -->
+    <nav
+        class="fixed w-full top-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+        <div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
+            <!-- Logo de Vistaguay -->
+            <a href="#" class="flex items-center">
+                <img src="images/logo.png" alt="Vistaguay"
+                    class="h-9 md:h-10 w-auto object-contain transition-transform hover:scale-105">
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex gap-stack-lg items-center">
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200 uppercase tracking-widest text-xs font-bold"
+                    href="#servicios">Servicios</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200 uppercase tracking-widest text-xs font-bold"
+                    href="#expert">Pilotos</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200 uppercase tracking-widest text-xs font-bold"
+                    href="#devs">Desarrolladores</a>
+            </div>
+            <div class="flex gap-stack-md items-center">
+                <a href="https://web.vistaguay.com" target="_blank" rel="noopener noreferrer"
+                    class="hidden md:block font-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors text-xs font-bold">Ir
+                    a la plataforma</a>
+                <button onclick="toggleDownloadModal()"
+                    class="bg-primary text-on-primary px-5 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs hover:opacity-90 active:scale-95 transition-all">Registrarse</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Section 1: Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center overflow-hidden pt-8 md:pt-12 pb-8">
+            <div class="absolute inset-0 z-0">
+                <img class="w-full h-full object-cover" alt="Campo de soja Vistaguay"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGd6oV37Z3zRmSeYABNAPZbwmYjiiYCKbQ5wqfwxoBOKTLgwkxnKCuBOpwAOItiUm5YDl-JjBffalyOBC3-8ypIk4SZjifVW6ARI03JRTjfsArikFkSTD43MRXuGiv68OBW2JpqJ7e2COvG7EykScM4W5uHDwVXpQk8rF04yw-_QcFDwNNGEjo3oahbCXRrpzzbeXTxOpyEW5t3fDoCNeZWGFJJf_H4eByzYXiA1QqoKqAyX1bJ8FP4mQo7ev4pEEam9-Urdn0NI59">
+                <div class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-900/75 to-[#fafafa] z-10">
+                </div>
+            </div>
+            <div class="relative z-20 max-w-container-max mx-auto px-4 md:px-8 w-full">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+                    <div class="w-full lg:max-w-md xl:max-w-xl space-y-6 text-left">
+                        <!-- Adjusted layout hierarchy and title sizes to not dominate the Hero area -->
+                        <h1
+                            class="text-white font-extrabold text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight">
+                            El campo tiene datos. <br>
+                            <span class="text-primary">Vistaguay los convierte en decisiones.</span>
+                        </h1>
+                        <p class="text-slate-300 font-medium text-base md:text-lg leading-relaxed max-w-xl">Somos
+                            especialistas en Drones para el Agro. Conectamos a productores, asesores, empresas con
+                            pilotos de drone y proveedores de analítica y servicios en un solo lugar.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                            <a href="#servicios"
+                                class="bg-primary hover:bg-[#3ca866] text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all active:scale-95 shadow-md inline-block text-center">
+                                Conocer la plataforma
+                            </a>
+                            <a href="#expert"
+                                class="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all active:scale-95 inline-block text-center">
+                                Soy piloto de drone
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-full lg:flex-1 flex justify-center items-center">
+                        <div id="ecosystem-animation-mount"
+                            class="w-full mt-8 sm:mt-12 lg:mt-0 flex justify-center items-center"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 2: Stats (Light Theme) -->
+        <section class="py-20 bg-[#FAFAFA]">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter text-center reveal">
+                    <div class="p-8 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                        <p class="text-4xl font-extrabold text-primary mb-2 tracking-tighter"><span class="counter"
+                                data-target="80" data-prefix="+" data-suffix="k">0</span></p>
+                        <p class="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Hectáreas
+                            analizadas</p>
+                    </div>
+                    <div class="p-8 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                        <p class="text-4xl font-extrabold text-primary mb-2 tracking-tighter"><span class="counter"
+                                data-target="600" data-prefix="+" data-suffix="">0</span></p>
+                        <p class="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Pilotos activos
+                        </p>
+                    </div>
+                    <div class="p-8 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                        <p class="text-4xl font-extrabold text-primary mb-2 tracking-tighter"><span class="counter"
+                                data-target="3" data-prefix="" data-suffix="">0</span></p>
+                        <p class="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Algoritmos
+                            patentados</p>
+                    </div>
+                    <div class="p-8 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                        <p class="text-4xl font-extrabold text-primary mb-2 tracking-tighter"><span class="counter"
+                                data-target="5" data-prefix="" data-suffix="">0</span></p>
+                        <p class="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Provincias
+                            cubiertas</p>
+                    </div>
+                </div>
+                <!-- Logos Carousel (Updated to Infinite Scroll) -->
+                <div class="mt-20 pt-10 border-t border-outline-variant/30 text-center reveal">
+                    <p class="text-xs text-on-surface-variant mb-8 uppercase tracking-widest opacity-60 font-bold">
+                        Confían en nosotros</p>
+                    <div class="relative overflow-hidden w-full pause-on-hover">
+                        <div
+                            class="flex items-center gap-16 grayscale opacity-40 animate-scroll whitespace-nowrap py-4">
+                            <!-- Original Set -->
+                            <img src="images/alianzas/logo-bayer.png" onError="this.src='alianzas/logo-bayer.png'"
+                                alt="Bayer"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-syngenta.png" onError="this.src='alianzas/logo-syngenta.png'"
+                                alt="Syngenta"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-corteva.png" onError="this.src='alianzas/logo-corteva.png'"
+                                alt="Corteva"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-basf.png" onError="this.src='alianzas/logo-basf.png'"
+                                alt="BASF"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-xarvio.png" onError="this.src='alianzas/logo-xarvio.png'"
+                                alt="Xarvio"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-advanta.png" onError="this.src='alianzas/logo-advanta.png'"
+                                alt="Advanta"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-nidera.png" onError="this.src='alianzas/logo-nidera.png'"
+                                alt="Nidera"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-dji-agriculture.png"
+                                onError="this.src='alianzas/logo-dji-agriculture.png'" alt="DJI Agriculture"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-xag.png" onError="this.src='alianzas/logo-xag.png'" alt="XAG"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-gaman.png" onError="this.src='alianzas/logo-gaman.png'"
+                                alt="Gaman"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-alea-broker-grupo-gaman.png"
+                                onError="this.src='alianzas/logo-alea-broker-grupo-gaman.png'" alt="Alea Broker"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-aca.png" onError="this.src='alianzas/logo-aca.png'" alt="ACA"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-coop-agricola-mb.png"
+                                onError="this.src='alianzas/logo-coop-agricola-mb.png'" alt="Coop Agricola MB"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-endeavor.png" onError="this.src='alianzas/logo-endeavor.png'"
+                                alt="Endeavor"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+
+                            <!-- Duplicate Set (Duplicated once) -->
+                            <img src="images/alianzas/logo-bayer.png" onError="this.src='alianzas/logo-bayer.png'"
+                                alt="Bayer"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-syngenta.png" onError="this.src='alianzas/logo-syngenta.png'"
+                                alt="Syngenta"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-corteva.png" onError="this.src='alianzas/logo-corteva.png'"
+                                alt="Corteva"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-basf.png" onError="this.src='alianzas/logo-basf.png'"
+                                alt="BASF"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-xarvio.png" onError="this.src='alianzas/logo-xarvio.png'"
+                                alt="Xarvio"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-advanta.png" onError="this.src='alianzas/logo-advanta.png'"
+                                alt="Advanta"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-nidera.png" onError="this.src='alianzas/logo-nidera.png'"
+                                alt="Nidera"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-dji-agriculture.png"
+                                onError="this.src='alianzas/logo-dji-agriculture.png'" alt="DJI Agriculture"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-xag.png" onError="this.src='alianzas/logo-xag.png'" alt="XAG"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-gaman.png" onError="this.src='alianzas/logo-gaman.png'"
+                                alt="Gaman"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-alea-broker-grupo-gaman.png"
+                                onError="this.src='alianzas/logo-alea-broker-grupo-gaman.png'" alt="Alea Broker"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-aca.png" onError="this.src='alianzas/logo-aca.png'" alt="ACA"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-coop-agricola-mb.png"
+                                onError="this.src='alianzas/logo-coop-agricola-mb.png'" alt="Coop Agricola MB"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                            <img src="images/alianzas/logo-endeavor.png" onError="this.src='alianzas/logo-endeavor.png'"
+                                alt="Endeavor"
+                                class="h-12 md:h-16 w-auto max-w-[160px] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mx-6 sm:mx-8" />
+                        </div>
+                        <!-- Gradient Overlays for smooth entry/exit -->
+                        <div
+                            class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10">
+                        </div>
+                        <div
+                            class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: El Problema (Cards) -->
+        <section class="py-20 bg-[#fafafa]">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl font-extrabold text-on-surface mb-4 tracking-tight">El problema: el potencial
+                        frenado</h2>
+                    <p class="text-on-surface-variant max-w-2xl mx-auto">La tecnología está lista y el agro también,
+                        pero faltaba una conexión eficiente.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                    <!-- Actor 1: Productores -->
+                    <div
+                        class="p-6 bg-surface rounded-2xl card-shadow card-hover border border-outline-variant/20 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-primary">agriculture</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-on-surface">Productores</h3>
+                            <p class="text-on-surface-variant text-sm leading-relaxed">Bajo conocimiento de las
+                                soluciones de mercado y dificultad para contratar servicios de forma directa y ágil.</p>
+                        </div>
+                    </div>
+
+                    <!-- Actor 2: Pilotos Invisibles -->
+                    <div
+                        class="p-6 bg-surface rounded-2xl card-shadow card-hover border border-outline-variant/20 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-on-surface">Pilotos Invisibles</h3>
+                            <p class="text-on-surface-variant text-sm leading-relaxed">Equipamiento costoso parado por
+                                falta de canales comerciales para ofrecer sus servicios de forma continua en su región.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Actor 3: Desarrolladores -->
+                    <div
+                        class="p-6 bg-surface rounded-2xl card-shadow card-hover border border-outline-variant/20 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-primary">code</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-on-surface">Desarrolladores</h3>
+                            <p class="text-on-surface-variant text-sm leading-relaxed">Dificultad crítica para probar,
+                                validar y escalar sus algoritmos e IA de precisión sobre terrenos reales de cultivo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Actor 4: Empresas -->
+                    <div
+                        class="p-6 bg-surface rounded-2xl card-shadow card-hover border border-outline-variant/20 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-primary">corporate_fare</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-on-surface">Empresas</h3>
+                            <p class="text-on-surface-variant text-sm leading-relaxed">Altas barreras logísticas y de
+                                costos para coordinar, capacitar y monitorear sus redes internas de pilotos en el país.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: La Solución (Orchestration Cards) -->
+        <section class="py-20 bg-[#FAFAFA]">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl font-extrabold text-on-surface mb-4 tracking-tight">Una solución de punta a
+                        punta</h2>
+                    <p class="text-on-surface-variant">Orquestamos la inteligencia del campo en una sola plataforma
+                        integrada.</p>
+                </div>
+                <div class="bg-surface rounded-2xl card-shadow p-8 md:p-12 reveal border border-outline-variant/20">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-start relative">
+                        <!-- Step 1 -->
+                        <div class="text-center flex flex-col items-center">
+                            <div class="text-4xl font-extrabold text-primary mb-2 opacity-20">01</div>
+                            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                <span class="material-symbols-outlined text-primary text-3xl">add_shopping_cart</span>
+                            </div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Productor solicita</h4>
+                            <p class="text-xs text-on-surface-variant max-w-[180px]">Define el lote desde la plataforma.
+                            </p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="text-center flex flex-col items-center">
+                            <div class="text-4xl font-extrabold text-primary mb-2 opacity-20">02</div>
+                            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                <span class="material-symbols-outlined text-primary text-3xl">flight</span>
+                            </div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Piloto Expert vuela</h4>
+                            <p class="text-xs text-on-surface-variant max-w-[180px]">Captura imágenes de alta precisión.
+                            </p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="text-center flex flex-col items-center">
+                            <div class="text-4xl font-extrabold text-primary mb-2 opacity-20">03</div>
+                            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                <span class="material-symbols-outlined text-primary text-3xl">memory</span>
+                            </div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Algoritmo procesa</h4>
+                            <p class="text-xs text-on-surface-variant max-w-[180px]">Conversión automática a datos
+                                útiles.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="text-center flex flex-col items-center">
+                            <div class="text-4xl font-extrabold text-primary mb-2 opacity-20">04</div>
+                            <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-4">
+                                <span
+                                    class="material-symbols-outlined text-on-primary text-3xl">assignment_turned_in</span>
+                            </div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-primary mb-2">Decisión en manos
+                            </h4>
+                            <p class="text-xs text-on-surface-variant font-bold max-w-[180px]">Acción inmediata en el
+                                lote.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Servicios (Interactive Tabbed Showcase) -->
+        <section class="py-20 bg-[#FAFAFA]" id="servicios">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-on-surface mb-4 tracking-tight">
+                        Tecnología de precisión y servicios para cada etapa del cultivo
+                    </h2>
+                    <p class="text-lg text-on-surface-variant max-w-2xl mx-auto">
+                        Soluciones de analítica, aplicación y formación profesional impulsadas por Inteligencia
+                        Artificial.
+                    </p>
+                </div>
+
+                <!-- Horizontal Pill Tab Bar -->
+                <div class="flex flex-wrap justify-center gap-3 mb-10">
+                    <button id="tab-btn-weed"
+                        class="tab-btn px-6 py-2.5 rounded-full bg-primary text-white font-bold text-sm shadow-md transition-all duration-300"
+                        onclick="switchTab('weed')">
+                        Mapeo de Malezas
+                    </button>
+                    <button id="tab-btn-plant"
+                        class="tab-btn px-6 py-2.5 rounded-full bg-surface-container-highest text-on-surface-variant hover:bg-surface-variant font-bold text-sm transition-all duration-300"
+                        onclick="switchTab('plant')">
+                        Conteo de Plantas
+                    </button>
+                    <button id="tab-btn-drone"
+                        class="tab-btn px-6 py-2.5 rounded-full bg-surface-container-highest text-on-surface-variant hover:bg-surface-variant font-bold text-sm transition-all duration-300"
+                        onclick="switchTab('drone')">
+                        Aplicaciones con Dron
+                    </button>
+                    <button id="tab-btn-training"
+                        class="tab-btn px-6 py-2.5 rounded-full bg-surface-container-highest text-on-surface-variant hover:bg-surface-variant font-bold text-sm transition-all duration-300"
+                        onclick="switchTab('training')">
+                        Capacitación para Pilotos
+                    </button>
+                    <button id="tab-btn-special"
+                        class="tab-btn px-6 py-2.5 rounded-full bg-surface-container-highest text-on-surface-variant hover:bg-surface-variant font-bold text-sm transition-all duration-300"
+                        onclick="switchTab('special')">
+                        Proyectos Especiales
+                    </button>
+                </div>
+
+                <!-- Dynamic 50/50 Content Card -->
+                <div
+                    class="bg-white rounded-3xl border border-outline-variant/30 shadow-xl overflow-hidden min-h-[480px]">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 opacity-100 transform translate-y-0"
+                        id="solutions-content-card">
+                        <!-- Dynamically populated via JS with smooth fade transitions -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Vistaguay Expert (Card based) -->
+        <section class="py-20 bg-[#FAFAFA]" id="expert">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div
+                    class="bg-surface rounded-3xl card-shadow overflow-hidden reveal border border-outline-variant/20 p-8 md:p-12">
+                    <!-- Top Row: 50/50 layout -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <!-- Left Column: Proposal & CTA -->
+                        <div class="space-y-6 flex flex-col justify-center">
+                            <h2 class="text-3xl font-extrabold text-on-surface tracking-tight">Convertite en un Expert
+                            </h2>
+                            <p class="text-on-surface font-semibold text-sm">
+                                Registrá tu drone y sumate a nuestra Red:
+                            </p>
+
+                            <!-- Bullet Points with Green Left Accent Bar -->
+                            <div class="space-y-4 pt-2">
+                                <div class="border-l-4 border-[#47C278] pl-4 py-1 mb-3">
+                                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed">
+                                        Recibí solicitudes de vuelo cercanas a tu ubicación directamente a tu celular
+                                    </p>
+                                </div>
+                                <div class="border-l-4 border-[#47C278] pl-4 py-1 mb-3">
+                                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed">
+                                        Accede a una biblioteca de algoritmos y un protocolo de vuelo claro para
+                                        garantizar la calidad del trabajo
+                                    </p>
+                                </div>
+                                <div class="border-l-4 border-[#47C278] pl-4 py-1 mb-3">
+                                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed">
+                                        Gestionamos tus pagos de forma segura, asegurando tu cobro al completar el
+                                        servicio
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="pt-4">
+                                <a href="https://onelink.to/xjay8d" target="_blank" rel="noopener noreferrer"
+                                    class="bg-[#47C278] hover:bg-[#3db067] text-white px-6 py-3 rounded-full font-bold text-sm shadow-sm transition-all duration-200 inline-flex items-center justify-center gap-2 mt-4">
+                                    REGISTRARSE
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Leaflet Map -->
+                        <div id="pilots-native-map"
+                            class="w-full h-[380px] sm:h-[420px] rounded-2xl overflow-hidden border border-slate-200 shadow-md z-10">
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: 3 Benefit Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-slate-200/60 mt-8">
+                        <!-- Card 1 -->
+                        <div class="p-5 bg-white rounded-2xl border border-slate-100 space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-xl">support_agent</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-800">Soporte y Protocolos</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Soporte activo y protocolos de vuelo
+                                interactivos para acompañarte en cada servicio y garantizar la calidad.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="p-5 bg-white rounded-2xl border border-slate-100 space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-xl">security</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-800">Seguros Integrales</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Coberturas preferenciales de
+                                Responsabilidad Civil, deriva y equipos junto a Grupo Gaman.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="p-5 bg-white rounded-2xl border border-slate-100 space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-xl">sell</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-800">Descuentos Preferenciales</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Beneficios y descuentos especiales en la
+                                compra de drones, repuestos y accesorios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Testimonios (Interactive 3D Carousel) -->
+        <section class="py-12 md:py-16 bg-[#FAFAFA] overflow-hidden relative" id="testimonios">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl font-extrabold text-on-surface tracking-tight mb-4">Historias de éxito real</h2>
+                    <p class="text-on-surface-variant">Lo que dicen quienes ya están transformando el campo con
+                        Vistaguay.</p>
+                </div>
+
+                <!-- Carousel Container Wrapper -->
+                <div class="relative w-full flex flex-col items-center justify-center">
+                    <div class="relative w-full flex items-center justify-center">
+                        <!-- Left Arrow -->
+                        <button id="prev-test-btn"
+                            class="absolute left-2 md:left-6 z-40 bg-white hover:bg-slate-100 text-slate-700 hover:text-slate-900 w-10 h-10 rounded-full flex items-center justify-center shadow-lg border border-slate-200 transition-all hover:scale-105 focus:outline-none">
+                            <span class="material-symbols-outlined text-xl">arrow_back</span>
+                        </button>
+
+                        <!-- Carousel Track Frame -->
+                        <div class="w-full max-w-5xl overflow-visible px-4 md:px-12 py-12">
+                            <div id="testimonial-track"
+                                class="flex transition-transform duration-500 ease-in-out gap-4 sm:gap-6 justify-start items-center">
+                                <!-- Cards will be dynamically rendered via JS to handle focus scaling -->
+                            </div>
+                        </div>
+
+                        <!-- Right Arrow -->
+                        <button id="next-test-btn"
+                            class="absolute right-2 md:right-6 z-40 bg-white hover:bg-slate-100 text-slate-700 hover:text-slate-900 w-10 h-10 rounded-full flex items-center justify-center shadow-lg border border-slate-200 transition-all hover:scale-105 focus:outline-none">
+                            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Counter Indicator -->
+                    <div id="testimonial-counter"
+                        class="text-xs font-extrabold text-on-surface-variant uppercase tracking-widest mt-4">
+                        1 / 11
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Developers (Contrast Card) -->
+        <section class="py-20 bg-[#FAFAFA]" id="devs">
+            <div class="max-w-container-max mx-auto px-4 md:px-8">
+                <div
+                    class="bg-inverse-surface rounded-3xl card-shadow p-8 md:p-16 flex flex-col lg:flex-row items-center gap-12 reveal relative overflow-hidden">
+                    <div class="flex-1 relative z-10 text-white space-y-6">
+                        <h2 class="text-3xl font-extrabold tracking-tight">¿Tenés un algoritmo que aporta valor al
+                            campo?</h2>
+                        <p class="text-sm text-surface-variant/80 leading-relaxed">
+                            Vistaguay es una plataforma abierta. Integrá tu tecnología de procesamiento y llegá a miles
+                            de hectáreas en toda Latinoamérica. Ofrecemos una API robusta y una infraestructura de datos
+                            escalable.
+                        </p>
+                        <button
+                            class="bg-primary hover:bg-[#3ca866] text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all shadow-md">
+                            Sumate a Vistaguay
+                        </button>
+                    </div>
+                    <div class="flex-1 relative z-10 w-full">
+                        <div
+                            class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 font-mono text-xs text-primary-fixed overflow-x-auto card-shadow text-emerald-300">
+                            <p class="text-white/40 mb-2">// POST /api/v1/process-field</p>
+                            <p>{</p>
+                            <p class="ml-4">"field_id": "ar_ba_lote_04",</p>
+                            <p class="ml-4">"algorithm": "weed_detector_v2",</p>
+                            <p class="ml-4">"output_format": "shapefile",</p>
+                            <p class="ml-4">"callback_url": "https://tuapp.com/webhook"</p>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Final CTA -->
+        <section class="relative py-24 h-[560px] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img class="w-full h-full object-cover" alt="Campo Vistaguay al atardecer"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA91x9qyKXMIpsBYsPeHZnvp4quCAbBZ5gke4VlQuXwX22fa-xaXN5XungxtQSdKabVsCUqskQGKdDkFS1ktbVIgLMfIKTntuzZ9n3yG29xvJ-ZcwfQGfZiOsuy_Fb3mgpGrBj_mZ86wCyjGOLib14boItknojkD_vVem5NrnhwQg7io-59n6246-gpSVYk4BobtVtEFnKHGjAbunb9m7DrbsLe_UdPf3oRpNU74ywYzQE53Kmmbf3b7wt6ADEUAtT2UmOXpEjgWQiL">
+                <div class="absolute inset-0 bg-black/60 z-10"></div>
+            </div>
+            <div class="relative z-20 max-w-container-max mx-auto px-4 md:px-8 text-center text-white">
+                <div class="max-w-3xl mx-auto space-y-6 reveal">
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                        Tu campo tiene más para dar. Vistaguay te ayuda a verlo.
+                    </h2>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
+                        <a href="https://onelink.to/6g4qbv" target="_blank" rel="noopener noreferrer"
+                            class="bg-primary hover:bg-[#3ca866] text-white px-7 py-3 rounded-full font-bold uppercase tracking-wider text-xs transition-all active:scale-95 shadow-lg inline-block">
+                            Empezar como productor
+                        </a>
+                        <a href="https://onelink.to/xjay8d" target="_blank" rel="noopener noreferrer"
+                            class="bg-white/10 hover:bg-white/20 border border-white/40 text-white px-7 py-3 rounded-full font-bold uppercase tracking-wider text-xs transition-all active:scale-95 inline-block">
+                            Registrarme como piloto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer (Shared Component) -->
+        <footer class="bg-surface-container w-full py-16 px-gutter border-t border-outline-variant/30">
+            <div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start gap-stack-lg">
+                <div class="max-w-xs">
+                    <img src="images/logo.png" alt="Vistaguay" class="h-8 w-auto mb-6 object-contain"
+                        onError="this.src='logo.png'" />
+                    <p class="text-on-surface-variant text-xs mb-8 leading-relaxed">Transformando el campo argentino a
+                        través de la inteligencia aérea y de datos.</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/vistaguay/" target="_blank"
+                            class="text-primary hover:opacity-70 transition-opacity">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/vistaguay" target="_blank"
+                            class="text-primary hover:opacity-70 transition-opacity">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@vistaguay310" target="_blank"
+                            class="text-primary hover:opacity-70 transition-opacity">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-y-10">
+                    <div>
+                        <h5 class="text-xs uppercase tracking-wider text-on-surface mb-6 font-bold">Soporte</h5>
+                        <ul class="space-y-4 text-xs text-on-surface-variant font-medium">
+                            <li><a class="hover:text-primary transition-colors" href="#">Privacidad</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Términos de Uso</a></li>
+                            <li><a class="hover:text-primary transition-colors"
+                                    href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank"
+                                    rel="noopener noreferrer">Contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-container-max mx-auto mt-16 pt-8 border-t border-outline-variant/20 text-center">
+                <p class="text-[11px] text-on-surface-variant opacity-60 uppercase tracking-widest font-bold">© 2026
+                    Vistaguay AgTech. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight * 0.9) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Animated Number Counters (Count-up effect)
+        const counters = document.querySelectorAll('.counter');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const countUp = (element) => {
+            const target = parseInt(element.getAttribute('data-target'), 10);
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 1500; // ms
+            const startTime = performance.now();
+
+            const updateCount = (timestamp) => {
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease out quad
+                const easeProgress = progress * (2 - progress);
+                const currentValue = Math.floor(easeProgress * target);
+
+                element.textContent = prefix + currentValue.toLocaleString('es-AR') + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    element.textContent = prefix + target.toLocaleString('es-AR') + suffix;
+                }
+            };
+
+            requestAnimationFrame(updateCount);
+        };
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    countUp(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Interactive Solutions Showcase tab data
+        const tabData = {
+            weed: {
+                badge: "Fotogrametría y Analítica",
+                title: "Control selectivo de malezas en barbecho y post-emergencia",
+                desc: "Mapeo digital de precisión con IA (Verde sobre Marrón y Verde sobre Verde) para aplicaciones sectorizadas de herbicidas en Maíz, Soja, Maní y Girasol.",
+                stat1Val: "83%",
+                stat1Label: "Ahorro de Producto",
+                stat2Val: "380%",
+                stat2Label: "ROI Obtenido",
+                stat3Val: "3.813L",
+                stat3Label: "Agua Ahorrada",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCO04atv5igq9zvilOFirlIUQfjuy3pX69273NboFUmcw-sJPiYLTHH6w4GW8SeWU8RjxiAABVfGG1gmxDeK1hlvH3YhtX0Gzi2lu8tTBt4zKdlWPpz1xvLFTaiVJVQx5ixrpd979NuTdfGmPqtAD7FX6NzgAyIHZfpIjMGSOm_NOas7NIzNMD12TqvUqsU2Fe8gqAurXHpx7jks231BZs4y3CeMaxn_6ylcFtVggvifqp9R4Ps4S0lMojjSaztRO48RFZFSAPgPcq3",
+                bullets: ["Algoritmo Verde sobre Marrón patentado", "Prescripciones listas para pulverizadoras", "Compatible con todas las marcas de maquinaria"],
+                ctaText: "Ver Ficha Técnica y ROI"
+            },
+            plant: {
+                badge: "Planting Quality",
+                title: "Uniformidad temporal y espacial de siembra en Maíz y Girasol",
+                desc: "Identificación de fallas y duplicaciones, recuento preciso de plantas emergidas para calcular desvíos estándar y estimar brechas de rendimiento.",
+                stat1Val: "1 TN/Ha",
+                stat1Label: "Brecha Estimada",
+                stat2Val: "V2-V3",
+                stat2Label: "Estadio Óptimo",
+                stat3Val: "4",
+                stat3Label: "Puntos de Medición",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAK968Uw6t8UdcjZvt9E1veR5VNQvFAztRWXHj6UnciU85hbn6vsg2StuArFD14acKGP4aKZyfNgGJFJdJxWrklY00oA6Lvu4dY_Hz0VItbUdf2BUQ_O3zrZR1n6IE13AS6sTlzEHZh0sSHvXuI3NgN7PSV8mDhxH7VvZltYwITLYVb0XvZvYZqxltBAxo0KeqoGtX9Y2ywPtvRYfpanOzt3nZDHNftTivdhWVGuvbXBaGvX1EtOWfP9k0m19LDUwqgdPeTx11_gTTD",
+                bullets: ["Conteo automatizado con visión computacional", "Monitoreo de velocidad de emergencia", "Optimización de densidad de siembra"],
+                ctaText: "Analizar Mi Siembra"
+            },
+            drone: {
+                badge: "Field Services",
+                title: "Aplicación aérea y siembra con drones de gran porte",
+                desc: "Servicios profesionales de pulverización ultra-precisa, fertilización y siembra de cultivos de cobertura en zonas de difícil acceso o terrenos anegados.",
+                stat1Val: "Pulverización",
+                stat1Label: "Ultra-Precisa",
+                stat2Val: "Fertilización",
+                stat2Label: "Sólida/Líquida",
+                stat3Val: "Siembra",
+                stat3Label: "Cultivos Cobertura",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBKxng3dGmKLyR6WP6q8MrTz2TDs0B80yBIm4Cz5gWRXT7l0e0sU_B4oN_7f-NjpvPLdTAmxgqU48cxzDnH3pOHY2pkcHROpkrbb3BjZXJx0Z9NwusOVue4MvQRYiVrydiLI6Daf84-DtJpBDWbPOTEKKOyUIEH_Hk_oujiZfLrVaJJwoULicQvH5x3F5jONuBxW6mQTNu6pFB5Vr89TmlxsoRtUWXAvpyX68WOdhEShqA-IBhsEIElGGgYEXnI7JG248AsmOiBGsxu",
+                bullets: ["Pulverización aérea sin pisoteo del cultivo", "Control selectivo de plagas y malezas", "Siembra al voleo de coberturas"],
+                ctaText: "Solicitar Servicio de Dron"
+            },
+            training: {
+                badge: "Academia Vistaguay",
+                title: "Capacitación comercial: Cómo ganar dinero con tu dron en el agro",
+                desc: "Curso intensivo para pilotos profesionales. Aprendé a generar reportes de valor agronómico, vender servicios de precisión y optimizar operaciones.",
+                stat1Val: "6 Meses",
+                stat1Label: "Soporte Técnico",
+                stat2Val: "Presencial",
+                stat2Label: "Modalidad Práctica",
+                stat3Val: "100%",
+                stat3Label: "Salida Laboral",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCLq_jMLNgQfEdwr5c24Cnu1RuzYyRFfHyJsMUvnBIuZBJ1i8yykbwWgNlXnK1em3DS04mIufJNLC7NtAMIJOEn-HORuRY5sIvtJZTNgD7MQRDVf1YAR04X97biwf_Gn_Nvhf9M3qlTWLftKIlqEj-NAwhBXjjYKCLpy_yBGCehxIReK8bz04gyPwOfGj3TFCribVoLWXov6KJ9WpEnwVq8bgWjKE9Bi0jEeuZ5gFwQ7gUSorFJ738d1gb_vY6kf4wpQ7IaWtIlawNp",
+                bullets: ["Certificación oficial Vistaguay Expert", "Acceso a bolsa de trabajo nacional", "Descuentos en seguros y repuestos"],
+                ctaText: "Inscribirse al Curso"
+            },
+            special: {
+                badge: "SOLUCIONES A MEDIDA Y R&D",
+                title: "Proyectos concretos de monitoreo, altimetría y otras labores",
+                desc: "Desarrollamos e integramos algoritmos específicos adaptados a cultivos regionales, ganadería y estudios topográficos complejos que requieren analítica a medida.",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCLq_jMLNgQfEdwr5c24Cnu1RuzYyRFfHyJsMUvnBIuZBJ1i8yykbwWgNlXnK1em3DS04mIufJNLC7NtAMIJOEn-HORuRY5sIvtJZTNgD7MQRDVf1YAR04X97biwf_Gn_Nvhf9M3qlTWLftKIlqEj-NAwhBXjjYKCLpy_yBGCehxIReK8bz04gyPwOfGj3TFCribVoLWXov6KJ9WpEnwVq8bgWjKE9Bi0jEeuZ5gFwQ7gUSorFJ738d1gb_vY6kf4wpQ7IaWtIlawNp"
+            }
+        };
+
+        function renderSolutionsCard(tabKey) {
+            const data = tabData[tabKey];
+            const cardContainer = document.getElementById('solutions-content-card');
+            if (!cardContainer) return;
+
+            let leftColumnHtml = '';
+
+            if (tabKey === 'special') {
+                leftColumnHtml = `
+          <div class="space-y-4">
+            <div class="inline-flex px-3 py-1 bg-primary/10 rounded-full text-primary text-xs font-bold uppercase tracking-wider">
+              ${data.badge}
+            </div>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-on-surface leading-tight">
+              ${data.title}
+            </h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              ${data.desc}
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-outline-variant/30 pt-6">
+              <div>
+                  <h4 class="text-xs uppercase font-extrabold text-primary mb-1">Ganadería</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Conteo y estimación de peso.</p>
+              </div>
+              <div>
+                  <h4 class="text-xs uppercase font-extrabold text-primary mb-1">Cultivos Especiales</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Cítricos, Yerba Mate, Caña de Azúcar, Viñedos y Pasturas.</p>
+              </div>
+              <div>
+                  <h4 class="text-xs uppercase font-extrabold text-primary mb-1">Forestal & Reforestación</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Mapeo de densidad y siembra aérea.</p>
+              </div>
+              <div>
+                  <h4 class="text-xs uppercase font-extrabold text-primary mb-1">Altimetría & Topografía</h4>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Modelos digitales de elevación y escurrimiento de agua.</p>
+              </div>
+          </div>
+          <div class="pt-4">
+              <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" class="bg-[#47C278] hover:bg-[#3db067] text-white px-8 py-3.5 rounded-full font-bold flex items-center gap-2 shadow-md w-fit text-sm transition-all hover:scale-[1.02] active:scale-95">
+                  Contactanos
+                  <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+          </div>
+                `;
+            } else {
+                const bulletsHtml = data.bullets.map(b => `
+                    <li class="flex items-center gap-2 text-xs text-on-surface-variant font-medium">
+                      <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+                      ${b}
+                    </li>
+                `).join('');
+
+                leftColumnHtml = `
+          <div class="space-y-4">
+            <div class="inline-flex px-3 py-1 bg-primary/10 rounded-full text-primary text-xs font-bold uppercase tracking-wider">
+              ${data.badge}
+            </div>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-on-surface leading-tight">
+              ${data.title}
+            </h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              ${data.desc}
+            </p>
+            <ul class="space-y-2 pt-2">
+              ${bulletsHtml}
+            </ul>
+          </div>
+          <!-- Key Metrics Grid -->
+          <div class="grid grid-cols-3 gap-4 border-t border-outline-variant/30 pt-6">
+            <div class="flex flex-col">
+              <span class="text-lg md:text-xl font-extrabold text-primary">${data.stat1Val}</span>
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant mt-0.5">${data.stat1Label}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-lg md:text-xl font-extrabold text-primary">${data.stat2Val}</span>
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant mt-0.5">${data.stat2Label}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-lg md:text-xl font-extrabold text-primary">${data.stat3Val}</span>
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant mt-0.5">${data.stat3Label}</span>
+            </div>
+          </div>
+          <div class="pt-2">
+            <button class="bg-primary hover:bg-[#3ca866] text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all shadow-md flex items-center gap-2">
+              ${data.ctaText}
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+          </div>
+                `;
+            }
+
+            cardContainer.innerHTML = `
+        <!-- Left Column: Content -->
+        <div class="p-8 md:p-12 flex flex-col justify-between gap-6">
+            ${leftColumnHtml}
+        </div>
+        <!-- Right Column: Visual Preview -->
+        <div class="relative h-64 lg:h-auto bg-surface-container overflow-hidden">
+          <img alt="${data.title}" class="w-full h-full object-cover" src="${data.image}">
+          <div class="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent"></div>
+        </div>
+      `;
+        }
+
+        function switchTab(tabKey) {
+            const cardContainer = document.getElementById('solutions-content-card');
+            if (!cardContainer) return;
+
+            // Toggle button classes
+            const buttons = {
+                weed: document.getElementById('tab-btn-weed'),
+                plant: document.getElementById('tab-btn-plant'),
+                drone: document.getElementById('tab-btn-drone'),
+                training: document.getElementById('tab-btn-training'),
+                special: document.getElementById('tab-btn-special')
+            };
+
+            Object.keys(buttons).forEach(key => {
+                const btn = buttons[key];
+                if (key === tabKey) {
+                    btn.className = "tab-btn px-6 py-2.5 rounded-full bg-primary text-white font-bold text-sm shadow-md transition-all duration-300";
+                } else {
+                    btn.className = "tab-btn px-6 py-2.5 rounded-full bg-surface-container-highest text-on-surface-variant hover:bg-surface-variant font-bold text-sm transition-all duration-300";
+                }
+            });
+
+            // Fluid fade and slide transition for dynamic tab switching
+            cardContainer.style.transition = 'opacity 150ms ease-in-out, transform 150ms ease-in-out';
+            cardContainer.style.opacity = '0';
+            cardContainer.style.transform = 'translateY(5px)';
+
+            setTimeout(() => {
+                renderSolutionsCard(tabKey);
+                cardContainer.style.opacity = '1';
+                cardContainer.style.transform = 'translateY(0)';
+            }, 150);
+        }
+
+        // Testimonials 3D Scale Carousel Data & Logic
+        const testimonials = [
+            { quote: "Para nosotros como asesores, Vistaguay es rápida y ágil de utilizar. Desde que la usamos, nos ha permitido ser mucho más eficientes en el tiempo en el que procesamos las imágenes", name: "Santiago Cha", role: "Socio Fundador, Vantagro" },
+            { quote: "La nueva plataforma permite vincular la necesidad de un productor con el piloto de dron. Además, te dan un protocolo de vuelo muy simple de lo que el cliente necesita, facilitando el trabajo. Para mí, es el Tinder de los drones", name: "Lucas Fiandrino", role: "Piloto de Drones" },
+            { quote: "Gracias a la alianza estratégica con Vistaguay, podemos ofrecer el servicio en todo el país y que todo productor obtenga ahorros de más de 60% en insumos", name: "Pablo Provera", role: "Responsable de Xarvio (BASF)" },
+            { quote: "Vistaguay nos permite correlacionar la información digital con lo que veíamos en el campo. Nos ayuda a saber dónde estamos parados y, lo más importante, definir qué cosas podríamos mejorar", name: "Santiago Tourn", role: "Fundador de Mecatech" },
+            { quote: "En conjunto a Vistaguay desarrollamos un algoritmo novedoso para Alfalfa. Recomiendo la plataforma a los productores para hacer las mediciones y poder tomar decisiones cada vez más precisas", name: "Fernando Scaramuzza", role: "Investigador, INTA Manfredi" },
+            { quote: "Vistaguay entiende las necesidades del trabajo a escala de investigación, dándonos información objetiva y robusta. Se adaptaron muy bien a nuestras necesidades y ofrecen muy buen soporte al cliente en tiempos cortos", name: "Ignacio Colonna", role: "Responsable Global de Desarrollo de Productos, Agrithority" },
+            { quote: "Lo que más nos gustó de Vistaguay es la flexibilidad que tuvieron para adaptar la solución a nuestros sistemas. Esto es clave para lograr la escalabilidad que buscamos y para tener un buen diagnóstico que impacta en el resultado económico", name: "Pedro Hales", role: "Coordinador, Grupo Ria" },
+            { quote: "Vistaguay me permitió darle un valor agregado a mi profesión, haciendo más eficiente la actividad agropecuaria. La plataforma es muy confiable y, lo mejor, el trato es personalizado. Lo recomiendo", name: "Facundo Fontana", role: "Asesor Privado" },
+            { quote: "Encontramos en Vistaguay un proveedor estratégico. Su plataforma nos permite evaluar rápidamente, de manera precisa y a mayor escala cómo está funcionando nuestro producto a campo, en cualquier lugar del mundo", name: "Federico Cola", role: "Fundador, Seed Matriz" },
+            { quote: "La plataforma de Vistaguay nos gustó por lo visual e intuitivo de sus reportes, pero sobre todo por la velocidad de entrega. Quedamos muy conformes y recomendamos a quienes están necesitando un servicio similar.", name: "Martín Rainaudo", role: "Gerente, Bamburubí" },
+            { quote: "Vistaguay me permite hacer vuelos para productores cerca de mi ubicación. Yo solo cargo las imágenes y cobro por mi vuelo. Si tenés un dron y querés aprovecharlo, te recomiendo sumarte", name: "Pablo Bettini", role: "Piloto de Dron, Vistaguay Expert" }
+        ];
+
+        let activeTestimonialIndex = 0;
+        let testimonialInterval = null;
+
+        function initTestimonials() {
+            const track = document.getElementById('testimonial-track');
+            if (!track) return;
+            track.innerHTML = '';
+            testimonials.forEach((item, index) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = `p-6 md:p-8 rounded-3xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col justify-between min-h-[300px] w-[280px] sm:w-[340px] md:w-[380px] shrink-0 border select-none`;
+                cardDiv.innerHTML = `
+                    <div>
+                        <span class="material-symbols-outlined text-primary text-3xl mb-4">format_quote</span>
+                        <p class="text-xs md:text-sm font-medium text-slate-800 italic leading-relaxed mb-6">"${item.quote}"</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center font-extrabold text-primary text-xs uppercase">
+                            ${item.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wider text-slate-900 font-extrabold">${item.name}</p>
+                            <p class="text-[10px] text-slate-500 font-semibold">${item.role}</p>
+                        </div>
+                    </div>
+                `;
+
+                ['mouseenter', 'mousedown', 'touchstart'].forEach(evt => {
+                    cardDiv.addEventListener(evt, pauseTestimonialCycling);
+                });
+                ['mouseleave', 'mouseup', 'touchend'].forEach(evt => {
+                    cardDiv.addEventListener(evt, startTestimonialCycling);
+                });
+                track.appendChild(cardDiv);
+            });
+        }
+
+        function renderTestimonials() {
+            const track = document.getElementById('testimonial-track');
+            if (!track) return;
+
+            const cards = track.children;
+            if (cards.length === 0) return;
+
+            const trackWidth = track.parentElement.offsetWidth;
+            const cardWidth = cards[0].offsetWidth || 380;
+            const gap = window.innerWidth >= 768 ? 24 : 16;
+
+            const activeCardCenter = (activeTestimonialIndex * (cardWidth + gap)) + (cardWidth / 2);
+            const trackCenter = trackWidth / 2;
+            const translateX = trackCenter - activeCardCenter;
+
+            track.style.transform = `translateX(${translateX}px)`;
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const isActive = i === activeTestimonialIndex;
+
+                card.className = `p-6 md:p-8 rounded-3xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col justify-between min-h-[300px] w-[280px] sm:w-[340px] md:w-[380px] shrink-0 border select-none`;
+
+                if (isActive) {
+                    card.className += ` scale-105 sm:scale-110 z-20 border-2 border-[#47C278] shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
+                } else {
+                    card.className += ` scale-95 z-10 border border-slate-200/80 bg-slate-50 opacity-70 shadow-none`;
+                }
+            }
+
+            const counterEl = document.getElementById('testimonial-counter');
+            if (counterEl) {
+                counterEl.textContent = `${activeTestimonialIndex + 1} / ${testimonials.length}`;
+            }
+        }
+
+        function startTestimonialCycling() {
+            if (testimonialInterval) clearInterval(testimonialInterval);
+            testimonialInterval = setInterval(() => {
+                activeTestimonialIndex = (activeTestimonialIndex + 1) % testimonials.length;
+                renderTestimonials();
+            }, 5000);
+        }
+
+        function pauseTestimonialCycling() {
+            if (testimonialInterval) {
+                clearInterval(testimonialInterval);
+                testimonialInterval = null;
+            }
+        }
+
+        function initPilotsMap() {
+            const mapContainer = document.getElementById('pilots-native-map');
+            if (!mapContainer) return;
+
+            // Initialize map centered on Argentina with controls disabled
+            const map = L.map('pilots-native-map', {
+                center: [-35.5, -62.0],
+                zoom: 4.0,
+                zoomControl: false,
+                attributionControl: false,
+                scrollWheelZoom: false,
+                dragging: true
+            });
+
+            // Load CartoDB Dark Matter No-Labels tiles
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+                maxZoom: 20
+            }).addTo(map);
+
+            // Fetch pilots coordinate dataset
+            fetch('data/pilots.json')
+                .then(response => response.json())
+                .then(pilots => {
+                    pilots.forEach(pilot => {
+                        if (pilot.lat && pilot.lng) {
+                            // Define custom clean static dot divIcon with outer green glow shadow
+                            const staticIcon = L.divIcon({
+                                className: 'custom-leaflet-dot',
+                                html: '<div class="w-1.5 h-1.5 rounded-full bg-[#47C278]/90 shadow-[0_0_4px_rgba(71,194,120,0.8)]"></div>',
+                                iconSize: [6, 6],
+                                iconAnchor: [3, 3]
+                            });
+
+                            // Create marker without tooltip and non-interactive
+                            L.marker([pilot.lat, pilot.lng], { icon: staticIcon, interactive: false })
+                                .addTo(map);
+                        }
+                    });
+                })
+                .catch(err => console.error("Error loading pilot map dataset:", err));
+        }
+
+        // Initialize default tab & testimonials
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSolutionsCard('weed');
+            initTestimonials();
+            renderTestimonials();
+            startTestimonialCycling();
+            initPilotsMap();
+
+            const prevBtn = document.getElementById('prev-test-btn');
+            const nextBtn = document.getElementById('next-test-btn');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    pauseTestimonialCycling();
+                    activeTestimonialIndex = (activeTestimonialIndex - 1 + testimonials.length) % testimonials.length;
+                    renderTestimonials();
+                    startTestimonialCycling();
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    pauseTestimonialCycling();
+                    activeTestimonialIndex = (activeTestimonialIndex + 1) % testimonials.length;
+                    renderTestimonials();
+                    startTestimonialCycling();
+                });
+            }
+        });
+
+        // Modal toggle handler
+        function toggleDownloadModal() {
+            const modal = document.getElementById('download-modal');
+            if (!modal) return;
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
+    <script src="js/ecosystem-animation.js"></script>
+
+    <!-- Download App Modal -->
+    <div id="download-modal"
+        class="fixed inset-0 z-[100] hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 ease-out opacity-0"
+        onclick="if(event.target === this) toggleDownloadModal()">
+        <!-- Main Modal Container: Two-column card (stacked on mobile) -->
+        <div
+            class="relative rounded-3xl bg-white shadow-2xl border border-slate-200 overflow-hidden max-w-4xl w-full flex flex-col md:flex-row max-h-[90vh] overflow-y-auto md:overflow-visible animate-[fadeInScale_0.3s_cubic-bezier(0.16,1,0.3,1)_forwards]">
+            <!-- Close Button -->
+            <button onclick="toggleDownloadModal()"
+                class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-50">
+                <span class="material-symbols-outlined text-xl font-bold">close</span>
+            </button>
+
+            <!-- LEFT COLUMN (Productores y Asesores) -->
+            <div
+                class="flex-1 p-8 sm:p-10 bg-slate-50 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-100">
+                <div class="space-y-4">
+                    <span
+                        class="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-[#47C278]/10 text-[#47C278] uppercase">
+                        Productores y Asesores
+                    </span>
+                    <h3 class="text-2xl font-extrabold text-slate-900">App Vistaguay</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        Gestioná tus lotes, solicitá vuelos y accedé a tus prescripciones agrícolas directo en tu
+                        celular.
+                    </p>
+                    <ul class="space-y-2 pt-2">
+                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                            <span class="material-symbols-outlined text-[#47C278] text-base">check_circle</span>
+                            Solicitá vuelos al instante
+                        </li>
+                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                            <span class="material-symbols-outlined text-[#47C278] text-base">check_circle</span>
+                            Monitoreá tus lotes
+                        </li>
+                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                            <span class="material-symbols-outlined text-[#47C278] text-base">check_circle</span>
+                            Descargá tus resultados
+                        </li>
+                    </ul>
+                </div>
+                <div class="pt-6">
+                    <a href="https://onelink.to/6g4qbv" target="_blank"
+                        class="w-full bg-[#47C278] hover:bg-[#3db067] text-white rounded-full py-3 px-6 font-bold flex items-center justify-center gap-2 shadow-sm text-sm transition-all hover:shadow active:scale-95">
+                        <span class="material-symbols-outlined text-lg">download</span>
+                        Descargar App Vistaguay
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN (Pilotos) -->
+            <div class="flex-1 p-8 sm:p-10 bg-white flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span
+                        class="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-[#182230]/10 text-[#182230] uppercase">
+                        Pilotos / Experts
+                    </span>
+                    <h3 class="text-2xl font-extrabold text-slate-900">App Experts</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        Postulate a vuelos cercanos, coordiná trabajos en campo y gestioná tu agenda agronómica.
+                    </p>
+                    <ul class="space-y-2 pt-2">
+                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                            <span class="material-symbols-outlined text-[#182230] text-base">check_circle</span>
+                            Recibí solicitudes en tu zona
+                        </li>
+                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                            <span class="material-symbols-outlined text-[#182230] text-base">check_circle</span>
+                            Cotizá vuelos a clientes
+                        </li>
+                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                            <span class="material-symbols-outlined text-[#182230] text-base">check_circle</span>
+                            Gestioná tu agenda de trabajo
+                        </li>
+                    </ul>
+                </div>
+                <div class="pt-6">
+                    <a href="https://onelink.to/xjay8d" target="_blank"
+                        class="w-full bg-[#182230] hover:bg-[#253244] text-white rounded-full py-3 px-6 font-bold flex items-center justify-center gap-2 shadow-sm text-sm transition-all hover:shadow active:scale-95">
+                        <span class="material-symbols-outlined text-lg">flight_takeoff</span>
+                        Descargar App Experts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
