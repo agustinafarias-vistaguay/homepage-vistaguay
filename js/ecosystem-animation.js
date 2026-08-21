@@ -125,18 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
       b.style.transform = 'translate(-50%, 0) scale(0.5)';
     });
 
-    // Disposición horizontal en fila
+    // Disposición horizontal en fila + TAMAÑO MÁS GRANDE (scale 1.25)
     nodeFarmer.style.opacity = '0';
     nodeFarmer.style.left = '23%';
     nodeFarmer.style.top = '56%';
+    nodeFarmer.style.transform = 'translate(-50%, -50%) scale(1.25)';
 
     nodePilot.style.opacity = '0';
     nodePilot.style.left = '50%';
     nodePilot.style.top = '56%';
+    nodePilot.style.transform = 'translate(-50%, -50%) scale(1.25)';
 
     nodeDev.style.opacity = '0';
     nodeDev.style.left = '77%';
     nodeDev.style.top = '56%';
+    nodeDev.style.transform = 'translate(-50%, -50%) scale(1.25)';
 
     // PASO 1: Badge "Ecosistema Integrado"
     setTimeout(() => {
@@ -144,23 +147,26 @@ document.addEventListener('DOMContentLoaded', () => {
       titleBadge.style.transform = 'translate(-50%, -50%) scale(1)';
     }, 100);
 
-    // PASO 2: Aparecen en fila los 3 nodos
+    // PASO 2: Aparecen en fila los 3 nodos (grandes)
     setTimeout(() => { nodeFarmer.style.opacity = '1'; }, 800);
     setTimeout(() => { nodePilot.style.opacity = '1'; }, 1600);
     setTimeout(() => { nodeDev.style.opacity = '1'; }, 2400);
 
-    // PASO 3: Reordenamiento a Triángulo y encendido de líneas exteriores
+    // PASO 3: Reordenamiento a Triángulo + ACHICAR A TAMAÑO NORMAL (scale 1)
     setTimeout(() => {
       titleBadge.style.opacity = '0';
 
       nodeFarmer.style.left = '50%';
       nodeFarmer.style.top = '22%';
+      nodeFarmer.style.transform = 'translate(-50%, -50%) scale(1)';
 
       nodeDev.style.left = '22%';
       nodeDev.style.top = '78%';
+      nodeDev.style.transform = 'translate(-50%, -50%) scale(1)';
 
       nodePilot.style.left = '78%';
       nodePilot.style.top = '78%';
+      nodePilot.style.transform = 'translate(-50%, -50%) scale(1)';
 
       [lineFarmerDev, lineFarmerPilot, lineDevPilot].forEach(l => l.style.opacity = '1');
     }, 3600);
@@ -190,13 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
       bubbleDev.style.opacity = '0';
       bubbleDev.style.transform = 'translate(-50%, 0) scale(0.5)';
 
-      // Apagar líneas del triángulo exterior
       [lineFarmerDev, lineFarmerPilot, lineDevPilot].forEach(l => l.style.opacity = '0');
-
-      // Encender líneas radiales hacia el logo central
       [lineFarmerCenter, lineDevCenter, linePilotCenter].forEach(l => l.style.opacity = '1');
 
-      // Revelar Isotipo Vistaguay en el centro
       centerLogo.style.opacity = '1';
       centerLogo.style.transform = 'translate(-50%, -50%) scale(1)';
     }, 12400);

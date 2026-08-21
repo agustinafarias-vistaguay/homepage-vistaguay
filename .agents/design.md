@@ -1,14 +1,15 @@
-# Vistaguay AgTech - Design System & UI/UX Specifications
+# Vistaguay AgTech - Full Design System & UI/UX Specifications
 
 ## 1. Color Palette & Tokens
 
 ### Core Brand Colors
 * **Primary (Vistaguay Green):** `#47C278`
-  * TailWind token: `primary`, `primary-container`
-  * Standard Hover State: `#3db067`
-  * Accessible On-Primary Text: `#FFFFFF`
+  * Tailwind Tokens: `primary`, `primary-container`
+  * Standard Hover State: `#3DB067`
+  * Active/Click State: `#349B5B` (`active:scale-95`)
+  * Accessible Text on Primary: `#FFFFFF` (`text-white`)
 * **General Page Background:** `#FAFAFA`
-  * Unified across all middle content sections to eliminate harsh grey block transitions.
+  * Standardized across all middle content sections to ensure a seamless visual flow.
 * **Surface Containers:** `#FFFFFF` (`bg-surface`)
 * **Dark Contrast Accents:**
   * Dark App Accent (Experts): `#182230` (Hover: `#253244`)
@@ -16,41 +17,42 @@
   * Hero Gradient: `from-slate-950/85 via-slate-900/75 to-[#FAFAFA]`
   * Final CTA Overlay: `bg-black/60`
 
-### Text & Contrast Standards
-* **Headings:** `#1A1C1C` (`text-on-surface`)
+### Text & Contrast Standards (WCAG 2.1 AA Compliant)
+* **Headings (H1, H2, H3):** `#1A1C1C` (`text-on-surface`)
 * **Body Text (Primary Copy):** `#3E4A3F` (`text-on-surface-variant`)
-* **Body Text (Secondary Copy):** `#334155` (`text-slate-700`) — Replaces `text-slate-500` to satisfy WCAG AA 4.5:1 contrast standards.
-* **Dark Background Text:** `#FFFFFF` (`text-white`) / `#CBD5E1` (`text-slate-300`)
+* **Body Text (Secondary/Muted Copy):** `#334155` (`text-slate-700`) — Replaces `text-slate-500` to satisfy the 4.5:1 minimum contrast ratio.
+* **Dark Background Copy:** `#FFFFFF` (`text-white`) / `#CBD5E1` (`text-slate-300`)
 
 ---
 
-## 2. Typography Hierarchy & Readability
+## 2. Typography Hierarchy & Readability Rules
 
-* **Font Family:** `Plus Jakarta Sans` (weights: 400, 500, 600, 700, 800)
+* **Font Family:** `Plus Jakarta Sans` (Weights: 400, 500, 600, 700, 800)
 
-| Element | Responsive Tailwind Classes | Size Range | Usage / Rules |
-| :--- | :--- | :--- | :--- |
-| **H1 (Hero Title)** | `text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight` | 30px - 48px | Strictly 1 per page. Balanced so as not to overwhelm the Hero container. |
-| **H2 (Section Titles)** | `text-2xl md:text-3xl lg:text-4xl font-extrabold text-on-surface tracking-tight` | 24px - 36px | Unified across ALL section headings (`#servicios`, `#expert`, `#devs`, etc.). |
-| **H3 (Card Titles)** | `text-xl font-bold text-on-surface` | 20px | Used for primary card headlines across Problem, Solutions, and Expert sections. |
-| **H4 (Subheadings/Badges)** | `text-sm font-bold uppercase tracking-wider` | 14px | Used for step labels, badge tags, and sub-block titles. |
-| **Hero Lead Paragraph** | `text-base md:text-lg text-slate-300 leading-relaxed` | 16px - 18px | High-legibility lead copy. |
-| **Standard Body Text** | `text-sm font-medium text-slate-700 leading-relaxed` | 14px | **Minimum size for body copy, bullet points, and card descriptions.** |
-| **Small / Micro Copy** | `text-xs font-semibold text-slate-500 uppercase tracking-widest` | 12px | Reserved strictly for uppercase metadata, dates, counters, and footer copyright. |
+| Element | Responsive Tailwind Classes | Desktop Size | Mobile Size | Rules / Guidelines |
+| :--- | :--- | :--- | :--- | :--- |
+| **H1 (Hero Title)** | `text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight` | 48px | 30px | Max 1 per page. Balanced spacing so it does not dominate the Hero area. |
+| **H2 (Section Titles)** | `text-2xl md:text-3xl lg:text-4xl font-extrabold text-on-surface tracking-tight` | 36px | 24px | Unified across ALL sections (`#servicios`, `#expert`, `#devs`, etc.). |
+| **Section Subtitles** | `text-sm sm:text-base md:text-lg text-on-surface-variant leading-relaxed` | 18px | 14px | Used directly below Section Titles for introductory context. |
+| **H3 (Card Titles)** | `text-xl font-bold text-on-surface` | 20px | 18px | Primary card headlines across Problem, Solutions, and Expert sections. |
+| **H4 (Subheadings/Badges)** | `text-sm font-bold uppercase tracking-wider` | 14px | 14px | Step labels, badge tags, and sub-block titles. |
+| **Hero Lead Copy** | `text-base md:text-lg text-slate-300 leading-relaxed` | 18px | 16px | High-legibility hero paragraph. |
+| **Standard Body Copy** | `text-sm font-medium text-slate-700 leading-relaxed` | 14px | 14px | **Global minimum size for all descriptions, bullets, and card body text.** |
+| **Small / Micro Copy** | `text-xs font-semibold text-slate-500 uppercase tracking-widest` | 12px | 12px | Reserved strictly for uppercase metadata, dates, step counters, and copyright. |
 
 ---
 
 ## 3. Button Hierarchy & Interactive Elements
 
-All buttons across the platform follow a strict **UPPERCASE** label standard (`uppercase tracking-wider text-xs font-bold`) for consistency.
+All interactive buttons follow a strict **UPPERCASE** label standard (`uppercase tracking-wider text-xs font-bold`) for consistency.
 
 ### A. Primary CTA Button (Solid Green)
-* **Usage:** Core conversion actions (*REGISTRARSE*, *EMPEZAR COMO PRODUCTOR*, *CONOCER LA PLATAFORMA*).
+* **Usage:** Primary conversion actions (*REGISTRARSE*, *EMPEZAR COMO PRODUCTOR*, *CONOCER LA PLATAFORMA*).
 * **Classes:**
   `bg-[#47C278] hover:bg-[#3db067] text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 shadow-md active:scale-95 inline-flex items-center justify-center gap-2`
 
 ### B. Secondary CTA Button - Dark/Hero Variant (Translucent White)
-* **Usage:** Alternative secondary actions on dark photo backgrounds (*SOY PILOTO DE DRONE*, *REGISTRARME COMO PILOTO*).
+* **Usage:** Secondary actions on dark photo backgrounds (*SOY PILOTO DE DRONE*, *REGISTRARME COMO PILOTO*).
 * **Classes:**
   `bg-white/10 hover:bg-white/20 border border-white/30 text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 active:scale-95 inline-block text-center`
 
@@ -65,41 +67,38 @@ All buttons across the platform follow a strict **UPPERCASE** label standard (`u
   `bg-[#182230] hover:bg-[#253244] text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 shadow-md active:scale-95 inline-flex items-center justify-center gap-2`
 
 ### E. Tertiary Links (Navbar Navigation)
-* **Usage:** Top navigation direct links (*SERVICIOS*, *PILOTOS*, *DESARROLLADORES*).
+* **Usage:** Direct header links (*SERVICIOS*, *PILOTOS*, *DESARROLLADORES*).
 * **Classes:**
   `text-on-surface-variant hover:text-primary transition-colors duration-200 uppercase tracking-widest text-xs font-bold`
 
 ---
 
-## 4. Mobile Navigation & Hamburger Menu Blueprint
+## 4. Mobile Navigation & Responsive Component Rules
 
-* **Breakpoint:** Desktop links and secondary outline button visible at `md:` (768px+). Hamburger toggle icon visible at `< md:`.
-* **Mobile Dropdown Container (`#mobile-menu`):**
-  * Positioned floating below fixed `<nav>`.
-  * Background: `bg-white/95 backdrop-blur-md shadow-xl border-b border-slate-200/80 p-6`.
-  * **Top Section:** Vertical flex stack of navigation links (`SERVICIOS`, `PILOTOS`, `DESARROLLADORES`) styled with `text-sm font-bold uppercase text-slate-800 hover:text-primary py-2`.
-  * **Divider Line:** `<hr class="border-slate-200/80 my-4">`
-  * **Bottom Action Stack:**
-    1. Primary CTA: `REGISTRARSE` (Solid Green Primary Button, `w-full`).
-    2. Secondary CTA: `IR A LA PLATAFORMA` (Light Outline Button, `w-full`).
+### Navbar Hamburger Dropdown (`< md:`)
+* Toggle button visible at `< md:` with `aria-label="Abrir menú de navegación"`.
+* Dropdown container (`#mobile-menu`):
+  * Class: `bg-white/95 backdrop-blur-md shadow-xl border-b border-slate-200/80 p-6 flex flex-col`.
+  * Top navigation items: `text-sm font-bold uppercase text-slate-800 hover:text-[#47C278] py-2`.
+  * Divider: `<hr class="border-slate-200/80 my-4">`.
+  * Action buttons: Primary `REGISTRARSE` + Secondary `IR A LA PLATAFORMA` stacked vertically (`w-full`).
 
----
+### Tabbed Services Showcase (Section 4 Mobile Fixes)
+* Horizontal tab bar wrapper: `flex overflow-x-auto whitespace-nowrap pb-2 gap-2 sm:justify-center scrollbar-none`.
+* Card metrics grid: `grid grid-cols-1 sm:grid-cols-3 gap-4`.
+* Card container: `min-h-0 md:min-h-[480px]`.
 
-## 5. Spacing & Container Standards
-
-* **Global Container Width:** `max-w-container-max` (`1360px`) with responsive horizontal margins `px-4 md:px-8`.
-* **Section Vertical Padding:**
-  * Standard Sections: `py-20` (80px)
-  * Hero Section: `pt-8 md:pt-12 pb-8` (Elevated content height)
-  * Testimonials Carousel: `py-12 md:py-16`
+### Final CTA Banner (Section 10 Mobile Fixes)
+* Height: `min-h-[480px] h-auto py-16 md:py-24`.
+* Buttons container: `flex flex-col sm:flex-row justify-center gap-4`.
 
 ---
 
-## 6. Accessibility & SEO Guidelines (WCAG 2.1 AA)
+## 5. Accessibility & SEO Compliance (WCAG 2.1 AA)
 
-1. **Text Contrast:** Eliminate `text-slate-500` or `opacity-60` on body copy and replace with `text-slate-700` (`#334155`) to guarantee a contrast ratio > 4.5:1.
-2. **Font Size Compliance:** Ensure all descriptive paragraphs, bullet points, and card content use `text-sm` (14px) or larger.
+1. **Text Contrast:** Replace `text-slate-500` or `opacity-60` on body copy with `text-slate-700` (`#334155`) to guarantee contrast ratio > 4.5:1.
+2. **Minimum Font Size:** Ensure no descriptive paragraph or list bullet drops below `text-sm` (14px).
 3. **Interactive Control Labels:**
-   * Mobile Hamburger Button: `aria-label="Abrir menú de navegación"`
-   * Carousel Arrow Buttons: `aria-label="Anterior testimonio"` / `aria-label="Siguiente testimonio"`
-   * Modal Close Button: `aria-label="Cerrar ventana"`
+   * Mobile Hamburger Toggle: `aria-label="Abrir menú de navegación"`
+   * Carousel Arrow Controls: `aria-label="Anterior testimonio"` / `aria-label="Siguiente testimonio"`
+   * Modal Close Buttons: `aria-label="Cerrar ventana"`

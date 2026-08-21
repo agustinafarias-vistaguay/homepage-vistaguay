@@ -1,9 +1,16 @@
 # Memory Log
 
 ## Current Goal
-Refactor `index.html` as the main project file to clean up the design system, refactor the Hero section, embed/modularize the Ecosystem Animation, and update the Solutions section.
+Audit and refactor `index.html` visual layout, typography, buttons, margins, and card grids to enforce strict coherence with the design tokens and rules specified in `design.md`.
 
 ## Progress
+- [x] Conduct code and visual audit of `index.html` using `design.md` as the source of truth.
+- [x] Standardize H2/H3 section titles, subheading badges, and body contrast sizes.
+- [x] Scale up section subtitles to `text-sm sm:text-base md:text-lg` and record changes in `design.md`.
+- [x] Refine dynamic product cards inside `tabData` by removing specified redundant bullets.
+- [x] Unify all primary CTA buttons with the institutionally defined green Tailwind classes and active scale properties.
+- [x] Harmonize secondary benefits and parameters container layouts with padding, background opacity, borders, and green SVG symbols.
+- [x] Eliminate all micro text references (`text-[10px]`, `text-[11px]`, `text-slate-500` copy contrast gaps) to secure accessibility compliance.
 - [x] Initial codebase review: read `index.html`, `code.html`, `DESIGN.md`, and `DESIGN-1.md`.
 - [x] Create implementation plan.
 - [x] Obtain user approval.
