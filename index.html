@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Vistaguay | Inteligencia de Datos para el Agro</title>
+    <title>Vistaguay</title>
     <link rel="icon" type="image/png" href="images/favicon.svg">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
@@ -774,11 +774,9 @@
                     </button>
                 </div>
 
-                <!-- Dynamic Counter Indicator -->
-                <div id="testimonial-counter"
-                    class="text-xs font-extrabold text-on-surface-variant uppercase tracking-widest mt-4">
-                    1 / 11
-                </div>
+                <!-- Dynamic dots indicator Testimonials-->
+                <div id="testimonial-dots" class="flex items-center justify-center gap-1.5 mt-2"></div>
+
             </div>
         </div>
     </section>
@@ -1425,6 +1423,8 @@
             });
         }
 
+        // Reemplazá estas 4 funciones en tu JS:
+
         function renderTestimonials(animate = true) {
             const track = document.getElementById('testimonial-track');
             if (!track) return;
@@ -1432,34 +1432,48 @@
             const cards = track.children;
             if (cards.length === 0) return;
 
-            const trackWidth = track.parentElement.offsetWidth;
+            const container = track.parentElement;
+            const containerWidth = container.offsetWidth;
+            const paddingLeft = parseFloat(window.getComputedStyle(container).paddingLeft) || 0;
             const cardWidth = cards[0].offsetWidth || 380;
-            const gap = window.innerWidth >= 768 ? 24 : 16;
+            const gap = window.innerWidth >= 640 ? 24 : 16;
 
             const activeCardCenter = (activeTestimonialIndex * (cardWidth + gap)) + (cardWidth / 2);
-            const trackCenter = trackWidth / 2;
-            const translateX = trackCenter - activeCardCenter;
+            const translateX = (containerWidth / 2) - paddingLeft - activeCardCenter;
 
+            // Transición de la pista
             track.style.transition = animate ? 'transform 500ms ease-in-out' : 'none';
             track.style.transform = `translateX(${translateX}px)`;
 
+            // Transición sincronizada de las tarjetas individuales
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
                 const isActive = i === activeTestimonialIndex;
 
-                card.className = `p-6 md:p-8 rounded-3xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col justify-between min-h-[300px] w-[280px] sm:w-[340px] md:w-[380px] shrink-0 border select-none`;
+                // Desactiva animaciones de la tarjeta si es un reseteo silencioso
+                card.style.transition = animate ? 'all 500ms cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+
+                const baseClass = `p-6 md:p-8 rounded-3xl flex flex-col justify-between min-h-[300px] w-[280px] sm:w-[340px] md:w-[380px] shrink-0 border select-none`;
 
                 if (isActive) {
-                    card.className += ` scale-105 sm:scale-110 z-20 border-2 border-[#47C278] shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
+                    card.className = `${baseClass} scale-105 sm:scale-110 z-20 border-2 border-[#47C278] shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
                 } else {
-                    card.className += ` scale-95 z-10 border border-slate-200/80 bg-slate-50 opacity-70 shadow-none`;
+                    card.className = `${baseClass} scale-95 z-10 border border-slate-200/80 bg-slate-50 opacity-70 shadow-none`;
                 }
             }
 
-            const counterEl = document.getElementById('testimonial-counter');
-            if (counterEl) {
-                const realIndex = (activeTestimonialIndex % testimonials.length) + 1;
-                counterEl.textContent = `${realIndex} / ${testimonials.length}`;
+            // Píldoras indicadoras
+            const dotsEl = document.getElementById('testimonial-dots');
+            if (dotsEl) {
+                const realIndex = activeTestimonialIndex % testimonials.length;
+                dotsEl.innerHTML = testimonials.map((_, i) => `
+            <button onclick="jumpToTestimonial(${i})" 
+                    aria-label="Ir al testimonio ${i + 1}"
+                    class="h-1.5 rounded-full transition-all duration-500 ease-out cursor-pointer ${i === realIndex
+                        ? 'w-6 bg-[#47C278] shadow-[0_0_8px_rgba(71,194,120,0.5)]'
+                        : 'w-1.5 bg-slate-200 hover:bg-slate-300'
+                    }"></button>
+        `).join('');
             }
         }
 
@@ -1470,15 +1484,13 @@
             activeTestimonialIndex++;
             renderTestimonials(true);
 
-            if (activeTestimonialIndex >= testimonials.length * 2) {
-                setTimeout(() => {
-                    activeTestimonialIndex = testimonials.length;
-                    renderTestimonials(false);
-                    isTransitioning = false;
-                }, 500);
-            } else {
-                setTimeout(() => { isTransitioning = false; }, 500);
-            }
+            setTimeout(() => {
+                if (activeTestimonialIndex >= testimonials.length * 2) {
+                    activeTestimonialIndex -= testimonials.length;
+                    renderTestimonials(false); // Salto invisible sin parpadeo
+                }
+                isTransitioning = false;
+            }, 500);
         }
 
         function prevTestimonial() {
@@ -1488,22 +1500,34 @@
             activeTestimonialIndex--;
             renderTestimonials(true);
 
-            if (activeTestimonialIndex < testimonials.length) {
-                setTimeout(() => {
-                    activeTestimonialIndex = testimonials.length * 2 - 1;
-                    renderTestimonials(false);
-                    isTransitioning = false;
-                }, 500);
-            } else {
-                setTimeout(() => { isTransitioning = false; }, 500);
-            }
+            setTimeout(() => {
+                if (activeTestimonialIndex < testimonials.length) {
+                    activeTestimonialIndex += testimonials.length;
+                    renderTestimonials(false); // Salto invisible sin parpadeo
+                }
+                isTransitioning = false;
+            }, 500);
         }
 
         function startTestimonialCycling() {
             if (testimonialInterval) clearInterval(testimonialInterval);
+            // Tiempo fluido entre transiciones (4000ms = 4 segundos)
             testimonialInterval = setInterval(() => {
                 nextTestimonial();
-            }, 5000);
+            }, 4000);
+        }
+
+        function jumpToTestimonial(index) {
+            if (isTransitioning) return;
+            pauseTestimonialCycling();
+
+            activeTestimonialIndex = testimonials.length + index;
+            renderTestimonials(true);
+
+            setTimeout(() => {
+                isTransitioning = false;
+                startTestimonialCycling();
+            }, 500);
         }
 
         function pauseTestimonialCycling() {
@@ -1565,19 +1589,19 @@
 
             const prevBtn = document.getElementById('prev-test-btn');
             const nextBtn = document.getElementById('next-test-btn');
+
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     pauseTestimonialCycling();
-                    activeTestimonialIndex = (activeTestimonialIndex - 1 + testimonials.length) % testimonials.length;
-                    renderTestimonials();
+                    prevTestimonial();
                     startTestimonialCycling();
                 });
             }
+
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     pauseTestimonialCycling();
-                    activeTestimonialIndex = (activeTestimonialIndex + 1) % testimonials.length;
-                    renderTestimonials();
+                    nextTestimonial();
                     startTestimonialCycling();
                 });
             }
