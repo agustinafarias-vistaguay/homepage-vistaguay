@@ -15,71 +15,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <!-- Logo Central Circular de Vistaguay -->
         <div id="vg-center-logo" class="absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-700 opacity-0 scale-50 pointer-events-none">
-          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-[#47C278] shadow-[0_15px_35px_rgba(71,194,120,0.4)] flex items-center justify-center p-2.5 overflow-hidden">
+          <div class="w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-white border-2 border-[#47C278] shadow-[0_15px_35px_rgba(71,194,120,0.4)] flex items-center justify-center p-1.5 overflow-hidden">
             <img src="images/iso-logo.png" alt="Vistaguay Isotipo" class="w-full h-full object-contain" onError="this.src='iso-logo.png'" />
           </div>
         </div>
 
         <!-- Líneas SVG Conectoras (Coordenadas ajustadas al triángulo más amplio) -->
         <svg viewBox="0 0 800 600" class="w-full h-full absolute inset-0 overflow-visible pointer-events-none">
-          <!-- 1. Líneas del Triángulo Exterior -->
-          <line id="line-farmer-dev" x1="400" y1="108" x2="120" y2="480" stroke="#47C278" stroke-width="3.5" stroke-linecap="round" class="opacity-0 transition-opacity duration-700" />
-          <line id="line-farmer-pilot" x1="400" y1="108" x2="680" y2="480" stroke="#47C278" stroke-width="3.5" stroke-linecap="round" class="opacity-0 transition-opacity duration-700" />
-          <line id="line-dev-pilot" x1="120" y1="480" x2="680" y2="480" stroke="#47C278" stroke-width="3.5" stroke-linecap="round" class="opacity-0 transition-opacity duration-700" />
+  <!-- 1. Líneas del Triángulo Exterior -->
+  <line id="line-farmer-dev" x1="400" y1="60" x2="120" y2="450" stroke="#47C278" stroke-width="3.5" stroke-linecap="round" class="opacity-0 transition-opacity duration-700" />
+  <line id="line-farmer-pilot" x1="400" y1="60" x2="680" y2="450" stroke="#47C278" stroke-width="3.5" stroke-linecap="round" class="opacity-0 transition-opacity duration-700" />
+  <line id="line-dev-pilot" x1="120" y1="450" x2="680" y2="450" stroke="#47C278" stroke-width="3.5" stroke-linecap="round" class="opacity-0 transition-opacity duration-700" />
 
-          <!-- 2. Líneas Radiales Convergentes al Centro -->
-          <line id="line-farmer-center" x1="400" y1="108" x2="400" y2="348" stroke="#47C278" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,6" class="opacity-0 transition-opacity duration-700" />
-          <line id="line-dev-center" x1="120" y1="480" x2="400" y2="348" stroke="#47C278" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,6" class="opacity-0 transition-opacity duration-700" />
-          <line id="line-pilot-center" x1="680" y1="480" x2="400" y2="348" stroke="#47C278" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,6" class="opacity-0 transition-opacity duration-700" />
-        </svg>
+  <!-- 2. Líneas Radiales Convergentes al Centro -->
+  <line id="line-farmer-center" x1="400" y1="60" x2="400" y2="300" stroke="#47C278" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,6" class="opacity-0 transition-opacity duration-700" />
+  <line id="line-dev-center" x1="120" y1="450" x2="400" y2="300" stroke="#47C278" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,6" class="opacity-0 transition-opacity duration-700" />
+  <line id="line-pilot-center" x1="680" y1="450" x2="400" y2="300" stroke="#47C278" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,6" class="opacity-0 transition-opacity duration-700" />
+</svg>
 
         <!-- NODO 1: PRODUCTOR (Globo hacia arriba) -->
-        <div id="vg-node-farmer" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
-          <div id="bubble-farmer" class="vg-bubble absolute bottom-full mb-3 left-1/2 z-50 w-max max-w-[220px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
-            <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
-              <span>"Quiero soluciones sin comprar un dron"</span>
-              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#47C278]"></div>
-            </div>
-          </div>
-          <div class="node-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center p-1 shadow-xl">
-            <div class="w-full h-full rounded-full bg-[#F3FDF8] flex items-center justify-center p-2 overflow-hidden">
-              <img src="images/Farmer.jpg" alt="Productor" class="w-full h-full object-contain" onError="this.src='Farmer.jpg'" />
-            </div>
-          </div>
-          <span class="node-title mt-2 px-3 py-1 rounded-full text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] shadow-sm whitespace-nowrap">Productor</span>
-        </div>
+<div id="vg-node-farmer" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
+  <div id="bubble-farmer" class="vg-bubble absolute bottom-full mb-3 left-1/2 z-50 w-max max-w-[220px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
+    <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
+      <span>"Quiero soluciones sin comprar un dron"</span>
+      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#47C278]"></div>
+    </div>
+  </div>
+  <div class="node-circle w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-white flex items-center justify-center p-1 shadow-xl">
+    <div class="w-full h-full rounded-full bg-[#F3FDF8] flex items-center justify-center p-2 overflow-hidden">
+      <img src="images/Farmer.jpg" alt="Productor" class="w-full h-full object-contain" onError="this.src='Farmer.jpg'" />
+    </div>
+  </div>
+  <span class="node-title absolute -bottom-9 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] shadow-sm whitespace-nowrap">Productor</span>
+</div>
 
-        <!-- NODO 2: PILOTOS (Globo hacia abajo) -->
-        <div id="vg-node-pilot" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
-          <div id="bubble-pilot" class="vg-bubble absolute top-full mt-3 left-1/2 z-50 w-max max-w-[200px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
-            <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
-              <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-[#47C278]"></div>
-              <span>"Quiero volar más en mi zona"</span>
-            </div>
-          </div>
-          <div class="node-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center p-1 shadow-xl">
-            <div class="w-full h-full rounded-full bg-[#F3FDF8] flex items-center justify-center p-2 overflow-hidden">
-              <img src="images/Pilot.jpg" alt="Pilotos" class="w-full h-full object-contain" onError="this.src='Pilot.jpg'" />
-            </div>
-          </div>
-          <span class="node-title mt-2 px-3 py-1 rounded-full text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] shadow-sm whitespace-nowrap">Pilotos</span>
-        </div>
+<!-- NODO 2: PILOTOS (Globo sale por debajo del nombre) -->
+<div id="vg-node-pilot" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
+  <div id="bubble-pilot" class="vg-bubble absolute top-full mt-11 left-1/2 z-50 w-max max-w-[200px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
+    <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
+      <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-[#47C278]"></div>
+      <span>"Quiero volar más en mi zona"</span>
+    </div>
+  </div>
+  <div class="node-circle w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-white flex items-center justify-center p-1 shadow-xl">
+    <div class="w-full h-full rounded-full bg-[#F3FDF8] flex items-center justify-center p-2 overflow-hidden">
+      <img src="images/Pilot.jpg" alt="Pilotos" class="w-full h-full object-contain" onError="this.src='Pilot.jpg'" />
+    </div>
+  </div>
+  <span class="node-title absolute -bottom-9 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] shadow-sm whitespace-nowrap">Pilotos</span>
+</div>
 
-        <!-- NODO 3: DESARROLLADORES (Globo hacia abajo) -->
-        <div id="vg-node-dev" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
-          <div id="bubble-dev" class="vg-bubble absolute top-full mt-3 left-1/2 z-50 w-max max-w-[210px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
-            <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
-              <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-[#47C278]"></div>
-              <span>"Quiero vender mis algoritmos"</span>
-            </div>
-          </div>
-          <div class="node-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center p-1 shadow-xl">
-            <div class="w-full h-full rounded-full bg-[#F3FDF8] flex items-center justify-center p-2 overflow-hidden">
-              <img src="images/Dev.jpg" alt="Desarrolladores" class="w-full h-full object-contain" onError="this.src='Dev.jpg'" />
-            </div>
-          </div>
-          <span class="node-title mt-2 px-3 py-1 rounded-full text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] shadow-sm whitespace-nowrap">Desarrolladores</span>
-        </div>
+<!-- NODO 3: DESARROLLADORES (Globo sale por debajo del nombre) -->
+<div id="vg-node-dev" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
+  <div id="bubble-dev" class="vg-bubble absolute top-full mt-11 left-1/2 z-50 w-max max-w-[210px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
+    <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
+      <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-[#47C278]"></div>
+      <span>"Quiero vender mis algoritmos"</span>
+    </div>
+  </div>
+  <div class="node-circle w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-white flex items-center justify-center p-1 shadow-xl">
+    <div class="w-full h-full rounded-full bg-[#F3FDF8] flex items-center justify-center p-2 overflow-hidden">
+      <img src="images/Dev.jpg" alt="Desarrolladores" class="w-full h-full object-contain" onError="this.src='Dev.jpg'" />
+    </div>
+  </div>
+  <span class="node-title absolute -bottom-9 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] shadow-sm whitespace-nowrap">Desarrolladores</span>
+</div>
 
       </div>
     </div>
@@ -125,17 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
     nodeFarmer.style.opacity = '0';
     nodeFarmer.style.left = '18%';
     nodeFarmer.style.top = '60%';
-    nodeFarmer.style.transform = 'translate(-50%, -50%) scale(1.15)';
+    nodeFarmer.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
     nodePilot.style.opacity = '0';
     nodePilot.style.left = '50%';
     nodePilot.style.top = '60%';
-    nodePilot.style.transform = 'translate(-50%, -50%) scale(1.15)';
+    nodePilot.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
     nodeDev.style.opacity = '0';
     nodeDev.style.left = '82%';
     nodeDev.style.top = '60%';
-    nodeDev.style.transform = 'translate(-50%, -50%) scale(1.15)';
+    nodeDev.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
     // PASO 1: Badge "Ecosistema Integrado"
     setTimeout(() => {
@@ -150,21 +150,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // PASO 3: Reordenamiento a Triángulo Amplio
     setTimeout(() => {
-      titleBadge.style.opacity = '0';
+      if (titleBadge) titleBadge.style.opacity = '0';
 
+      // Productor al 10% (Subido para no pisar el logo central)
       nodeFarmer.style.left = '50%';
-      nodeFarmer.style.top = '18%';
-      nodeFarmer.style.transform = 'translate(-50%, -50%) scale(1)';
+      nodeFarmer.style.top = '10%';
+      nodeFarmer.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
+      // Desarrolladores (Vértice inferior izquierdo)
       nodeDev.style.left = '15%';
-      nodeDev.style.top = '80%';
-      nodeDev.style.transform = 'translate(-50%, -50%) scale(1)';
+      nodeDev.style.top = '75%';
+      nodeDev.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
+      // Pilotos (Vértice inferior derecho)
       nodePilot.style.left = '85%';
-      nodePilot.style.top = '80%';
-      nodePilot.style.transform = 'translate(-50%, -50%) scale(1)';
+      nodePilot.style.top = '75%';
+      nodePilot.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
-      [lineFarmerDev, lineFarmerPilot, lineDevPilot].forEach(l => l.style.opacity = '1');
+      // Logo Central
+      if (typeof centerLogo !== 'undefined' && centerLogo) {
+        centerLogo.style.left = '50%';
+        centerLogo.style.top = '50%';
+        centerLogo.style.transform = 'translate(-50%, -50%) scale(0.9)';
+      }
+
+      [lineFarmerDev, lineFarmerPilot, lineDevPilot].forEach(l => {
+        if (l) l.style.opacity = '1';
+      });
     }, 3300);
 
     // PASO 4: Globos de diálogo

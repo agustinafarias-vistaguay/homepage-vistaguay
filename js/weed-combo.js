@@ -1,7 +1,16 @@
 // js/weed-combo.js - Transición en cortina/barrido con timings personalizados preservados
 
+/**
+ * @file weed-combo.js
+ * @description Controls the curtain/swipe preview animation on the solutions showcard.
+ */
+
 let comboInterval = null;
 
+/**
+ * Opens the combo demo modal layer on the solutions showcase card.
+ * @returns {void}
+ */
 function openComboDemoModal() {
     const cardContainer = document.getElementById('solutions-content-card');
     if (!cardContainer) return;
@@ -58,6 +67,10 @@ function openComboDemoModal() {
     startComboAnimation();
 }
 
+/**
+ * Closes the combo demo modal layer on the solutions showcase card.
+ * @returns {void}
+ */
 function closeComboDemoModal() {
     const demoLayer = document.getElementById('inline-combo-demo');
 
@@ -83,6 +96,10 @@ function closeComboDemoModal() {
     }, 500);
 }
 
+/**
+ * Starts the curtain/swipe preview animation, toggling clip-path properties sequentially.
+ * @returns {void}
+ */
 function startComboAnimation() {
     stopComboAnimation();
     let currentLayer = 1;
@@ -123,9 +140,17 @@ function startComboAnimation() {
     }, TIEMPO_ESPERA_PRIMERA_IMAGEN);
 }
 
+/**
+ * Stops the active curtain/swipe preview animation interval.
+ * @returns {void}
+ */
 function stopComboAnimation() {
     if (comboInterval) {
         clearInterval(comboInterval);
         comboInterval = null;
     }
 }
+
+// Bind functions to global window object for inline HTML event handling
+window.openComboDemoModal = openComboDemoModal;
+window.closeComboDemoModal = closeComboDemoModal;
