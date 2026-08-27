@@ -1,0 +1,68 @@
+/* 1. Botón Circular de Ícono (Flechas Carrusel y Acciones Flotantes) */
+.btn-circle-icon {
+    width: 2rem;
+    /* 32px */
+    height: 2rem;
+    /* 32px */
+    border-radius: 9999px;
+    background-color: #47C278;
+    /* primary */
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(71, 194, 120, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.btn-circle-icon:hover {
+    background-color: #3db067;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(71, 194, 120, 0.5);
+}
+
+.btn-circle-icon:active {
+    transform: scale(0.95);
+}
+
+/* 2. Pills de Beneficios Clave (Tarjetas de Mapeo / Conteo) */
+.benefit-pill {
+    background-color: rgba(243, 244, 246, 0.9);
+    /* bg-slate-100/90 */
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    /* border-slate-200/90 */
+    border-radius: 9999px;
+    /* Forma de píldora redondeada */
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #334155;
+    /* text-slate-700 */
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.benefit-pill:hover {
+    border-color: rgba(71, 194, 120, 0.5);
+    background-color: #ffffff;
+}
+
+/* 3. Tarjeta de Testimonio (Carrusel) */
+.testimonial-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+}

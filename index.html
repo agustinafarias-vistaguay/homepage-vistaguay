@@ -6,79 +6,22 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Vistaguay</title>
     <link rel="icon" type="image/png" href="images/favicon.svg">
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet">
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "primary": "#47C278",
-                        "primary-container": "#47C278",
-                        "on-primary": "#ffffff",
-                        "on-primary-container": "#004b26",
-                        "background": "#fafafa",
-                        "on-background": "#1a1c1c",
-                        "surface": "#ffffff",
-                        "on-surface": "#1a1c1c",
-                        "on-surface-variant": "#3e4a3f",
-                        "outline": "#6d7a6f",
-                        "outline-variant": "#bdcabc",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-container-low": "#f3f3f3",
-                        "surface-container": "#eeeeee",
-                        "surface-container-high": "#e8e8e8",
-                        "surface-container-highest": "#e2e2e2",
-                        "inverse-surface": "#2f3131",
-                        "surface-variant": "#e2e2e2"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "8px",
-                        "xl": "12px",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "4.5": "18px",
-                        "1.8": "7.2px",
-                        "stack-sm": "8px",
-                        "section-padding": "80px",
-                        "gutter": "24px",
-                        "margin-mobile": "16px",
-                        "stack-lg": "32px",
-                        "container-max": "1360px",
-                        "stack-md": "16px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "label-sm": ["Plus Jakarta Sans"],
-                        "display-lg": ["Plus Jakarta Sans"],
-                        "headline-lg-mobile": ["Plus Jakarta Sans"],
-                        "headline-lg": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "stat-xl": ["Plus Jakarta Sans"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["22px", { "lineHeight": "1.3", "fontWeight": "700" }],
-                        "label-sm": ["13px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "display-lg": ["56px", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-                        "headline-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-                        "body-md": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
-                        "stat-xl": ["40px", { "lineHeight": "1", "fontWeight": "800" }]
-                    }
-                },
-            },
-        }
-    </script>
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Leaflet.js for interactive pilot map -->
+
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <link rel="stylesheet" href="css/leaflet-custom.css">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -87,7 +30,7 @@
 
 <body class="bg-background text-on-surface font-body-md selection:bg-primary/20 selection:text-primary">
 
-    <!-- Section 0: TopNavBar (Shared Component) -->
+    <!-- TopNavBar -->
     <nav
         class="fixed w-full top-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
         <div class="flex justify-between items-center w-full px-6 sm:px-10 lg:px-12 max-w-6xl mx-auto h-14 md:h-15">
@@ -114,7 +57,7 @@
                     Ir a la plataforma
                 </a>
                 <button onclick="toggleDownloadModal()"
-                    class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 text-xs font-semibold rounded-full normal-case transition-all shadow-sm active:scale-95 inline-block text-center">
+                    class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 text-xs font-semibold rounded-full normal-case transition-all shadow-sm active:scale-95 inline-flex items-center justify-center gap-2">
                     Registrarse
                 </button>
             </div>
@@ -141,11 +84,11 @@
             <hr class="border-slate-200/80 my-4">
             <div class="flex flex-col space-y-3 pt-1">
                 <button onclick="toggleMobileMenu(); toggleDownloadModal()"
-                    class="w-full bg-[#47C278] hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm text-center">
+                    class="w-full bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm text-center">
                     Registrarse
                 </button>
                 <a href="https://web.vistaguay.com" target="_blank" rel="noopener noreferrer"
-                    class="w-full border border-slate-300 text-slate-800 hover:border-[#47C278] hover:text-[#47C278] py-2 px-4.5 rounded-full font-semibold text-xs transition-all text-center block">
+                    class="w-full border border-slate-300 text-slate-800 hover:border-primary hover:text-primary py-2 px-4.5 rounded-full font-semibold text-xs transition-all text-center block">
                     Ir a la plataforma
                 </a>
             </div>
@@ -161,7 +104,7 @@
         <div class="relative z-20 max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
                 <div class="w-full lg:max-w-md xl:max-w-xl space-y-6 text-left">
-                    <!-- Título H1: El elemento más grande del sitio -->
+
                     <h1 class="text-white font-extrabold text-2xl md:text-3xl lg:text-4xl tracking-tight leading-tight">
                         El campo tiene datos. <br>
                         <span class="text-primary">Vistaguay los convierte en decisiones.</span>
@@ -171,11 +114,11 @@
                         pilotos de drone y proveedores de analítica y servicios en un solo lugar.</p>
                     <div class="flex flex-col sm:flex-row gap-4 pt-2">
                         <a href="#servicios"
-                            class="bg-[#47C278] hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-block text-center">
+                            class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center justify-center gap-2">
                             Conocer la plataforma
                         </a>
                         <a href="#expert"
-                            class="bg-white/10 hover:bg-white/20 border border-white/40 text-white py-2 px-4.5 rounded-full font-semibold text-xs transition-all active:scale-95 inline-block text-center">
+                            class="bg-white/10 hover:bg-white/20 border border-white/40 text-white py-2 px-4.5 rounded-full font-semibold text-xs transition-all active:scale-95 inline-flex items-center justify-center gap-2">
                             Soy piloto de drone
                         </a>
                     </div>
@@ -194,41 +137,40 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center reveal">
                 <!-- Card 1: Hectáreas procesadas -->
                 <div
-                    class="py-3 px-4 sm:py-3.5 sm:px-5 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                    class="py-3 px-4 sm:py-3.5 sm:px-5 bg-surface rounded-2xl shadow-lg border border-outline-variant/20">
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-primary mb-1 tracking-tighter">
                         <span class="counter" data-target="80000" data-prefix="+" data-suffix="">0</span>
                     </p>
-                    <p class="text-[10px] sm:text-[11px] font-bold tracking-wider text-slate-600 uppercase">Hectáreas
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 ">Hectáreas
                         procesadas
                     </p>
                 </div>
 
                 <!-- Card 2: Pilotos certificados -->
                 <div
-                    class="py-3 px-4 sm:py-3.5 sm:px-5 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                    class="py-3 px-4 sm:py-3.5 sm:px-5 bg-surface rounded-2xl shadow-lg border border-outline-variant/20">
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-primary mb-1 tracking-tighter">
                         <span class="counter" data-target="600" data-prefix="+" data-suffix="">0</span>
                     </p>
-                    <p class="text-[10px] sm:text-[11px] font-bold tracking-wider text-slate-600 uppercase">Pilotos
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 ">Pilotos
                         certificados
                     </p>
                 </div>
 
                 <!-- Card 3: Productores alcanzados -->
                 <div
-                    class="py-3 px-4 sm:py-3.5 sm:px-5 bg-surface rounded-2xl card-shadow border border-outline-variant/20">
+                    class="py-3 px-4 sm:py-3.5 sm:px-5 bg-surface rounded-2xl shadow-lg border border-outline-variant/20">
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-primary mb-1 tracking-tighter">
                         <span class="counter" data-target="350" data-prefix="+" data-suffix="">0</span>
                     </p>
-                    <p class="text-[10px] sm:text-[11px] font-bold tracking-wider text-slate-600 uppercase">Productores
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 ">Productores
                         alcanzados
                     </p>
                 </div>
             </div>
             <!-- Logos Carousel (Updated to Infinite Scroll) -->
             <div class="mt-12 pt-8 md:mt-16 md:pt-10 border-t border-outline-variant/30 text-center reveal">
-                <p
-                    class="text-[10px] sm:text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest font-bold opacity-85">
+                <p class="text-[10px] sm:text-[11px] text-on-surface-variant mb-4 tracking-widest font-bold opacity-85">
                     Confían en nosotros</p>
                 <div class="relative overflow-hidden w-full pause-on-hover">
                     <!-- Se removió opacity-40 del contenedor padre -->
@@ -259,11 +201,6 @@
                             class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
                         <img src="images/alianzas/logo-xag.png" onError="this.src='alianzas/logo-xag.png'" alt="XAG"
                             class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
-                        <img src="images/alianzas/logo-aca.png" onError="this.src='alianzas/logo-aca.png'" alt="ACA"
-                            class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
-                        <img src="images/alianzas/logo-coop-agricola-mb.png"
-                            onError="this.src='alianzas/logo-coop-agricola-mb.png'" alt="Coop Agricola MB"
-                            class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
 
                         <!-- Set 2 (Duplicado para loop infinito fluido) -->
                         <img src="images/alianzas/logo-bayer.png" onError="this.src='alianzas/logo-bayer.png'"
@@ -291,11 +228,7 @@
                             class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
                         <img src="images/alianzas/logo-xag.png" onError="this.src='alianzas/logo-xag.png'" alt="XAG"
                             class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
-                        <img src="images/alianzas/logo-aca.png" onError="this.src='alianzas/logo-aca.png'" alt="ACA"
-                            class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
-                        <img src="images/alianzas/logo-coop-agricola-mb.png"
-                            onError="this.src='alianzas/logo-coop-agricola-mb.png'" alt="Coop Agricola MB"
-                            class="h-8 sm:h-9 md:h-10 max-h-10 w-auto object-contain brightness-95 contrast-125 opacity-80 hover:opacity-100 transition-all duration-300 mx-3 sm:mx-4" />
+
                     </div>
                     <!-- Gradient Overlays para difuminado suave en bordes -->
                     <div
@@ -311,19 +244,20 @@
 
     <!-- VIDEO SHOWCASE SECTION -->
     <section class="py-10 md:py-12 px-6 sm:px-10 lg:px-12 max-w-3xl md:max-w-4xl mx-auto text-center" id="soluciones">
-        <h2 class="text-xl md:text-2xl font-extrabold text-on-surface mb-4">Descubrí cómo Vistaguay transforma la
-            gestión
-            agrícola</h2>
-        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mb-6">Un recorrido visual por
-            nuestra plataforma y ecosistema en acción.</p>
+        <h2 class="text-xl md:text-2xl font-extrabold text-on-surface mb-4">
+            Descubrí cómo Vistaguay transforma la gestión agrícola
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mb-6">
+            Un recorrido visual por nuestra plataforma y ecosistema en acción.
+        </p>
 
         <div
             class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg border border-surface-variant bg-slate-900">
             <iframe id="featured-video" class="w-full h-full"
-                data-src="https://www.youtube.com/embed/TP_SOfIKqRk?autoplay=1&mute=1"
+                data-src="https://www.youtube.com/embed/TP_SOfIKqRk?autoplay=1&mute=1&cc_load_policy=1&hl=es&cc_lang_pref=es&rel=0&modestbranding=1&iv_load_policy=3&loop=1&playlist=TP_SOfIKqRk"
                 title="Descubrí cómo Vistaguay transforma la gestión agrícola" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
             </iframe>
         </div>
     </section>
@@ -340,7 +274,7 @@
                     campo en una sola plataforma
                     integrada.</p>
             </div>
-            <div class="bg-surface rounded-2xl card-shadow p-4 sm:p-5 md:p-6 reveal border border-outline-variant/20">
+            <div class="bg-surface rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 reveal border border-outline-variant/20">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-start relative">
                     <!-- Step 1 -->
                     <div class="text-center flex flex-col items-center">
@@ -350,7 +284,7 @@
                             <span
                                 class="material-symbols-outlined text-primary text-xs sm:text-sm">add_shopping_cart</span>
                         </div>
-                        <h4 class="text-xs sm:text-[13px] font-bold uppercase tracking-wider mb-1 text-slate-800">
+                        <h4 class="text-xs sm:text-[13px] font-bold mb-1 text-slate-800">
                             Productor
                             solicita
                         </h4>
@@ -366,7 +300,7 @@
                             class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                             <span class="material-symbols-outlined text-primary text-xs sm:text-sm">flight</span>
                         </div>
-                        <h4 class="text-xs sm:text-[13px] font-bold uppercase tracking-wider mb-1 text-slate-800">Piloto
+                        <h4 class="text-xs sm:text-[13px] font-bold  mb-1 text-slate-800">Piloto
                             Expert
                             vuela
                         </h4>
@@ -381,7 +315,7 @@
                             class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                             <span class="material-symbols-outlined text-primary text-xs sm:text-sm">memory</span>
                         </div>
-                        <h4 class="text-xs sm:text-[13px] font-bold uppercase tracking-wider mb-1 text-slate-800">
+                        <h4 class="text-xs sm:text-[13px] font-bold  mb-1 text-slate-800">
                             Algoritmo procesa
                         </h4>
                         <p class="text-[10px] sm:text-[11px] text-slate-600 leading-snug max-w-[180px]">
@@ -397,7 +331,7 @@
                             <span
                                 class="material-symbols-outlined text-on-primary text-xs sm:text-sm">assignment_turned_in</span>
                         </div>
-                        <h4 class="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-primary mb-1">Decisión
+                        <h4 class="text-xs sm:text-[13px] font-bold text-primary mb-1">Decisión
                             en manos
                         </h4>
                         <p class="text-[10px] sm:text-[11px] text-slate-700 font-bold leading-snug max-w-[180px]">
@@ -465,83 +399,113 @@
     <section class="py-10 md:py-12 bg-[#FAFAFA]" id="expert">
         <div class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
             <div
-                class="bg-surface rounded-3xl card-shadow overflow-hidden reveal border border-outline-variant/20 p-5 md:p-8">
-                <!-- Top Row: 50/50 layout -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <!-- Left Column: Proposal & CTA -->
-                    <div class="space-y-6 flex flex-col justify-center">
-                        <h2 class="text-xl md:text-2xl font-extrabold text-on-surface tracking-tight">
-                            Convertite en un piloto <span class="text-[#47C278] font-bold">Expert</span>
-                        </h2>
+                class="bg-surface rounded-3xl shadow-lg overflow-hidden reveal border border-outline-variant/20 p-5 md:p-8">
 
-                        <!-- Bullet Points with Green Left Accent Bar -->
-                        <div class="space-y-4 pt-2">
-                            <div class="border-l-4 border-[#47C278] pl-4 py-1 mb-3">
-                                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                                    Recibí solicitudes de vuelo cercanas a tu ubicación directamente a tu celular
-                                </p>
+                <!-- 50/50 Layout Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+
+                    <!-- Left Column: Content + 2 Benefit Cards -->
+                    <div class="flex flex-col justify-between space-y-6">
+                        <div>
+                            <h2 class="text-xl md:text-2xl font-extrabold text-on-surface tracking-tight mb-5">
+                                Convertite en un piloto <span class="text-primary font-bold">Expert</span>
+                            </h2>
+
+                            <!-- 3-Step Flow Process -->
+                            <div class="space-y-5 pt-1">
+
+                                <!-- Step 01 -->
+                                <div class="flex items-start gap-3.5 group cursor-default">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-xs flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
+                                        01
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-800 leading-tight mb-1">Solicitudes en
+                                            tu zona</h4>
+                                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                            Recibí solicitudes de vuelo cercanas a tu ubicación directamente a tu
+                                            celular.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 02 -->
+                                <div class="flex items-start gap-3.5 group cursor-default">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-xs flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
+                                        02
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-800 leading-tight mb-1">Soporte,
+                                            Protocolos y IA</h4>
+                                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                            Accede a soporte activo, protocolos de vuelo interactivos y algoritmos para
+                                            garantizar la calidad.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 03 -->
+                                <div class="flex items-start gap-3.5 group cursor-default">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-xs flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
+                                        03
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-800 leading-tight mb-1">Cobro Seguro
+                                        </h4>
+                                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                            Gestionamos tus pagos de forma segura, asegurando tu cobro al completar el
+                                            servicio.
+                                        </p>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="border-l-4 border-[#47C278] pl-4 py-1 mb-3">
-                                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                                    Accede a una biblioteca de algoritmos y un protocolo de vuelo claro para
-                                    garantizar la calidad del trabajo
-                                </p>
+                        </div>
+
+                        <!-- 2 Benefit Cards Grid (Usando .benefit-pill de components.css) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-5 border-t border-outline-variant/30 mt-4">
+
+                            <!-- Benefit Card 1 -->
+                            <div class="benefit-pill !rounded-xl !items-start !p-3.5 !gap-3">
+                                <span
+                                    class="material-symbols-outlined text-primary text-base sm:text-lg font-bold shrink-0 mt-0.5">security</span>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">Seguros
+                                        Integrales</h4>
+                                    <p class="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-1">
+                                        Coberturas preferenciales de Responsabilidad Civil, deriva y equipos junto a
+                                        Grupo Gaman.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="border-l-4 border-[#47C278] pl-4 py-1 mb-3">
-                                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                                    Gestionamos tus pagos de forma segura, asegurando tu cobro al completar el
-                                    servicio
-                                </p>
+
+                            <!-- Benefit Card 2 -->
+                            <div class="benefit-pill !rounded-xl !items-start !p-3.5 !gap-3">
+                                <span
+                                    class="material-symbols-outlined text-primary text-base sm:text-lg font-bold shrink-0 mt-0.5">sell</span>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">Descuentos
+                                        Preferenciales</h4>
+                                    <p class="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-1">
+                                        Beneficios y descuentos especiales en la compra de drones, repuestos y
+                                        accesorios.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="pt-4">
-                            <a href="https://onelink.to/xjay8d" target="_blank" rel="noopener noreferrer"
-                                class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 text-xs font-semibold rounded-full normal-case transition-all shadow-sm active:scale-95 inline-flex items-center justify-center gap-2 mt-4">
-                                Registrarse
-                            </a>
                         </div>
                     </div>
 
-                    <!-- Right Column: Leaflet Map -->
-                    <div id="pilots-native-map"
-                        class="w-full h-[380px] sm:h-[420px] rounded-2xl overflow-hidden border border-slate-200 shadow-md z-10">
+                    <!-- Right Column: Leaflet Map (Estirado al alto total) -->
+                    <div class="w-full h-full min-h-[380px] lg:min-h-0">
+                        <div id="pilots-native-map"
+                            class="w-full h-full rounded-2xl overflow-hidden border border-slate-200 shadow-md z-10 min-h-[380px]">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Bottom Row: 3 Benefit Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-200/60 mt-6">
-                    <!-- Card 1 -->
-                    <div class="p-2.5 sm:p-3 bg-slate-100/90 rounded-2xl border border-slate-200/80 space-y-3">
-                        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <span
-                                class="material-symbols-outlined text-[#47C278] text-xl font-bold">support_agent</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-slate-800">Soporte y Protocolos</h4>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">Soporte activo y protocolos de
-                            vuelo
-                            interactivos para acompañarte en cada servicio y garantizar la calidad.</p>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="p-2.5 sm:p-3 bg-slate-100/90 rounded-2xl border border-slate-200/80 space-y-3">
-                        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-[#47C278] text-xl font-bold">security</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-slate-800">Seguros Integrales</h4>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">Coberturas preferenciales de
-                            Responsabilidad Civil, deriva y equipos junto a Grupo Gaman.</p>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="p-2.5 sm:p-3 bg-slate-100/90 rounded-2xl border border-slate-200/80 space-y-3">
-                        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-[#47C278] text-xl font-bold">sell</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-slate-800">Descuentos Preferenciales</h4>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">Beneficios y descuentos
-                            especiales
-                            en la
-                            compra de drones, repuestos y accesorios.</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -566,7 +530,7 @@
                 <div class="relative w-full flex items-center justify-center">
                     <!-- Left Arrow (Verde con sombra y contraste) -->
                     <button id="prev-test-btn" aria-label="Anterior testimonio"
-                        class="absolute left-2 md:left-6 z-40 bg-[#47C278] hover:bg-[#3db067] text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg border border-[#47C278] transition-all hover:scale-110 active:scale-95 focus:outline-none">
+                        class="btn-circle-icon absolute left-2 md:left-6 z-40">
                         <span class="material-symbols-outlined text-sm font-bold">arrow_back</span>
                     </button>
 
@@ -580,7 +544,7 @@
 
                     <!-- Right Arrow (Verde con sombra y contraste) -->
                     <button id="next-test-btn" aria-label="Siguiente testimonio"
-                        class="absolute right-2 md:right-6 z-40 bg-[#47C278] hover:bg-[#3db067] text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg border border-[#47C278] transition-all hover:scale-110 active:scale-95 focus:outline-none">
+                        class="btn-circle-icon absolute right-2 md:right-6 z-40">
                         <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
                     </button>
                 </div>
@@ -596,7 +560,7 @@
     <section class="py-10 md:py-12 bg-[#FAFAFA]" id="devs">
         <div class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
             <div
-                class="bg-inverse-surface rounded-3xl card-shadow p-6 md:p-10 flex flex-col lg:flex-row items-center gap-12 reveal relative overflow-hidden">
+                class="bg-inverse-surface rounded-3xl shadow-lg p-6 md:p-10 flex flex-col lg:flex-row items-center gap-12 reveal relative overflow-hidden">
                 <div class="flex-1 relative z-10 text-white space-y-6">
                     <h2 class="text-xl md:text-2xl font-extrabold tracking-tight">¿Tenés un algoritmo que aporta
                         valor
@@ -609,13 +573,13 @@
                     </p>
                     <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-block bg-[#47C278] hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95">
+                        class="inline-block bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95">
                         Sumate a Vistaguay
                     </a>
                 </div>
                 <div class="flex-1 relative z-10 w-full">
                     <div
-                        class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 font-mono text-xs text-primary-fixed overflow-x-auto card-shadow text-emerald-300">
+                        class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 font-mono text-xs text-primary-fixed overflow-x-auto shadow-lg text-emerald-300">
                         <p class="text-white/40 mb-2">// POST /api/v1/process-field</p>
                         <p>{</p>
                         <p class="ml-4">"field_id": "ar_ba_lote_04",</p>
@@ -640,15 +604,16 @@
             <div class="max-w-3xl mx-auto space-y-6 reveal">
                 <h2
                     class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white text-center leading-tight tracking-tight max-w-3xl mx-auto mb-6 sm:mb-8">
-                    Tu campo tiene más para dar. Vistaguay te ayuda a verlo.
+                    Tu campo tiene más para dar.<br />
+                    Vistaguay te ayuda a verlo.
                 </h2>
                 <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
                     <a href="https://onelink.to/6g4qbv" target="_blank" rel="noopener noreferrer"
-                        class="bg-[#47C278] hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-block">
+                        class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center justify-center gap-2">
                         Empezar como productor
                     </a>
                     <a href="https://onelink.to/xjay8d" target="_blank" rel="noopener noreferrer"
-                        class="bg-white/10 hover:bg-white/20 border border-white/40 text-white py-2 px-4.5 rounded-full font-semibold text-xs transition-all active:scale-95 inline-block text-center">
+                        class="bg-white/10 hover:bg-white/20 border border-white/40 text-white py-2 px-4.5 rounded-full font-semibold text-xs transition-all active:scale-95 inline-flex items-center justify-center gap-2">
                         Registrarme como piloto
                     </a>
                 </div>
@@ -689,7 +654,7 @@
             </div>
             <div class="grid grid-cols-1 gap-y-10">
                 <div>
-                    <h5 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-800 mb-2">Soporte</h5>
+                    <h5 class="text-[11px] font-extrabold text-slate-800 mb-2">Soporte</h5>
                     <ul class="space-y-1.5 text-xs text-slate-600 font-medium">
                         <li><a class="hover:text-primary transition-colors duration-200"
                                 href="https://web.vistaguay.com/privacy-policies" target="_blank"
@@ -728,7 +693,7 @@
         <div
             class="relative rounded-3xl bg-white shadow-2xl border border-slate-200 overflow-hidden max-w-4xl w-full flex flex-col md:flex-row max-h-[90vh] my-auto">
             <!-- Close Button -->
-            <button onclick="toggleDownloadModal()"
+            <button onclick="toggleDownloadModal()" aria-label="Cerrar ventana"
                 class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-50">
                 <span class="material-symbols-outlined text-xl font-bold">close</span>
             </button>
@@ -737,8 +702,7 @@
             <div
                 class="flex-1 p-8 sm:p-10 bg-slate-50 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-100 overflow-y-auto">
                 <div class="space-y-4">
-                    <span
-                        class="inline-block px-3 py-1 rounded-full text-xs font-extrabold tracking-wider bg-[#47C278]/10 text-[#47C278] uppercase">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-primary/10 text-primary">
                         Productores y Asesores
                     </span>
                     <h3 class="text-2xl font-extrabold text-slate-900">App Vistaguay</h3>
@@ -748,22 +712,22 @@
                     </p>
                     <ul class="space-y-2 pt-2">
                         <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
-                            <span class="material-symbols-outlined text-[#47C278] text-base">check_circle</span>
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Solicitá vuelos al instante
                         </li>
                         <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
-                            <span class="material-symbols-outlined text-[#47C278] text-base">check_circle</span>
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Monitoreá tus lotes
                         </li>
                         <li class="flex items-center gap-2 text-xs font-semibold text-slate-600">
-                            <span class="material-symbols-outlined text-[#47C278] text-base">check_circle</span>
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Descargá tus resultados
                         </li>
                     </ul>
                 </div>
                 <div class="pt-6">
                     <a href="https://onelink.to/6g4qbv" target="_blank"
-                        class="w-full bg-[#47C278] hover:bg-[#3db067] text-white rounded-full py-3 px-6 font-bold flex items-center justify-center gap-2 shadow-sm text-xs uppercase tracking-wider transition-all hover:shadow active:scale-95 text-center">
+                        class="w-full bg-primary hover:bg-[#3db067] text-white rounded-full py-3 px-6 font-bold flex items-center justify-center gap-2 shadow-sm text-xs transition-all hover:shadow active:scale-95 text-center">
                         <span class="material-symbols-outlined text-lg">download</span>
                         Descargar App Vistaguay
                     </a>
@@ -774,7 +738,7 @@
             <div class="flex-1 p-8 sm:p-10 bg-white flex flex-col justify-between overflow-y-auto">
                 <div class="space-y-4">
                     <span
-                        class="inline-block px-3 py-1 rounded-full text-xs font-extrabold tracking-wider bg-[#182230]/10 text-[#182230] uppercase">
+                        class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-[#182230]/10 text-[#182230]">
                         Pilotos / Experts
                     </span>
                     <h3 class="text-2xl font-extrabold text-slate-900">App Experts</h3>
@@ -798,8 +762,8 @@
                 </div>
                 <div class="pt-6">
                     <a href="https://onelink.to/xjay8d" target="_blank"
-                        class="w-full bg-[#182230] hover:bg-[#253244] text-white rounded-full py-3 px-6 font-bold flex items-center justify-center gap-2 shadow-sm text-xs uppercase tracking-wider transition-all hover:shadow active:scale-95 text-center">
-                        <span class="material-symbols-outlined text-lg">flight_takeoff</span>
+                        class="w-full bg-[#182230] hover:bg-[#253244] text-white rounded-full py-3 px-6 font-bold flex items-center justify-center gap-2 shadow-sm text-xs transition-all hover:shadow active:scale-95 text-center">
+                        <span class="material-symbols-outlined text-lg">download</span>
                         Descargar App Experts
                     </a>
                 </div>

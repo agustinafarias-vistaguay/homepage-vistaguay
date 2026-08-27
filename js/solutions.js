@@ -180,7 +180,7 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
             </div>
             <div class="pt-4">
                 <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" 
-                    class="bg-[#47C278] hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center gap-2 w-fit">
+                    class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center gap-2 w-fit">
                     ${data.ctaText}
                     <span class="material-symbols-outlined text-base">arrow_forward</span>
                 </a>
@@ -196,12 +196,12 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
                         <span class="material-symbols-outlined text-primary text-xs shrink-0 w-4 h-4 flex items-center justify-center">check_circle</span>
                         <span class="inline-flex items-center">${b}</span>
                         <div class="relative inline-flex items-center justify-center shrink-0 ml-1">
-                            <span class="absolute inline-flex h-full w-full rounded-full bg-[#47C278]/50 animate-ping"></span>
+                            <span class="absolute inline-flex h-full w-full rounded-full bg-primary/50 animate-ping"></span>
                             <button onclick="openComboDemoModal()" 
-                                    aria-label="Ver animación combo" 
-                                    class="relative w-7 h-7 rounded-full bg-[#47C278] hover:bg-[#3db067] text-white flex items-center justify-center shadow-md transition-transform hover:scale-110 active:scale-95 cursor-pointer">
-                                <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
-                            </button>
+        aria-label="Ver animación combo" 
+        class="btn-circle-icon relative w-7 h-7 text-xs">
+    <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+</button>
                         </div>
                     </li>
                 `;
@@ -220,11 +220,11 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
         if (tabKey === 'plant') {
             bottomContentHtml = `
                 <div class="pt-3 border-t border-outline-variant/30 space-y-2 w-full lg:max-w-[260px]">
-                    <p class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">Medición y Parámetros:</p>
+                    <p class="text-[11px] sm:text-xs font-extrabold text-slate-700 mb-1.5">Medición y Parámetros:</p>
                     <div class="grid grid-cols-2 lg:grid-cols-1 gap-1.5 sm:gap-2">
                         ${data.parameters.map(p => `
                             <div class="py-1 px-2.5 sm:py-1.5 sm:px-3 bg-slate-100 border border-slate-200 rounded-xl flex items-center gap-2.5 shadow-sm">
-                                <span class="material-symbols-outlined text-[#47C278] text-xs font-bold shrink-0">${p.icon}</span>
+                                <span class="material-symbols-outlined text-primary text-xs font-bold shrink-0">${p.icon}</span>
                                 <span class="text-[11px] sm:text-xs font-semibold text-slate-700 leading-tight">${p.name}</span>
                             </div>
                         `).join('')}
@@ -234,11 +234,11 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
         } else if (tabKey === 'drone') {
             bottomContentHtml = `
                 <div class="pt-3 border-t border-outline-variant/30 space-y-2 w-full lg:max-w-[260px]">
-                    <p class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">Labores Disponibles:</p>
+                    <p class="text-[11px] sm:text-xs font-extrabold text-slate-700 mb-1.5">Labores Disponibles:</p>
                     <div class="grid grid-cols-2 lg:grid-cols-1 gap-1.5 sm:gap-2">
                         ${data.applications.map(a => `
                             <div class="py-1 px-2.5 sm:py-1.5 sm:px-3 bg-slate-100 border border-slate-200 rounded-xl flex items-center gap-2.5 shadow-sm">
-                                <span class="material-symbols-outlined text-[#47C278] text-xs font-bold shrink-0">${a.icon}</span>
+                                <span class="material-symbols-outlined text-primary text-xs font-bold shrink-0">${a.icon}</span>
                                 <span class="text-[11px] sm:text-xs font-semibold text-slate-700 leading-tight">${a.title}</span>
                             </div>
                         `).join('')}
@@ -248,11 +248,11 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
         } else if (tabKey === 'weed') {
             bottomContentHtml = `
                 <div class="pt-3 border-t border-outline-variant/30 space-y-2 w-full lg:max-w-[260px]">
-                    <p class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">Beneficios Clave:</p>
+                    <p class="text-[11px] sm:text-xs font-extrabold text-slate-700 mb-1.5">Beneficios Clave:</p>
                     <div class="grid grid-cols-2 lg:grid-cols-1 gap-1.5 sm:gap-2">
                         ${data.benefits.map(b => `
                             <div class="py-1 px-2.5 sm:py-1.5 sm:px-3 bg-slate-100 border border-slate-200 rounded-xl flex items-center gap-2.5 shadow-sm">
-                                <span class="material-symbols-outlined text-[#47C278] text-xs font-bold shrink-0">${b.icon}</span>
+                                <span class="material-symbols-outlined text-primary text-xs font-bold shrink-0">${b.icon}</span>
                                 <span class="text-[11px] sm:text-xs font-semibold text-slate-700 leading-tight">${b.name}</span>
                             </div>
                         `).join('')}
@@ -264,15 +264,15 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
                 <div class="border-t border-outline-variant/30 pt-4">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <h4 class="text-sm sm:text-base uppercase font-extrabold text-primary mb-0.5">${data.stat1Val}</h4>
+                            <h4 class="text-sm sm:text-base font-extrabold text-primary mb-0.5">${data.stat1Val}</h4>
                             <p class="text-xs text-on-surface-variant leading-tight">${data.stat1Label}</p>
                         </div>
                         <div>
-                            <h4 class="text-sm sm:text-base uppercase font-extrabold text-primary mb-0.5">${data.stat2Val}</h4>
+                            <h4 class="text-sm sm:text-base font-extrabold text-primary mb-0.5">${data.stat2Val}</h4>
                             <p class="text-xs text-on-surface-variant leading-tight">${data.stat2Label}</p>
                         </div>
                         <div>
-                            <h4 class="text-sm sm:text-base uppercase font-extrabold text-primary mb-0.5">${data.stat3Val}</h4>
+                            <h4 class="text-sm sm:text-base font-extrabold text-primary mb-0.5">${data.stat3Val}</h4>
                             <p class="text-xs text-on-surface-variant leading-tight">${data.stat3Label}</p>
                         </div>
                     </div>
@@ -283,7 +283,7 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
         const ctaButtonHtml = data.ctaText ? `
             <div class="pt-1">
                 <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" 
-                    class="bg-[#47C278] hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center gap-2">
+                    class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center gap-2">
                     ${data.ctaText}
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>

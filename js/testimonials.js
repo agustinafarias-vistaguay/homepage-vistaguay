@@ -42,7 +42,7 @@ function initTestimonials() {
                 <p class="text-xs text-slate-600 leading-normal italic mb-6">"${item.quote}"</p>
             </div>
             <div class="flex items-center gap-4">
-                <div class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center font-extrabold text-primary text-[10px] uppercase">
+                <div class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center font-extrabold text-primary text-[10px]">
                     ${item.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
@@ -95,7 +95,7 @@ function renderTestimonials(animate = true) {
         const baseClass = `p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 flex flex-col justify-between min-h-[180px] w-[230px] sm:w-[270px] md:w-[300px] shrink-0 select-none`;
 
         if (isActive) {
-            card.className = `${baseClass} scale-105 sm:scale-110 z-20 border-2 border-[#47C278] shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
+            card.className = `${baseClass} scale-105 sm:scale-110 z-20 border-2 border-primary shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
         } else {
             card.className = `${baseClass} scale-95 z-10 border border-slate-200 bg-slate-50 opacity-70 shadow-none`;
         }
@@ -108,9 +108,9 @@ function renderTestimonials(animate = true) {
             <button onclick="jumpToTestimonial(${i})" 
                     aria-label="Ir al testimonio ${i + 1}"
                     class="h-1 rounded-full transition-all duration-500 ease-out cursor-pointer ${i === realIndex
-                        ? 'w-4 bg-[#47C278]'
-                        : 'w-1 bg-slate-200 hover:bg-slate-300'
-                    }"></button>
+                ? 'w-4 bg-primary'
+                : 'w-1 bg-slate-200 hover:bg-slate-300'
+            }"></button>
         `).join('');
     }
 }

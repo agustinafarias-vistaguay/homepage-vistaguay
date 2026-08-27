@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <!-- Badge Superior: Ecosistema Integrado -->
         <div id="vg-title-badge" class="absolute left-1/2 top-[8%] -translate-x-1/2 -translate-y-1/2 z-25 transition-all duration-700 opacity-0 scale-50 pointer-events-none">
-          <div class="px-5 py-2 rounded-full bg-[#47C278] text-white font-extrabold text-xs sm:text-sm shadow-[0_8px_25px_rgba(71,194,120,0.3)] flex items-center justify-center">
+          <div class="px-5 py-2 rounded-full bg-primary text-white font-extrabold text-xs sm:text-sm shadow-[0_8px_25px_rgba(71,194,120,0.3)] flex items-center justify-center">
             <span>Ecosistema Integrado</span>
           </div>
         </div>
 
         <!-- Logo Central Circular de Vistaguay -->
         <div id="vg-center-logo" class="absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-700 opacity-0 scale-50 pointer-events-none">
-          <div class="w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-white border-2 border-[#47C278] shadow-[0_15px_35px_rgba(71,194,120,0.4)] flex items-center justify-center p-1.5 overflow-hidden">
+          <div class="w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-white border-2 border-primary shadow-[0_15px_35px_rgba(71,194,120,0.4)] flex items-center justify-center p-1.5 overflow-hidden">
             <img src="images/iso-logo.png" alt="Vistaguay Isotipo" class="w-full h-full object-contain" onError="this.src='iso-logo.png'" />
           </div>
         </div>
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- NODO 1: PRODUCTOR (Globo hacia arriba) -->
 <div id="vg-node-farmer" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
   <div id="bubble-farmer" class="vg-bubble absolute bottom-full mb-3 left-1/2 z-50 w-max max-w-[220px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
-    <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
+    <div class="relative px-3.5 py-2 rounded-2xl bg-primary text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
       <span>"Quiero soluciones sin comprar un dron"</span>
       <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#47C278]"></div>
     </div>
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- NODO 2: PILOTOS (Globo sale por debajo del nombre) -->
 <div id="vg-node-pilot" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
   <div id="bubble-pilot" class="vg-bubble absolute top-full mt-11 left-1/2 z-50 w-max max-w-[200px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
-    <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
+    <div class="relative px-3.5 py-2 rounded-2xl bg-primary text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
       <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-[#47C278]"></div>
       <span>"Quiero volar más en mi zona"</span>
     </div>
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- NODO 3: DESARROLLADORES (Globo sale por debajo del nombre) -->
 <div id="vg-node-dev" class="vg-node absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer flex flex-col items-center select-none transition-all duration-700">
   <div id="bubble-dev" class="vg-bubble absolute top-full mt-11 left-1/2 z-50 w-max max-w-[210px] opacity-0 pointer-events-none transition-all duration-400" style="transform: translate(-50%, 0) scale(0.5);">
-    <div class="relative px-3.5 py-2 rounded-2xl bg-[#47C278] text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
+    <div class="relative px-3.5 py-2 rounded-2xl bg-primary text-white font-semibold text-xs shadow-lg border border-emerald-300 text-center">
       <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-[#47C278]"></div>
       <span>"Quiero vender mis algoritmos"</span>
     </div>

@@ -1722,12 +1722,6 @@
     "lng": -60.8123
   },
   {
-    "id": 1003,
-    "city": "Piloto Bell Ville",
-    "lat": -34.25419,
-    "lng": -64.08865
-  },
-  {
     "id": 1004,
     "city": "Piloto Tandil",
     "lat": -36.8378,
@@ -1818,22 +1812,10 @@
     "lng": -61.50369
   },
   {
-    "id": 1019,
-    "city": "Piloto Río Cuarto",
-    "lat": -34.37255,
-    "lng": -62.24747
-  },
-  {
     "id": 1020,
     "city": "Piloto Trenque Lauquen",
     "lat": -38.38466,
     "lng": -61.22919
-  },
-  {
-    "id": 1021,
-    "city": "Piloto Marcos Juárez",
-    "lat": -33.86401,
-    "lng": -60.91264
   },
   {
     "id": 1022,
@@ -1878,12 +1860,6 @@
     "lng": -68.32185
   },
   {
-    "id": 1029,
-    "city": "Piloto Venado Tuerto",
-    "lat": -33.91185,
-    "lng": -61.34185
-  },
-  {
     "id": 1030,
     "city": "Piloto Tandil",
     "lat": -37.49812,
@@ -1914,12 +1890,6 @@
     "lng": -58.18291
   },
   {
-    "id": 1035,
-    "city": "Piloto Villa María",
-    "lat": -32.81291,
-    "lng": -63.12891
-  },
-  {
     "id": 1036,
     "city": "Piloto General Roca",
     "lat": -39.02891,
@@ -1948,5 +1918,65 @@
     "city": "Piloto Quimilí",
     "lat": -27.42891,
     "lng": -64.58291
+  },
+  {
+    "id": 1041,
+    "city": "Piloto Mendoza (Valle de Uco)",
+    "lat": -33.5777,
+    "lng": -69.0163
+  },
+  {
+    "id": 1042,
+    "city": "Piloto San Rafael",
+    "lat": -34.6177,
+    "lng": -68.3301
+  },
+  {
+    "id": 1043,
+    "city": "Piloto San Juan",
+    "lat": -31.5375,
+    "lng": -68.5364
+  },
+  {
+    "id": 1044,
+    "city": "Piloto La Rioja",
+    "lat": -29.4131,
+    "lng": -66.8558
+  },
+  {
+    "id": 1045,
+    "city": "Piloto Catamarca",
+    "lat": -28.4696,
+    "lng": -65.7852
+  },
+  {
+    "id": 1046,
+    "city": "Piloto Neuquén",
+    "lat": -38.9516,
+    "lng": -68.0591
+  },
+  {
+    "id": 1047,
+    "city": "Piloto Zapala",
+    "lat": -38.9026,
+    "lng": -70.0544
+  },
+  {
+    "id": 1048,
+    "city": "Piloto San Martín de los Andes",
+    "lat": -40.1579,
+    "lng": -71.3534
+  },
+  {
+    "id": 1049,
+    "city": "Piloto Malargüe",
+    "lat": -35.4752,
+    "lng": -69.5842
+  },
+  {
+    "id": 1050,
+    "city": "Piloto Maipú (Mendoza)",
+    "lat": -32.9782,
+    "lng": -68.7845
   }
 ]

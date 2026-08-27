@@ -13,12 +13,22 @@ This document establishes the mandatory technical guidelines, execution boundari
 ## 2. Codebase Architecture & Modular Standards
 * **No Inline Code:** `index.html` must remain clean and semantic. **NEVER** write inline `<style>` tags or inline `<script>` blocks inside `index.html`.
 * **JS Modularity:** All JavaScript logic must reside in dedicated, single-responsibility ES modules inside the `js/` directory (e.g., `js/solutions.js`, `js/testimonials.js`).
-* **CSS Separation:** All custom CSS rules, keyframes, and library overrides must be placed inside `css/styles.css`.
+* **Modular CSS Strategy:** Custom CSS must be split into functional, single-responsibility files inside `css/`:
+  * `css/components.css`: Reusable UI components (`.btn-circle-icon`, `.benefit-pill`).
+  * `css/animations.css`: Keyframes, scroll reveals, and shimmer effects.
+  * `css/leaflet-custom.css`: Third-party library overrides (Leaflet maps).
 * **Global Scope Exposure:** When creating or editing functions called directly from HTML event attributes (e.g., `onclick="toggleMobileMenu()"`), explicitly attach them to the global `window` object (e.g., `window.toggleMobileMenu = toggleMobileMenu`).
-* **UI Design Token Compliance:** Strictly adhere to the UI tokens, padding specifications, typography scales, and responsive breakpoint rules documented in `.agents/design.md`.
 
 ---
 
-## 3. Self-Documentation & Maintenance Rules
+## 3. UI Tokens & Accessibility Strict Enforcement
+* **Design Token Compliance:** Strictly adhere to the UI tokens, padding specifications, typography scales, and responsive breakpoint rules documented in `.agents/design.md`.
+* **No Hardcoded Values:** Do NOT use hardcoded Hex colors (e.g., `#47C278`) or custom CSS when native Tailwind utility classes exist (`primary`, `shadow-lg`, etc.).
+* **Mandatory Accessibility (a11y):** All icon-only buttons, carousels, and modal controls MUST include descriptive `aria-label` attributes.
+* **Universal Sentence Case:** Do NOT use `uppercase` or `tracking-wider` classes for buttons, step badges, or titles unless explicitly mandated.
+
+---
+
+## 4. Self-Documentation & Maintenance Rules
 * **JSDoc Comments:** Provide concise JSDoc comments directly above every exported or major function explaining its purpose and parameters.
 * **Architecture Sync:** Whenever a new file is added, removed, or renamed within `css/`, `js/`, or `data/`, automatically update the file tree table in `README.md`.
