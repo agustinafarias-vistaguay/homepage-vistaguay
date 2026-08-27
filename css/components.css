@@ -1,4 +1,95 @@
-/* 1. Botón Circular de Ícono (Flechas Carrusel y Acciones Flotantes) */
+/* 1. BOTONES DE ACCIÓN GLOBAL Y CTAs */
+
+/* Primary CTA Green */
+.btn-primary {
+    background-color: #47C278;
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(71, 194, 120, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #3db067;
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(71, 194, 120, 0.35);
+}
+
+.btn-primary:active {
+    transform: scale(0.96);
+}
+
+/* Secondary Outline Light (Header / Ir a la plataforma) */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #cbd5e1;
+    /* slate-300 */
+    color: #1e293b;
+    /* slate-800 */
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-outline:hover {
+    border-color: #47C278;
+    /* primary */
+    color: #47C278;
+    background-color: rgba(71, 194, 120, 0.04);
+    transform: translateY(-1px) scale(1.02);
+}
+
+.btn-outline:active {
+    transform: scale(0.96);
+}
+
+/* Secondary Translucent Dark/Hero (Registrarme como piloto / App Experts Modal) */
+.btn-secondary-hero {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-secondary-hero:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: translateY(-1px) scale(1.02);
+}
+
+.btn-secondary-hero:active {
+    transform: scale(0.96);
+}
+
+/* 2. BOTÓN CIRCULAR DE ÍCONO (Flechas Carrusel y Acciones Flotantes) */
 .btn-circle-icon {
     width: 2rem;
     /* 32px */
@@ -28,7 +119,51 @@
     transform: scale(0.95);
 }
 
-/* 2. Pills de Beneficios Clave (Tarjetas de Mapeo / Conteo) */
+/* 3. SOLAPAS DE PESTAÑAS / FILTROS (.tab-btn) */
+.tab-btn {
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    outline: none;
+}
+
+.tab-btn:active {
+    transform: scale(0.96);
+}
+
+.tab-btn-active {
+    background-color: #47C278;
+    /* primary */
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(71, 194, 120, 0.25);
+}
+
+.tab-btn-active:hover {
+    background-color: #3db067;
+}
+
+.tab-btn-inactive {
+    background-color: #ffffff;
+    border-color: rgba(226, 232, 240, 0.9);
+    color: #334155;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tab-btn-inactive:hover {
+    border-color: rgba(71, 194, 120, 0.5);
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+/* 4. PILLS DE BENEFICIOS CLAVE (Tarjetas de Mapeo / Conteo / Expert) */
 .benefit-pill {
     background-color: rgba(243, 244, 246, 0.9);
     /* bg-slate-100/90 */
@@ -52,7 +187,7 @@
     background-color: #ffffff;
 }
 
-/* 3. Tarjeta de Testimonio (Carrusel) */
+/* 5. TARJETA DE TESTIMONIO (Carrusel) */
 .testimonial-card {
     background-color: #ffffff;
     border-radius: 20px;
@@ -65,4 +200,45 @@
 .testimonial-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+}
+
+/* Segmented Control / Switch */
+.segmented-control {
+    padding: 4px;
+    background-color: rgba(241, 245, 249, 0.9);
+    /* slate-100 */
+    border: 1px solid #e2e8f0;
+    /* slate-200 */
+    border-radius: 9999px;
+    align-items: center;
+    gap: 4px;
+}
+
+.segmented-btn {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.segmented-btn-active {
+    background-color: #47C278;
+    /* primary */
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.segmented-btn-inactive {
+    background-color: transparent;
+    color: #475569;
+    /* slate-600 */
+}
+
+.segmented-btn-inactive:hover {
+    color: #0f172a;
+    /* slate-900 */
 }

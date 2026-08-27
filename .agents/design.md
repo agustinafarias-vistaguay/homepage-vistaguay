@@ -98,12 +98,7 @@ Todos los botones interactivos y enlaces se presentan en **Sentence case** (sin 
 * **Clases:**
   `border border-slate-300 text-slate-800 hover:border-primary hover:text-primary py-2 px-4.5 rounded-full font-semibold text-xs transition-all inline-flex items-center justify-center gap-2`
 
-### D. Dark Accent CTA Button (App Experts)
-* **Uso:** Descarga de app para pilotos / perfil técnico (*Descargar app Experts*).
-* **Clases:**
-  `bg-[#182230] hover:bg-[#253244] text-white py-2 px-4.5 rounded-full font-semibold text-xs transition-all shadow-sm active:scale-95 inline-flex items-center justify-center gap-2`
-
-### E. Tertiary Links (Navbar Navigation)
+### D. Tertiary Links (Navbar Navigation)
 * **Uso:** Enlaces del menú principal (*Servicios*, *Pilotos*, *Desarrolladores*).
 * **Clases:**
   `text-xs font-semibold text-slate-700 hover:text-primary transition-colors normal-case`
@@ -169,3 +164,22 @@ Todos los botones interactivos y enlaces se presentan en **Sentence case** (sin 
 ### C. Media & Aspect Ratios
 * **Video Embeds:** Contenedor contenedor con `aspect-video rounded-2xl overflow-hidden shadow-lg`.
 * **Hero/CTA Backgrounds:** `object-cover` obligatorio para evitar distorsiones de aspecto en pantallas ultramochas o móviles.
+
+---
+
+## 7. Centralized CSS Components (css/components.css)
+Para evitar duplicación de reglas en HTML y CSS, los componentes globales repetitivos deben emplear preferentemente las siguientes clases centralizadas:
+
+* **`.btn-primary`:** Botón primario verde (#47C278, hover #3db067, 14px font-bold, rounded-full, sombra suave).
+
+* **`.btn-outline`**: Botón secundario con borde sobre fondo claro (border #cbd5e1, hover border/text #47C278).**
+
+* **`.btn-secondary-hero`**: Botón secundario translúcido con borde sobre fondo oscuro (bg-white/10, border-white/40).**
+
+* **`.btn-circle-icon`:** Botón circular navegacional (32x32px, #47C278, elevación en hover).**
+
+* **`.tab-btn` (`.tab-btn-active` / `.tab-btn-inactive`):** Botones de pestañas y conmutadores de filtros.
+
+* **`.benefit-pill`:** Tarjetas/píldoras compactas para beneficios clave con ícono integrado.
+
+* **`.testimonial-card`:** Tarjetas contenedoras de testimonios (rounded-[20px], fondo blanco, sombras suaves).**

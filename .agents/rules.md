@@ -14,7 +14,7 @@ This document establishes the mandatory technical guidelines, execution boundari
 * **No Inline Code:** `index.html` must remain clean and semantic. **NEVER** write inline `<style>` tags or inline `<script>` blocks inside `index.html`.
 * **JS Modularity:** All JavaScript logic must reside in dedicated, single-responsibility ES modules inside the `js/` directory (e.g., `js/solutions.js`, `js/testimonials.js`).
 * **Modular CSS Strategy:** Custom CSS must be split into functional, single-responsibility files inside `css/`:
-  * `css/components.css`: Reusable UI components (`.btn-circle-icon`, `.benefit-pill`).
+  * `css/components.css`: Reusable UI components (`.btn-primary`, `.btn-outline`, `.btn-secondary-hero`, `.tab-btn`, `.benefit-pill`, `.testimonial-card`).
   * `css/animations.css`: Keyframes, scroll reveals, and shimmer effects.
   * `css/leaflet-custom.css`: Third-party library overrides (Leaflet maps).
 * **Global Scope Exposure:** When creating or editing functions called directly from HTML event attributes (e.g., `onclick="toggleMobileMenu()"`), explicitly attach them to the global `window` object (e.g., `window.toggleMobileMenu = toggleMobileMenu`).
@@ -23,7 +23,8 @@ This document establishes the mandatory technical guidelines, execution boundari
 
 ## 3. UI Tokens & Accessibility Strict Enforcement
 * **Design Token Compliance:** Strictly adhere to the UI tokens, padding specifications, typography scales, and responsive breakpoint rules documented in `.agents/design.md`.
-* **No Hardcoded Values:** Do NOT use hardcoded Hex colors (e.g., `#47C278`) or custom CSS when native Tailwind utility classes exist (`primary`, `shadow-lg`, etc.).
+* **Centralized Component Usage:** Standard buttons, tabs, and interactive cards MUST use their designated CSS component classes (`.btn-primary`, `.btn-outline`, `.btn-secondary-hero`, `.tab-btn`) from `css/components.css`. Do NOT duplicate long Tailwind utility strings for standardized UI buttons.
+* **No Hardcoded Values:** Do NOT use hardcoded Hex colors in HTML markup when Tailwind color tokens (`primary`, `slate-900`, etc.) or centralized CSS component classes exist.
 * **Mandatory Accessibility (a11y):** All icon-only buttons, carousels, and modal controls MUST include descriptive `aria-label` attributes.
 * **Universal Sentence Case:** Do NOT use `uppercase` or `tracking-wider` classes for buttons, step badges, or titles unless explicitly mandated.
 

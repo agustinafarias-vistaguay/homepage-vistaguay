@@ -61,8 +61,8 @@ const tabData = {
         overlayImage: "images/pq-suerpuesto.png"
     },
     drone: {
-        title: "Aplicación aérea y siembra con drones de gran porte",
-        desc: "Servicios profesionales de pulverización, fertilización y siembra de precisión en zonas de difícil acceso o terrenos anegados.",
+        title: "Aplicación aérea de solidos y liquidos con drones de gran porte",
+        desc: "Servicios profesionales de pulverización, fertilización, control de plagas y siembra de precisión en zonas de difícil acceso o terrenos anegados.",
         bullets: [
             "Pulverización aérea sin pisoteo del cultivo",
             "Control selectivo de plagas y malezas"
@@ -123,30 +123,30 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
 
     // Selector Verde sobre Marrón / Verde sobre Verde (Mobile vs Desktop)
     const segmentedControlMobile = tabKey === 'weed' ? `
-        <div class="lg:hidden p-1 bg-slate-100/90 border border-slate-200 rounded-full inline-flex items-center gap-1 mb-2">
-            <button onclick="toggleWeedSubTab('marron')" 
-                class="py-1 px-3 rounded-full text-[11px] sm:text-xs transition-all duration-300 ease-in-out ${subKey === 'marron' ? 'bg-primary text-white font-semibold shadow-sm normal-case' : 'text-slate-600 hover:text-slate-900 font-medium normal-case'}">
-                Verde sobre Marrón
-            </button>
-            <button onclick="toggleWeedSubTab('verde')" 
-                class="py-1 px-3 rounded-full text-[11px] sm:text-xs transition-all duration-300 ease-in-out ${subKey === 'verde' ? 'bg-primary text-white font-semibold shadow-sm normal-case' : 'text-slate-600 hover:text-slate-900 font-medium normal-case'}">
-                Verde sobre Verde
-            </button>
-        </div>
-    ` : '';
+    <div class="inline-flex lg:hidden segmented-control mb-2">
+        <button onclick="toggleWeedSubTab('marron')" 
+            class="segmented-btn ${subKey === 'marron' ? 'segmented-btn-active' : 'segmented-btn-inactive'}">
+            Verde sobre Marrón
+        </button>
+        <button onclick="toggleWeedSubTab('verde')" 
+            class="segmented-btn ${subKey === 'verde' ? 'segmented-btn-active' : 'segmented-btn-inactive'}">
+            Verde sobre Verde
+        </button>
+    </div>
+` : '';
 
     const segmentedControlDesktop = tabKey === 'weed' ? `
-        <div class="hidden lg:block absolute top-4 left-4 z-40 p-1 bg-slate-100/90 border border-slate-200 rounded-full inline-flex items-center gap-1 shadow-md">
-            <button onclick="toggleWeedSubTab('marron')" 
-                class="py-1 px-3 rounded-full text-[11px] sm:text-xs transition-all duration-300 ease-in-out ${subKey === 'marron' ? 'bg-primary text-white font-semibold shadow-sm normal-case' : 'text-slate-600 hover:text-slate-900 font-medium normal-case'}">
-                Verde sobre Marrón
-            </button>
-            <button onclick="toggleWeedSubTab('verde')" 
-                class="py-1 px-3 rounded-full text-[11px] sm:text-xs transition-all duration-300 ease-in-out ${subKey === 'verde' ? 'bg-primary text-white font-semibold shadow-sm normal-case' : 'text-slate-600 hover:text-slate-900 font-medium normal-case'}">
-                Verde sobre Verde
-            </button>
-        </div>
-    ` : '';
+    <div class="hidden lg:inline-flex absolute top-4 left-4 z-40 segmented-control shadow-md">
+        <button onclick="toggleWeedSubTab('marron')" 
+            class="segmented-btn ${subKey === 'marron' ? 'segmented-btn-active' : 'segmented-btn-inactive'}">
+            Verde sobre Marrón
+        </button>
+        <button onclick="toggleWeedSubTab('verde')" 
+            class="segmented-btn ${subKey === 'verde' ? 'segmented-btn-active' : 'segmented-btn-inactive'}">
+            Verde sobre Verde
+        </button>
+    </div>
+` : '';
 
     // Solapa 5: Proyectos Especiales
     if (tabKey === 'special') {
@@ -180,7 +180,7 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
             </div>
             <div class="pt-4">
                 <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" 
-                    class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center gap-2 w-fit">
+                    class="btn-primary w-fit">
                     ${data.ctaText}
                     <span class="material-symbols-outlined text-base">arrow_forward</span>
                 </a>
@@ -283,7 +283,7 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
         const ctaButtonHtml = data.ctaText ? `
             <div class="pt-1">
                 <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" 
-                    class="bg-primary hover:bg-[#3db067] text-white py-2 px-4.5 rounded-full font-semibold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 inline-flex items-center gap-2">
+                    class="btn-primary">
                     ${data.ctaText}
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
@@ -310,29 +310,29 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
     }
 
     // Configuración visual de la imagen superpuesta (Laptop / Celular)
-    const overlayWidth = tabKey === 'drone' ? 'w-[250px] xl:w-[290px]' : 'w-[420px] xl:w-[480px]';
-    const overlayPosition = tabKey === 'drone' ? 'bottom-0 lg:bottom-0 xl:bottom-0' : 'bottom-2 xl:bottom-4';
-    const overlayTranslate = tabKey === 'drone' ? '-translate-x-[40%]' : '-translate-x-[30%]';
+    const overlayWidth = tabKey === 'drone' ? 'w-[200px] xl:w-[230px]' : 'w-[380px] xl:w-[430px]';
+    const overlayPosition = tabKey === 'drone' ? 'bottom-0 xl:bottom-0' : 'bottom-0 xl:bottom-1';
+    const overlayTranslate = tabKey === 'drone' ? '-translate-x-[40%]' : '-translate-x-[28%]';
 
     const overlayImageHtml = data.overlayImage ? `
-        <div id="solutions-overlay-image" class="hidden lg:block absolute left-1/2 -translate-x-[35%] bottom-0 z-20 w-[300px] xl:w-[350px] pointer-events-none transition-all duration-500">
-            <img src="${data.overlayImage}" alt="Vista previa de plataforma" 
-                 class="w-full h-auto drop-shadow-[0_18px_30px_rgba(0,0,0,0.35)] object-contain">
-        </div>
-    ` : '';
+    <div id="solutions-overlay-image" class="hidden lg:block absolute left-1/2 ${overlayTranslate} ${overlayPosition} z-20 ${overlayWidth} pointer-events-none transition-all duration-500">
+        <img src="${data.overlayImage}" alt="Vista previa de plataforma" 
+             class="w-full h-auto drop-shadow-[0_18px_30px_rgba(0,0,0,0.35)] object-contain">
+    </div>
+` : '';
 
     cardContainer.className = "grid grid-cols-1 lg:grid-cols-2 opacity-100 transform translate-y-0 relative lg:h-full";
     cardContainer.innerHTML = `
-        <div class="p-5 md:p-6 lg:pr-8 flex flex-col justify-between gap-4 z-30 relative lg:h-full">
-            ${leftColumnHtml}
-        </div>
-        <div class="relative h-72 sm:h-80 lg:h-full bg-surface-container overflow-hidden z-0">
-            ${segmentedControlDesktop}
-            <img alt="${data.title}" class="w-full h-full object-cover" src="${data.image}">
-            <div class="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent"></div>
-        </div>
-        ${overlayImageHtml}
-    `;
+    <div class="p-5 md:p-6 lg:pr-8 flex flex-col justify-between gap-4 z-30 relative lg:h-full">
+        ${leftColumnHtml}
+    </div>
+    <div class="relative h-72 sm:h-80 lg:h-full bg-surface-container overflow-hidden z-0">
+        ${segmentedControlDesktop}
+        <img alt="${data.title}" class="w-full h-full object-cover" src="${data.image}">
+        <div class="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent"></div>
+    </div>
+    ${overlayImageHtml}
+`;
 }
 
 /**
@@ -356,9 +356,9 @@ function switchTab(tabKey) {
         const btn = buttons[key];
         if (!btn) return;
         if (key === tabKey) {
-            btn.className = "tab-btn px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-bold shadow-md transition-all duration-300 normal-case";
+            btn.className = "tab-btn tab-btn-active";
         } else {
-            btn.className = "tab-btn px-3.5 py-1.5 rounded-full bg-white border border-slate-200/90 text-slate-700 hover:border-primary/50 text-xs font-bold shadow-sm transition-all duration-300 normal-case";
+            btn.className = "tab-btn tab-btn-inactive";
         }
     });
 

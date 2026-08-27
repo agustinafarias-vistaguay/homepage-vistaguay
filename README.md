@@ -1,49 +1,61 @@
-# Vistaguay AgTech Landing Page
+# Vistaguay AgTech - Documentación del Proyecto
 
-## Project Overview
-This repository contains the Vistaguay AgTech landing page, a high-performance web application designed with modern aesthetics (smooth animations, dynamic layout cards, dark gradients, and responsive components) to connect agricultural producers, advisors, and companies with drone pilots and precision analytics.
-
----
-
-## File Architecture
-The project is structured to separate HTML layout, styling, and JavaScript logic:
-
-| Directory/File | Description |
-| :--- | :--- |
-| `index.html` | Core semantic HTML layout of the landing page. |
-| `css/styles.css` | All custom styles, keyframe animations, scroll triggers, and Leaflet overrides. |
-| `js/` | Modular JavaScript interactive scripts. |
-| `data/` | Coordinates and JSON datasets (e.g., `data/pilots.json`). |
-| `images/` | Site assets, logos, and illustration overlays. |
-| `.agents/` | Context guidelines, UI design system, and technical agent rules. |
+Sitio web institucional de Vistaguay AgTech para conectar productores agrícolas, asesores y empresas con pilotos de drones y servicios de analítica de precisión.
 
 ---
 
-## JavaScript Modules & Responsibilities
-All logic is modularized inside single-responsibility files in the `js/` directory:
+## Estructura de Archivos y Módulos
 
-* **`js/main.js`**: Manages general UI interactions (navbar dropdown menu, download modal display, scroll reveal observers, lazy-loaded video).
-* **`js/stats.js`**: Runs dynamic count-up counter animations from 0 via `IntersectionObserver`.
-* **`js/solutions.js`**: Controls the precision agriculture tabs switcher, sub-tabs, and dynamic card showcase rendering.
-* **`js/testimonials.js`**: Powers the 3D-focused slide carousel with auto-play, hover pause interactions, indicator dots, and controls.
-* **`js/pilots-map.js`**: Initializes the Leaflet.js dark map, fetching and plotting coordinates from `data/pilots.json`.
-* **`js/ecosystem-animation.js`**: Orchestrates the SVG-based animation representing the Vistaguay platform ecosystem flow.
-* **`js/weed-combo.js`**: Manages the custom weed detection curtain transitions and split-screen previews.
+### Módulos JavaScript (`js/`)
+Módulos ES independientes con responsabilidad única:
+
+* **`js/main.js`**: Lógica del menú mobile, modal de descarga (`#download-modal`), observadores de scroll (`.reveal`) y carga diferida (lazy load) del video.
+* **`js/stats.js`**: Animación de contadores numéricos al entrar en pantalla vía `IntersectionObserver`.
+* **`js/solutions.js`**: Selector de solapas de servicios y renderizado dinámico de tarjetas, contenidos e imágenes superpuestas.
+* **`js/weed-combo.js`**: Modal interactivo que muestra la combinación del Mapeo de Malezas y Conteo de Plantas (PQ) en un mismo vuelo.
+* **`js/testimonials.js`**: Carrusel 3D de testimonios en bucle continuo con pausa al hover y controles de navegación.
+* **`js/pilots-map.js`**: Inicialización del mapa Leaflet.js en modo oscuro, lectura del dataset y renderizado de marcadores.
+* **`js/ecosystem-animation.js`**: Renderizado y control de la animación interactiva de nodos en la sección Hero.
+
+### Hojas de Estilo CSS (`css/`)
+Estilos divididos por capas de uso:
+
+* **`css/components.css`**: Componentes UI reutilizables (`.btn-circle-icon`, `.benefit-pill`, `.testimonial-card`).
+* **`css/animations.css`**: Reglas `@keyframes`, carrusel infinito de marcas (`.animate-scroll`) y efectos de revelado al scroll.
+* **`css/leaflet-custom.css`**: Estilos del tema oscuro, tooltips y ajustes visuales para el mapa Leaflet.
+
+### Datos y Fuentes (`data/`)
+* **`data/pilots.json`**: Dataset con coordenadas geográficas de pilotos. *(Datos demostrativos para simular la cobertura en el mapa)*.
+* **`data/[Pitch Deck].pdf`**: Presentación comercial original utilizada como fuente base para los textos y métricas de la web.
+
+### Configuración para IAs (`.agents/`)
+* **`.agents/design.md`**: Sistema de diseño UI/UX (tokens de color, tipografía, botones y elevaciones).
+* **`.agents/rules.md`**: Reglas técnicas de arquitectura (modularidad CSS/JS, accesibilidad y exposición al objeto global `window`).
 
 ---
 
-## Developer Guidelines
+## Uso de la carpeta `.agents/` en Prompts
 
-### Local Development
-Because scripts perform local data fetching (`data/pilots.json`), run a local web server rather than opening `index.html` directly from the file system.
+Para solicitar cambios a un asistente de IA (Antigravity, Cursor, Copilot, ChatGPT, Claude), hacé referencia a estos archivos según el tipo de tarea:
 
-Option A (VS Code Extension):
-* Right-click `index.html` and select **Open with Live Server**.
+### Cambios de Diseño o Estilos (HTML / CSS)
+> "Agregá un nuevo botón en la sección de soluciones siguiendo los tokens y la jerarquía de `@.agents/design.md`."
 
-Option B (Terminal):
+### Funciones JavaScript o Nuevos Archivos
+> "Creá el script para el modal basándote en `@.agents/rules.md` para mantener el código modular, exponer las funciones al objeto `window` y cumplir con las normas de accesibilidad."
+
+### Secciones Completas o Refactorizaciones
+> "Vamos a crear una nueva sección. Consultá `@.agents/design.md` para los estilos visuales y `@.agents/rules.md` para la estructura del código."
+
+---
+
+## Ejecución en Entorno Local
+
+Para evitar bloqueos de seguridad CORS al leer `data/pilots.json` con `fetch()`, iniciá la web mediante un servidor local:
+
+**Opción A (VS Code):**
+Hacer clic derecho sobre `index.html` ➔ **Open with Live Server**.
+
+**Opción B (Terminal Python):**
 ```bash
-# Using Python
 python -m http.server 8000
-
-# Using Node.js (npx)
-npx serve .
