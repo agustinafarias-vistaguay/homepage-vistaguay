@@ -11,30 +11,32 @@ let comboInterval = null;
  * Opens the combo demo modal layer on the solutions showcase card.
  * @returns {void}
  */
-function openComboDemoModal() {
-    const cardContainer = document.getElementById('solutions-content-card');
-    if (!cardContainer) return;
 
-    // 1. Mayor recorrido en la ida (36% horizontal, -48% vertical) y aumento de escala (1.3)
-    const defaultOverlay = document.getElementById('solutions-overlay-image');
-    if (defaultOverlay) {
-        defaultOverlay.style.zIndex = '10';
-        defaultOverlay.style.transition = 'transform 1.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease-out';
-        defaultOverlay.style.transform = 'translate(36%, -48%) scale(1.3)';
-        defaultOverlay.style.opacity = '0';
-    }
+(function () {
+    function openComboDemoModal() {
+        const cardContainer = document.getElementById('solutions-content-card');
+        if (!cardContainer) return;
 
-    // Columna derecha (donde se ubica la imagen del campo)
-    const rightColumn = cardContainer.children[1];
-    if (!rightColumn) return;
+        // 1. Mayor recorrido en la ida (36% horizontal, -48% vertical) y aumento de escala (1.3)
+        const defaultOverlay = document.getElementById('solutions-overlay-image');
+        if (defaultOverlay) {
+            defaultOverlay.style.zIndex = '10';
+            defaultOverlay.style.transition = 'transform 1.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease-out';
+            defaultOverlay.style.transform = 'translate(36%, -48%) scale(1.3)';
+            defaultOverlay.style.opacity = '0';
+        }
 
-    let demoLayer = document.getElementById('inline-combo-demo');
+        // Columna derecha (donde se ubica la imagen del campo)
+        const rightColumn = cardContainer.children[1];
+        if (!rightColumn) return;
 
-    if (!demoLayer) {
-        demoLayer = document.createElement('div');
-        demoLayer.id = 'inline-combo-demo';
-        demoLayer.className = 'absolute inset-0 z-40 bg-black/75 backdrop-blur-sm flex flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-700 ease-out overflow-hidden';
-        demoLayer.innerHTML = `
+        let demoLayer = document.getElementById('inline-combo-demo');
+
+        if (!demoLayer) {
+            demoLayer = document.createElement('div');
+            demoLayer.id = 'inline-combo-demo';
+            demoLayer.className = 'absolute inset-0 z-40 bg-black/75 backdrop-blur-sm flex flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-700 ease-out overflow-hidden';
+            demoLayer.innerHTML = `
             <!-- Botón de Cierre -->
             <button onclick="closeComboDemoModal()" aria-label="Cerrar demo" 
                 class="absolute top-3 right-3 z-50 text-white/80 hover:text-white bg-black/60 hover:bg-black/90 w-9 h-9 rounded-full flex items-center justify-center transition-colors backdrop-blur-md cursor-pointer">
@@ -58,99 +60,103 @@ function openComboDemoModal() {
                 </div>
             </div>
         `;
-        rightColumn.appendChild(demoLayer);
+            rightColumn.appendChild(demoLayer);
+        }
+
+        demoLayer.classList.remove('hidden');
+        setTimeout(() => demoLayer.classList.remove('opacity-0'), 200);
+
+        startComboAnimation();
     }
 
-    demoLayer.classList.remove('hidden');
-    setTimeout(() => demoLayer.classList.remove('opacity-0'), 200);
+    /**
+     * Closes the combo demo modal layer on the solutions showcase card.
+     * @returns {void}
+     */
+    function closeComboDemoModal() {
+        const demoLayer = document.getElementById('inline-combo-demo');
 
-    startComboAnimation();
-}
+        // 2. Regreso suave de 0.7s e inicio inmediato sobre z-45
+        const defaultOverlay = document.getElementById('solutions-overlay-image');
+        if (defaultOverlay) {
+            defaultOverlay.style.zIndex = '45';
+            defaultOverlay.style.transition = 'transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease-in';
+            defaultOverlay.style.transform = '';
+            defaultOverlay.style.opacity = '1';
 
-/**
- * Closes the combo demo modal layer on the solutions showcase card.
- * @returns {void}
- */
-function closeComboDemoModal() {
-    const demoLayer = document.getElementById('inline-combo-demo');
+            setTimeout(() => {
+                defaultOverlay.style.zIndex = '';
+            }, 700);
+        }
 
-    // 2. Regreso suave de 0.7s e inicio inmediato sobre z-45
-    const defaultOverlay = document.getElementById('solutions-overlay-image');
-    if (defaultOverlay) {
-        defaultOverlay.style.zIndex = '45';
-        defaultOverlay.style.transition = 'transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease-in';
-        defaultOverlay.style.transform = '';
-        defaultOverlay.style.opacity = '1';
+        if (!demoLayer) return;
+
+        stopComboAnimation();
+        demoLayer.classList.add('opacity-0');
+        setTimeout(() => {
+            demoLayer.classList.add('hidden');
+        }, 500);
+    }
+
+    /**
+     * Starts the curtain/swipe preview animation, toggling clip-path properties sequentially.
+     * @returns {void}
+     */
+    function startComboAnimation() {
+        stopComboAnimation();
+        let currentLayer = 1;
+
+        const img1 = document.getElementById('img-layer-1');
+        const img2 = document.getElementById('img-layer-2');
+
+        // Reset inicial ocultando ambas imágenes fuera de pantalla con la cortina
+        if (img1 && img2) {
+            img1.style.clipPath = 'inset(0 100% 0 0)';
+            img2.style.clipPath = 'inset(0 100% 0 0)';
+        }
+
+        // Tiempo de espera de la 1ª imagen intacto:
+        const TIEMPO_ESPERA_PRIMERA_IMAGEN = 900;
 
         setTimeout(() => {
-            defaultOverlay.style.zIndex = '';
-        }, 700);
+            if (!img1) return;
+
+            // Revela la primera imagen en barrido
+            img1.style.clipPath = 'inset(0 0 0 0)';
+
+            // Bucle de transición sin dejar huecos visibles
+            comboInterval = setInterval(() => {
+                if (!img1 || !img2) return;
+
+                if (currentLayer === 1) {
+                    // Despliega la 2ª imagen encima en cortina
+                    img2.style.clipPath = 'inset(0 0 0 0)';
+                    currentLayer = 2;
+                } else {
+                    // Repliega la 2ª imagen revelando de nuevo la 1ª fija abajo
+                    img2.style.clipPath = 'inset(0 100% 0 0)';
+                    currentLayer = 1;
+                }
+            }, 2500);
+
+        }, TIEMPO_ESPERA_PRIMERA_IMAGEN);
     }
 
-    if (!demoLayer) return;
-
-    stopComboAnimation();
-    demoLayer.classList.add('opacity-0');
-    setTimeout(() => {
-        demoLayer.classList.add('hidden');
-    }, 500);
-}
-
-/**
- * Starts the curtain/swipe preview animation, toggling clip-path properties sequentially.
- * @returns {void}
- */
-function startComboAnimation() {
-    stopComboAnimation();
-    let currentLayer = 1;
-
-    const img1 = document.getElementById('img-layer-1');
-    const img2 = document.getElementById('img-layer-2');
-
-    // Reset inicial ocultando ambas imágenes fuera de pantalla con la cortina
-    if (img1 && img2) {
-        img1.style.clipPath = 'inset(0 100% 0 0)';
-        img2.style.clipPath = 'inset(0 100% 0 0)';
+    /**
+     * Stops the active curtain/swipe preview animation interval.
+     * @returns {void}
+     */
+    function stopComboAnimation() {
+        if (comboInterval) {
+            clearInterval(comboInterval);
+            comboInterval = null;
+        }
     }
 
-    // Tiempo de espera de la 1ª imagen intacto:
-    const TIEMPO_ESPERA_PRIMERA_IMAGEN = 900;
+    // Bind functions to global window object for inline HTML event handling
+    window.openComboDemoModal = openComboDemoModal;
+    window.closeComboDemoModal = closeComboDemoModal;
 
-    setTimeout(() => {
-        if (!img1) return;
+    window.closeWeedComboModal = closeWeedComboModal;
 
-        // Revela la primera imagen en barrido
-        img1.style.clipPath = 'inset(0 0 0 0)';
-
-        // Bucle de transición sin dejar huecos visibles
-        comboInterval = setInterval(() => {
-            if (!img1 || !img2) return;
-
-            if (currentLayer === 1) {
-                // Despliega la 2ª imagen encima en cortina
-                img2.style.clipPath = 'inset(0 0 0 0)';
-                currentLayer = 2;
-            } else {
-                // Repliega la 2ª imagen revelando de nuevo la 1ª fija abajo
-                img2.style.clipPath = 'inset(0 100% 0 0)';
-                currentLayer = 1;
-            }
-        }, 2500);
-
-    }, TIEMPO_ESPERA_PRIMERA_IMAGEN);
-}
-
-/**
- * Stops the active curtain/swipe preview animation interval.
- * @returns {void}
- */
-function stopComboAnimation() {
-    if (comboInterval) {
-        clearInterval(comboInterval);
-        comboInterval = null;
-    }
-}
-
-// Bind functions to global window object for inline HTML event handling
-window.openComboDemoModal = openComboDemoModal;
-window.closeComboDemoModal = closeComboDemoModal;
+})();

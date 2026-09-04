@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         videoObserver.observe(videoIframe);
     }
 
-    // 2. Scroll Reveal Animations
+    // 2. Scroll Reveal Animations (con Throttling mediante requestAnimationFrame)
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
         reveals.forEach(element => {
@@ -76,6 +76,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-    window.addEventListener('scroll', revealOnScroll);
+
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                revealOnScroll();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    });
+
     revealOnScroll(); // Run initially
 });
+
+// Exponer la función globalmente para el evento onclick del footer
+window.copyEmailToClipboard = function (event, email) {
+    event.preventDefault();
+
+    navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById('email-copied-toast');
+        if (toast) {
+            toast.classList.remove('hidden', 'opacity-0');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 2000);
+        }
+    }).catch(err => {
+        console.error('Error al copiar el correo:', err);
+    });
+};

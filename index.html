@@ -26,14 +26,6 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "yd2r9ty3ia");
-    </script>
 </head>
 
 <body class="bg-background text-on-surface font-body-md selection:bg-primary/20 selection:text-primary">
@@ -50,13 +42,13 @@
 
             <!-- Desktop Links (Visibles solo en pantallas >= 1024px) -->
             <div class="hidden lg:flex gap-8 items-center">
-                <a class="text-xs font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
+                <a class="text-sm font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
                     href="#servicios">Servicios</a>
-                <a class="text-xs font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
+                <a class="text-sm font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
                     href="#business">Business</a>
-                <a class="text-xs font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
+                <a class="text-sm font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
                     href="#expert">Pilotos</a>
-                <a class="text-xs font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
+                <a class="text-sm font-semibold text-slate-700 hover:text-primary transition-colors normal-case"
                     href="#devs">Desarrolladores</a>
             </div>
 
@@ -161,7 +153,7 @@
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-primary mb-1 tracking-tighter">
                         <span class="counter" data-target="80000" data-prefix="+" data-suffix="">0</span>
                     </p>
-                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 ">Hectáreas
+                    <p class="text-sm sm:text-sm font-bold text-slate-600 ">Hectáreas
                         procesadas
                     </p>
                 </div>
@@ -172,7 +164,7 @@
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-primary mb-1 tracking-tighter">
                         <span class="counter" data-target="800" data-prefix="+" data-suffix="">0</span>
                     </p>
-                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 ">Pilotos
+                    <p class="text-sm sm:text-sm font-bold text-slate-600 ">Pilotos
                         certificados
                     </p>
                 </div>
@@ -183,14 +175,14 @@
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-primary mb-1 tracking-tighter">
                         <span class="counter" data-target="350" data-prefix="+" data-suffix="">0</span>
                     </p>
-                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 ">Productores
+                    <p class="text-sm sm:text-sm font-bold text-slate-600 ">Productores
                         alcanzados
                     </p>
                 </div>
             </div>
             <!-- Logos Carousel (Updated to Infinite Scroll) -->
             <div class="mt-12 pt-8 md:mt-16 md:pt-10 border-t border-outline-variant/30 text-center reveal">
-                <p class="text-[10px] sm:text-[11px] text-on-surface-variant mb-4 tracking-widest font-bold opacity-85">
+                <p class="text-sm sm:text-sm text-on-surface-variant mb-4 tracking-widest font-bold opacity-85">
                     Confían en nosotros
                 </p>
                 <div class="relative overflow-hidden w-full">
@@ -271,7 +263,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
 
     <!-- SECCIÓN UNIFICADA: CÓMO FUNCIONA VISTAGUAY -->
@@ -283,7 +274,7 @@
                 <h2 class="text-xl md:text-2xl font-extrabold text-on-surface mb-3 tracking-tight">
                     Una solución de punta a punta
                 </h2>
-                <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                <p class="text-sm sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
                     Orquestamos cada etapa del proceso: desde la solicitud inicial y la ejecución del servicio en campo,
                     hasta la liquidación a las partes y la entrega del resultado final.
                 </p>
@@ -303,8 +294,7 @@
                             class="h-full bg-primary w-0 transition-all duration-700 ease-in-out"></div>
                     </div>
 
-                    <div
-                        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-3 items-start relative z-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
 
                         <!-- Paso 01 -->
                         <div class="text-center flex flex-col items-center">
@@ -314,9 +304,10 @@
                                 <span
                                     class="material-symbols-outlined text-primary text-base sm:text-lg">add_shopping_cart</span>
                             </div>
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Pedido de servicio
+                            <h3 class="text-sm sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Pedido de servicio
                             </h3>
-                            <p class="text-[11px] sm:text-xs text-slate-600 leading-normal max-w-[140px]">Solicitud y
+                            <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-normal max-w-[140px]">
+                                Solicitud y
                                 delimitación del lote.</p>
                         </div>
 
@@ -327,9 +318,10 @@
                                 class="process-icon-circle relative z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#eefaf2] border border-primary/20 flex items-center justify-center mb-2.5 transition-all duration-300">
                                 <span class="material-symbols-outlined text-primary text-base sm:text-lg">flight</span>
                             </div>
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Vuelo o aplicación
+                            <h3 class="text-sm sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Vuelo o aplicación
                             </h3>
-                            <p class="text-[11px] sm:text-xs text-slate-600 leading-normal max-w-[140px]">Captura de
+                            <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-normal max-w-[140px]">Captura
+                                de
                                 datos o trabajo en campo.</p>
                         </div>
 
@@ -341,9 +333,10 @@
                                 <span
                                     class="material-symbols-outlined text-primary text-base sm:text-lg">cloud_upload</span>
                             </div>
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Carga de datos
+                            <h3 class="text-sm sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Carga de datos
                             </h3>
-                            <p class="text-[11px] sm:text-xs text-slate-600 leading-normal max-w-[140px]">Subida de
+                            <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-normal max-w-[140px]">Subida
+                                de
                                 imágenes o recetas.</p>
                         </div>
 
@@ -354,8 +347,9 @@
                                 class="process-icon-circle relative z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#eefaf2] border border-primary/20 flex items-center justify-center mb-2.5 transition-all duration-300">
                                 <span class="material-symbols-outlined text-primary text-base sm:text-lg">memory</span>
                             </div>
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Procesamiento</h3>
-                            <p class="text-[11px] sm:text-xs text-slate-600 leading-normal max-w-[140px]">Algoritmos y
+                            <h3 class="text-sm sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Procesamiento</h3>
+                            <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-normal max-w-[140px]">
+                                Algoritmos y
                                 reportes listos.</p>
                         </div>
 
@@ -367,9 +361,10 @@
                                 <span
                                     class="material-symbols-outlined text-primary text-base sm:text-lg">payments</span>
                             </div>
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Liquidación a
+                            <h3 class="text-sm sm:text-sm font-bold text-slate-900 mb-1 leading-snug">Liquidación a
                                 partes</h3>
-                            <p class="text-[11px] sm:text-xs text-slate-600 leading-normal max-w-[140px]">Pago seguro a
+                            <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-normal max-w-[140px]">Pago
+                                seguro a
                                 pilotos y devs.</p>
                         </div>
 
@@ -382,10 +377,10 @@
                                     class="material-symbols-outlined text-primary text-base sm:text-lg transition-colors">task_alt</span>
                             </div>
                             <h3 id="process-title-6"
-                                class="text-xs sm:text-sm font-bold text-slate-900 mb-1 leading-snug transition-colors">
+                                class="text-sm sm:text-sm font-bold text-slate-900 mb-1 leading-snug transition-colors">
                                 Acción en el lote</h3>
                             <p id="process-desc-6"
-                                class="text-[11px] sm:text-xs text-slate-600 leading-normal max-w-[140px] transition-colors">
+                                class="text-sm sm:text-smsm:text-sm text-slate-600 leading-normal max-w-[140px] transition-colors">
                                 Decisiones e impacto en el campo.</p>
                         </div>
 
@@ -394,7 +389,7 @@
 
                 <!-- 2. Sub-card con Fondo Gris Sutil y Video Plano -->
                 <div class="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-6 sm:p-8 w-full text-center">
-                    <p class="text-xs sm:text-sm font-semibold text-slate-700 mb-4">
+                    <p class="text-sm sm:text-sm font-semibold text-slate-700 mb-4">
                         Un recorrido visual por nuestra plataforma y ecosistema en acción.
                     </p>
                     <div
@@ -418,7 +413,7 @@
                 <h2 class="text-xl md:text-2xl font-extrabold text-on-surface mb-4 tracking-tight">
                     Tecnología de precisión y servicios para cada etapa del cultivo
                 </h2>
-                <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                <p class="text-sm sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
                     Soluciones de analítica, aplicación y formación profesional, en un solo lugar.
                 </p>
             </div>
@@ -531,7 +526,7 @@
                             <h2 class="text-xl md:text-2xl font-extrabold text-on-surface tracking-tight mb-2">
                                 Vistaguay <span class="text-primary font-bold">Business</span>
                             </h2>
-                            <p class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
+                            <p class="text-sm sm:text-sm text-slate-600 mb-6 leading-relaxed">
                                 Potenciamos la gestión de grandes empresas y agroinsumos con una interfaz adaptada a tus
                                 operaciones.
                             </p>
@@ -551,7 +546,7 @@
                                             <h4 class="biz-title text-sm font-bold leading-tight mb-1">
                                                 Solicitudes rápidas y asignación delegada
                                             </h4>
-                                            <p class="biz-desc text-xs opacity-90 leading-relaxed">
+                                            <p class="biz-desc text-sm opacity-90 leading-relaxed">
                                                 Cargás el lote desde una interfaz simplificada y nosotros coordinamos al
                                                 piloto certificado ideal.
                                             </p>
@@ -571,7 +566,7 @@
                                             <h4 class="biz-title text-sm font-bold text-slate-900 leading-tight mb-1">
                                                 Tableros de control y reportes custom
                                             </h4>
-                                            <p class="biz-desc text-xs text-slate-600 leading-relaxed">
+                                            <p class="biz-desc text-sm text-slate-600 leading-relaxed">
                                                 Consolidación de hectáreas voladas, métricas clave y reportes
                                                 exportables con tu marca.
                                             </p>
@@ -591,7 +586,7 @@
                                             <h4 class="biz-title text-sm font-bold text-slate-900 leading-tight mb-1">
                                                 Presencia de marca en plataforma
                                             </h4>
-                                            <p class="biz-desc text-xs text-slate-600 leading-relaxed">
+                                            <p class="biz-desc text-sm text-slate-600 leading-relaxed">
                                                 Visibilidad directa hacia productores y asesores mediante banners
                                                 publicitarios estratégicos.
                                             </p>
@@ -631,13 +626,13 @@
                                 <!-- Step 01 -->
                                 <div class="flex items-start gap-3.5 group cursor-default">
                                     <div
-                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-xs flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
+                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-sm flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
                                         01
                                     </div>
                                     <div>
                                         <h4 class="text-sm font-bold text-slate-800 leading-tight mb-1">Solicitudes en
                                             tu zona</h4>
-                                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                        <p class="text-sm sm:text-sm text-slate-700 leading-relaxed">
                                             Recibí solicitudes de vuelo cercanas a tu ubicación directamente a tu
                                             celular.
                                         </p>
@@ -647,13 +642,13 @@
                                 <!-- Step 02 -->
                                 <div class="flex items-start gap-3.5 group cursor-default">
                                     <div
-                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-xs flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
+                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-sm flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
                                         02
                                     </div>
                                     <div>
                                         <h4 class="text-sm font-bold text-slate-800 leading-tight mb-1">Soporte,
                                             Protocolos y IA</h4>
-                                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                        <p class="text-sm sm:text-sm text-slate-700 leading-relaxed">
                                             Accede a soporte activo, protocolos de vuelo interactivos y algoritmos para
                                             garantizar la calidad.
                                         </p>
@@ -663,13 +658,13 @@
                                 <!-- Step 03 -->
                                 <div class="flex items-start gap-3.5 group cursor-default">
                                     <div
-                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-xs flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
+                                        class="w-8 h-8 rounded-full bg-primary/10 text-primary font-black text-sm flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary group-hover:text-white shadow-sm mt-0.5">
                                         03
                                     </div>
                                     <div>
                                         <h4 class="text-sm font-bold text-slate-800 leading-tight mb-1">Cobro Seguro
                                         </h4>
-                                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                        <p class="text-sm sm:text-sm text-slate-700 leading-relaxed">
                                             Gestionamos tus pagos de forma segura, asegurando tu cobro al completar el
                                             servicio.
                                         </p>
@@ -687,9 +682,10 @@
                                 <span
                                     class="material-symbols-outlined text-primary text-base sm:text-lg font-bold shrink-0 mt-0.5">security</span>
                                 <div>
-                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">Seguros
+                                    <h4 class="text-sm sm:text-sm font-bold text-slate-800 leading-tight">Seguros
                                         Integrales</h4>
-                                    <p class="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-1">
+                                    <p
+                                        class="text-sm sm:text-smsm:text-sm text-slate-600 font-normal leading-relaxed mt-1">
                                         Coberturas preferenciales de Responsabilidad Civil, deriva y equipos junto a
                                         Grupo Gaman.
                                     </p>
@@ -701,9 +697,10 @@
                                 <span
                                     class="material-symbols-outlined text-primary text-base sm:text-lg font-bold shrink-0 mt-0.5">sell</span>
                                 <div>
-                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">Descuentos
+                                    <h4 class="text-sm sm:text-sm font-bold text-slate-800 leading-tight">Descuentos
                                         Preferenciales</h4>
-                                    <p class="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-1">
+                                    <p
+                                        class="text-sm sm:text-smsm:text-sm text-slate-600 font-normal leading-relaxed mt-1">
                                         Beneficios y descuentos especiales en la compra de drones, repuestos y
                                         accesorios.
                                     </p>
@@ -732,7 +729,7 @@
                 <h2 class="text-xl md:text-2xl font-extrabold text-on-surface tracking-tight mb-4">Historias de
                     éxito
                     real</h2>
-                <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">Lo que dicen
+                <p class="text-sm sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">Lo que dicen
                     quienes
                     ya están
                     transformando el campo con Vistaguay.
@@ -779,7 +776,7 @@
                     <h2 class="text-xl md:text-2xl font-extrabold text-white tracking-tight">
                         Integrá tus algoritmos y monetizá tu código
                     </h2>
-                    <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                    <p class="text-slate-200 text-sm sm:text-sm leading-relaxed">
                         Contamos con una API robusta para una integración ágil y directa. Formá parte de la biblioteca
                         de algoritmos para el agro más grande de Argentina.
                     </p>
@@ -787,7 +784,7 @@
 
                 <div class="w-full lg:w-1/2 relative z-10">
                     <div
-                        class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 font-mono text-xs sm:text-sm text-emerald-300 overflow-x-auto shadow-lg">
+                        class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 font-mono text-sm sm:text-sm text-emerald-300 overflow-x-auto shadow-lg">
                         <p class="text-white/40 mb-2">// POST /api/v1/process-field</p>
                         <p>{</p>
                         <p class="ml-4">"field_id": "ar_ba_lote_04",</p>
@@ -812,7 +809,8 @@
         <div class="relative z-20 max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 text-center text-white w-full">
             <div class="max-w-3xl mx-auto reveal flex flex-col items-center">
 
-                <p class="text-[11px] sm:text-xs font-semibold tracking-[0.15em] text-slate-300/90 uppercase mb-1.5">
+                <p
+                    class="text-sm sm:text-smsm:text-sm font-semibold tracking-[0.15em] text-slate-300/90 uppercase mb-1.5">
                     Los drones están revolucionando el agro
                 </p>
 
@@ -834,10 +832,10 @@
                 <div id="vistaguay-badge" class="mt-16">
                     <div
                         class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-md bg-black/5 backdrop-blur-sm border border-white/5 shadow-inner">
-                        <span class="text-xs md:text-sm font-medium text-slate-300">Hay un</span>
+                        <span class="text-sm md:text-sm font-medium text-slate-300">Hay un</span>
                         <img src="images/vistaguay.svg" alt="Vistaguay"
                             class="h-3.5 md:h-4 w-auto inline-block brightness-0 invert opacity-95" />
-                        <span class="text-xs md:text-sm font-medium text-slate-300">para vos</span>
+                        <span class="text-sm md:text-sm font-medium text-slate-300">para vos</span>
                     </div>
                 </div>
 
@@ -897,7 +895,7 @@
             </div>
 
             <!-- Columna Derecha: Soporte y Legales -->
-            <div class="flex flex-col sm:flex-row gap-8 sm:gap-12 text-xs">
+            <div class="flex flex-col sm:flex-row gap-8 sm:gap-12 text-sm">
                 <div class="space-y-2">
                     <p class="font-bold text-slate-800 uppercase tracking-wider text-[10px]">Soporte y Contacto</p>
                     <ul class="space-y-1.5 text-slate-600">
@@ -913,7 +911,7 @@
                                 class="hover:text-primary transition-colors relative group inline-flex items-center gap-1">
                                 <span>soporte@vistaguay.com</span>
                                 <span id="email-copied-toast"
-                                    class="hidden absolute -top-7 left-0 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded shadow">
+                                    class="hidden absolute -top-7 left-0 bg-slate-800 text-white text-sm sm:text-smpx-2 py-0.5 rounded shadow">
                                     ¡Copiado!
                                 </span>
                             </a>
@@ -943,13 +941,11 @@
 
         <!-- Barra de Copyright -->
         <div class="max-w-6xl mx-auto mt-6 pt-3 border-t border-slate-200/80 text-center w-full">
-            <p class="text-[10px] tracking-widest text-slate-400 font-bold">
+            <p class="text-sm sm:text-smtracking-widest text-slate-400 font-bold">
                 © 2026 Vistaguay AgTech. Todos los derechos reservados.
             </p>
         </div>
     </footer>
-
-    </main>
 
     <script src="js/main.js"></script>
     <script src="js/stats.js"></script>
@@ -981,20 +977,20 @@
                 class="flex-1 p-8 sm:p-10 bg-slate-50 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-200/60 overflow-y-auto">
                 <div class="space-y-4">
                     <h3 class="text-2xl font-extrabold text-slate-900">App Vistaguay</h3>
-                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p class="text-sm sm:text-sm text-slate-600 leading-relaxed">
                         Gestioná tus lotes, solicitá vuelos y accedé a tus prescripciones agrícolas directo en tu
                         celular.
                     </p>
                     <ul class="space-y-2.5 pt-2">
-                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                        <li class="flex items-center gap-2 text-sm font-semibold text-slate-700">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Solicitá vuelos al instante
                         </li>
-                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                        <li class="flex items-center gap-2 text-sm font-semibold text-slate-700">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Monitoreá tus lotes
                         </li>
-                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                        <li class="flex items-center gap-2 text-sm font-semibold text-slate-700">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Descargá tus resultados
                         </li>
@@ -1012,19 +1008,19 @@
             <div class="flex-1 p-8 sm:p-10 bg-inverse-surface flex flex-col justify-between overflow-y-auto">
                 <div class="space-y-4">
                     <h3 class="text-2xl font-extrabold text-white">App Experts</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <p class="text-sm sm:text-sm text-slate-300 leading-relaxed">
                         Postulate a vuelos cercanos, coordiná trabajos en campo y gestioná tu agenda agronómica.
                     </p>
                     <ul class="space-y-2.5 pt-2">
-                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-200">
+                        <li class="flex items-center gap-2 text-sm font-semibold text-slate-200">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Recibí solicitudes en tu zona
                         </li>
-                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-200">
+                        <li class="flex items-center gap-2 text-sm font-semibold text-slate-200">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Cotizá vuelos a clientes
                         </li>
-                        <li class="flex items-center gap-2 text-xs font-semibold text-slate-200">
+                        <li class="flex items-center gap-2 text-sm font-semibold text-slate-200">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
                             Gestioná tu agenda de trabajo
                         </li>
