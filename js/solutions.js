@@ -21,6 +21,7 @@ const tabData = {
                 { name: "Retorno de inversión > 300%", icon: "trending_up" }
             ],
             image: "images/mdm-gob.jpg",
+            imageClass: "object-[center_47%] lg:object-top", // <--- Ajuste de encuadre
             overlayImage: "images/mdm-superpuesto.png"
         },
         verde: {
@@ -37,6 +38,7 @@ const tabData = {
                 { name: "Retorno de inversión > 300%", icon: "trending_up" }
             ],
             image: "images/mdm-gog.jpg",
+            imageClass: "object-[center_47%] lg:object-top", // <--- Ajuste de encuadre
             overlayImage: "images/mdm-superpuesto.png"
         }
     },
@@ -328,7 +330,7 @@ function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
     </div>
     <div class="relative h-72 sm:h-80 lg:h-full bg-surface-container overflow-hidden z-0">
         ${segmentedControlDesktop}
-        <img alt="${data.title}" class="w-full h-full object-cover" src="${data.image}">
+        <img alt="${data.title}" class="w-full h-full object-cover ${data.imageClass || 'object-center'}" src="${data.image}">
         <div class="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent"></div>
     </div>
     ${overlayImageHtml}
