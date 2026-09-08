@@ -31,35 +31,31 @@
 
         function runFluidProcessSequence() {
             const isDesktop = window.innerWidth >= 1024;
-            const totalDuration = 5500; // 3.5 segundos de recorrido fluido total
-            const stepInterval = totalDuration / 5; // ~700ms exactos entre cada ícono
+            const totalDuration = 5500;
+            const stepInterval = totalDuration / 5;
 
             if (isDesktop) {
-                // Animación de línea 100% fluida y constante
                 progressLine.style.transition = `width ${totalDuration}ms linear`;
                 progressLine.style.width = '100%';
             }
 
-            // Sincronización de latidos en el instante exacto que la línea cruza cada círculo
-            pulseIcon(1); // Inicio inmediato (0ms)
+            pulseIcon(1);
 
-            setTimeout(() => pulseIcon(2), stepInterval);       // ~700ms (20%)
-            setTimeout(() => pulseIcon(3), stepInterval * 2);   // ~1400ms (40%)
-            setTimeout(() => pulseIcon(4), stepInterval * 3);   // ~2100ms (60%)
-            setTimeout(() => pulseIcon(5), stepInterval * 4);   // ~2800ms (80%)
+            setTimeout(() => pulseIcon(2), stepInterval);       // ~1100ms
+            setTimeout(() => pulseIcon(3), stepInterval * 2);   // ~2200ms
+            setTimeout(() => pulseIcon(4), stepInterval * 3);   // ~3300ms
+            setTimeout(() => pulseIcon(5), stepInterval * 4);   // ~4400ms
 
-            // Remate en paso 6 cuando la línea llega al final (100% / 3500ms)
             setTimeout(() => {
                 pulseIcon(6);
 
-                // Activación del color verde de cierre
                 const circle6 = document.getElementById('process-icon-6');
                 const symbol6 = document.getElementById('process-symbol-6');
                 const title6 = document.getElementById('process-title-6');
                 const desc6 = document.getElementById('process-desc-6');
 
                 if (circle6) {
-                    circle6.classList.remove('bg-[#eefaf2]', 'border-primary/20');
+                    circle6.classList.remove('bg-emerald-50', 'border-primary/20');
                     circle6.classList.add('bg-primary', 'shadow-md');
                 }
                 if (symbol6) {

@@ -4,6 +4,7 @@
  */
 
 (function () {
+
     let currentWeedSubKey = 'marron';
 
     const tabData = {
@@ -22,7 +23,7 @@
                     { name: "Retorno de inversión > 300%", icon: "trending_up" }
                 ],
                 image: "images/mdm-gob.jpg",
-                imageClass: "object-[center_47%] lg:object-top", // <--- Ajuste de encuadre
+                imageClass: "object-[center_47%] lg:object-top",
                 overlayImage: "images/mdm-superpuesto.png"
             },
             verde: {
@@ -39,7 +40,7 @@
                     { name: "Retorno de inversión > 300%", icon: "trending_up" }
                 ],
                 image: "images/mdm-gog.jpg",
-                imageClass: "object-[center_47%] lg:object-top", // <--- Ajuste de encuadre
+                imageClass: "object-[center_47%] lg:object-top",
                 overlayImage: "images/mdm-superpuesto.png"
             }
         },
@@ -104,12 +105,6 @@
         }
     };
 
-    /**
-     * Renders the HTML content for a specific solution tab and subtab.
-     * @param {string} tabKey - The top-level tab identifier (e.g. 'weed', 'plant', 'drone').
-     * @param {string} [subKey] - Optional subtab identifier for the 'weed' tab.
-     * @returns {void}
-     */
     function renderSolutionsCard(tabKey, subKey = currentWeedSubKey) {
         const cardContainer = document.getElementById('solutions-content-card');
         if (!cardContainer) return;
@@ -124,7 +119,6 @@
 
         let leftColumnHtml = '';
 
-        // Selector Verde sobre Marrón / Verde sobre Verde (Mobile vs Desktop)
         const segmentedControlMobile = tabKey === 'weed' ? `
     <div class="inline-flex lg:hidden segmented-control mb-2">
         <button onclick="toggleWeedSubTab('marron')" 
@@ -151,7 +145,6 @@
     </div>
 ` : '';
 
-        // Solapa 5: Proyectos Especiales
         if (tabKey === 'special') {
             leftColumnHtml = `
             <div class="space-y-3">
@@ -166,26 +159,26 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 border-t border-outline-variant/30 pt-6">
                 <div>
                     <h4 class="text-sm sm:text-[13px] font-bold text-primary mb-1.5">Ganadería</h4>
-                    <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-relaxed">Conteo y estimación de peso.</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">Conteo y estimación de peso.</p>
                 </div>
                 <div>
                     <h4 class="text-sm sm:text-[13px] font-bold text-primary mb-1.5">Cultivos especiales</h4>
-                    <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-relaxed">Cítricos, Yerba Mate, Caña de Azúcar, Viñedos y Pasturas.</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">Cítricos, Yerba Mate, Caña de Azúcar, Viñedos y Pasturas.</p>
                 </div>
                 <div>
                     <h4 class="text-sm sm:text-[13px] font-bold text-primary mb-1.5">Forestal & reforestación</h4>
-                    <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-relaxed">Mapeo de densidad y siembra aérea.</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">Mapeo de densidad y siembra aérea.</p>
                 </div>
                 <div>
                     <h4 class="text-sm sm:text-[13px] font-bold text-primary mb-1.5">Altimetría & topografía</h4>
-                    <p class="text-sm sm:text-smsm:text-sm text-slate-600 leading-relaxed">Modelos digitales de elevación y escurrimiento de agua.</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">Modelos digitales de elevación y escurrimiento de agua.</p>
                 </div>
             </div>
             <div class="pt-4">
                 <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" 
-                    class="btn-primary w-fit">
+                    class="btn-primary w-fit flex items-center gap-2">
                     ${data.ctaText}
-                    <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    ${getIcon('arrow_forward', 'w-4 h-4 fill-current shrink-0')}
                 </a>
             </div>
         `;
@@ -196,15 +189,15 @@
                 if (isSpecial) {
                     return `
                     <li class="text-sm sm:text-sm font-bold text-slate-700 leading-normal flex items-center gap-2 my-1">
-                        <span class="material-symbols-outlined text-primary text-sm shrink-0 w-4 h-4 flex items-center justify-center">check_circle</span>
+                        ${getIcon('check_circle', 'w-4 h-4 text-primary shrink-0')}
                         <span class="inline-flex items-center">${b}</span>
                         <div class="relative inline-flex items-center justify-center shrink-0 ml-1">
                             <span class="absolute inline-flex h-full w-full rounded-full bg-primary/50 animate-ping"></span>
                             <button onclick="openComboDemoModal()" 
-        aria-label="Ver animación combo" 
-        class="btn-circle-icon relative w-7 h-7 text-sm">
-    <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
-</button>
+                                aria-label="Ver animación combo" 
+                                class="btn-circle-icon relative w-7 h-7 text-sm flex items-center justify-center">
+                                ${getIcon('arrow_forward', 'w-4 h-4 text-white shrink-0')}
+                            </button>
                         </div>
                     </li>
                 `;
@@ -212,7 +205,7 @@
 
                 return `
                 <li class="text-sm sm:text-sm font-medium text-slate-700 leading-normal flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary text-sm shrink-0 w-4 h-4 flex items-center justify-center">check_circle</span>
+                    ${getIcon('check_circle', 'w-4 h-4 text-primary shrink-0')}
                     <span>${b}</span>
                 </li>
             `;
@@ -223,12 +216,12 @@
             if (tabKey === 'plant') {
                 bottomContentHtml = `
                 <div class="pt-3 border-t border-outline-variant/30 space-y-2 w-full lg:max-w-[260px]">
-                    <p class="text-sm sm:text-smsm:text-sm font-extrabold text-slate-700 mb-1.5">Medición y Parámetros:</p>
+                    <p class="text-sm font-extrabold text-slate-700 mb-1.5">Medición y Parámetros:</p>
                     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
                         ${data.parameters.map(p => `
                             <div class="py-1 px-2.5 sm:py-1.5 sm:px-3 bg-slate-100 border border-slate-200 rounded-xl flex items-center gap-2.5 shadow-sm">
-                                <span class="material-symbols-outlined text-primary text-sm font-bold shrink-0">${p.icon}</span>
-                                <span class="text-sm sm:text-smsm:text-sm font-semibold text-slate-700 leading-tight">${p.name}</span>
+                                ${getIcon(p.icon, 'w-4 h-4 text-primary shrink-0')}
+                                <span class="text-sm font-semibold text-slate-700 leading-tight">${p.name}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -237,12 +230,12 @@
             } else if (tabKey === 'drone') {
                 bottomContentHtml = `
                 <div class="pt-3 border-t border-outline-variant/30 space-y-2 w-full lg:max-w-[260px]">
-                    <p class="text-sm sm:text-smsm:text-sm font-extrabold text-slate-700 mb-1.5">Labores Disponibles:</p>
+                    <p class="text-sm font-extrabold text-slate-700 mb-1.5">Labores Disponibles:</p>
                     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
                         ${data.applications.map(a => `
                             <div class="py-1 px-2.5 sm:py-1.5 sm:px-3 bg-slate-100 border border-slate-200 rounded-xl flex items-center gap-2.5 shadow-sm">
-                                <span class="material-symbols-outlined text-primary text-sm font-bold shrink-0">${a.icon}</span>
-                                <span class="text-sm sm:text-smsm:text-sm font-semibold text-slate-700 leading-tight">${a.title}</span>
+                                ${getIcon(a.icon, 'w-4 h-4 text-primary shrink-0')}
+                                <span class="text-sm font-semibold text-slate-700 leading-tight">${a.title}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -251,12 +244,12 @@
             } else if (tabKey === 'weed') {
                 bottomContentHtml = `
                 <div class="pt-3 border-t border-outline-variant/30 space-y-2 w-full lg:max-w-[260px]">
-                    <p class="text-sm sm:text-smsm:text-sm font-extrabold text-slate-700 mb-1.5">Beneficios Clave:</p>
+                    <p class="text-sm font-extrabold text-slate-700 mb-1.5">Beneficios Clave:</p>
                     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
                         ${data.benefits.map(b => `
                             <div class="py-1 px-2.5 sm:py-1.5 sm:px-3 bg-slate-100 border border-slate-200 rounded-xl flex items-center gap-2.5 shadow-sm">
-                                <span class="material-symbols-outlined text-primary text-sm font-bold shrink-0">${b.icon}</span>
-                                <span class="text-sm sm:text-smsm:text-sm font-semibold text-slate-700 leading-tight">${b.name}</span>
+                                ${getIcon(b.icon, 'w-4 h-4 text-primary shrink-0')}
+                                <span class="text-sm font-semibold text-slate-700 leading-tight">${b.name}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -286,9 +279,9 @@
             const ctaButtonHtml = data.ctaText ? `
             <div class="pt-1">
                 <a href="https://api.whatsapp.com/send?phone=5493516887507" target="_blank" rel="noopener noreferrer" 
-                    class="btn-primary">
+                    class="btn-primary flex items-center gap-2 w-fit">
                     ${data.ctaText}
-                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    ${getIcon('arrow_forward', 'w-4 h-4 fill-current shrink-0')}
                 </a>
             </div>
         ` : '';
@@ -312,7 +305,6 @@
         `;
         }
 
-        // Configuración visual de la imagen superpuesta (Laptop / Celular)
         const overlayWidth = tabKey === 'drone' ? 'w-[200px] xl:w-[230px]' : 'w-[380px] xl:w-[430px]';
         const overlayPosition = tabKey === 'drone' ? 'bottom-0 xl:bottom-0' : 'bottom-0 xl:bottom-1';
         const overlayTranslate = tabKey === 'drone' ? '-translate-x-[40%]' : '-translate-x-[28%]';
@@ -338,11 +330,6 @@
 `;
     }
 
-    /**
-     * Handles switching between active showcase tabs with a smooth fade-and-slide transition.
-     * @param {string} tabKey - The key of the tab to switch to.
-     * @returns {void}
-     */
     function switchTab(tabKey) {
         const cardContainer = document.getElementById('solutions-content-card');
         if (!cardContainer) return;
@@ -376,11 +363,6 @@
         }, 180);
     }
 
-    /**
-     * Handles subtab selections within the 'weed' tab context (Verde sobre Marrón / Verde sobre Verde).
-     * @param {string} subKey - The subtab identifier ('marron' or 'verde').
-     * @returns {void}
-     */
     function toggleWeedSubTab(subKey) {
         if (currentWeedSubKey === subKey) return;
         const cardContainer = document.getElementById('solutions-content-card');
@@ -397,17 +379,12 @@
         }, 180);
     }
 
-    // Bind interactive functions to global window object for inline HTML event handling
     window.renderSolutionsCard = renderSolutionsCard;
     window.switchTab = switchTab;
     window.toggleWeedSubTab = toggleWeedSubTab;
 
-    // Initialize solutions card with the default 'weed' tab on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         renderSolutionsCard('weed');
     });
-
-    window.toggleWeedSubTab = toggleWeedSubTab;
-    window.openWeedComboModal = openWeedComboModal;
 
 })();

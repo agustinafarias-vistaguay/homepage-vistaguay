@@ -17,7 +17,6 @@ let comboInterval = null;
         const cardContainer = document.getElementById('solutions-content-card');
         if (!cardContainer) return;
 
-        // 1. Mayor recorrido en la ida (36% horizontal, -48% vertical) y aumento de escala (1.3)
         const defaultOverlay = document.getElementById('solutions-overlay-image');
         if (defaultOverlay) {
             defaultOverlay.style.zIndex = '10';
@@ -26,7 +25,6 @@ let comboInterval = null;
             defaultOverlay.style.opacity = '0';
         }
 
-        // Columna derecha (donde se ubica la imagen del campo)
         const rightColumn = cardContainer.children[1];
         if (!rightColumn) return;
 
@@ -37,19 +35,15 @@ let comboInterval = null;
             demoLayer.id = 'inline-combo-demo';
             demoLayer.className = 'absolute inset-0 z-40 bg-black/75 backdrop-blur-sm flex flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-700 ease-out overflow-hidden';
             demoLayer.innerHTML = `
-            <!-- Botón de Cierre -->
             <button onclick="closeComboDemoModal()" aria-label="Cerrar demo" 
                 class="absolute top-3 right-3 z-50 text-white/80 hover:text-white bg-black/60 hover:bg-black/90 w-9 h-9 rounded-full flex items-center justify-center transition-colors backdrop-blur-md cursor-pointer">
                 <span class="material-symbols-outlined text-2xl font-bold">close</span>
             </button>
 
-            <!-- Laptop Animada Ampliada (En primer plano z-40) -->
             <div class="relative w-full max-w-[480px] sm:max-w-[570px] lg:max-w-[630px] -translate-y-[20%] flex items-center justify-center">
-                <!-- Marco PNG de la Laptop -->
                 <img src="images/mdm-superpuesto.png" alt="Laptop Vistaguay" 
                      class="relative z-20 w-full h-auto drop-shadow-2xl pointer-events-none">
 
-                <!-- Pantalla con reproducción interna en cortina/barrido -->
                 <div class="absolute top-[45.5%] left-1/2 -translate-x-1/2 w-[65%] h-[47.5%] overflow-hidden bg-transparent rounded-sm shadow-inner z-30">
                     <img id="img-layer-1" src="images/pq-mdm-1.png" alt="Conteo" 
                          class="absolute inset-0 w-full h-full object-cover z-10" 
@@ -76,7 +70,6 @@ let comboInterval = null;
     function closeComboDemoModal() {
         const demoLayer = document.getElementById('inline-combo-demo');
 
-        // 2. Regreso suave de 0.7s e inicio inmediato sobre z-45
         const defaultOverlay = document.getElementById('solutions-overlay-image');
         if (defaultOverlay) {
             defaultOverlay.style.zIndex = '45';
@@ -109,22 +102,17 @@ let comboInterval = null;
         const img1 = document.getElementById('img-layer-1');
         const img2 = document.getElementById('img-layer-2');
 
-        // Reset inicial ocultando ambas imágenes fuera de pantalla con la cortina
         if (img1 && img2) {
             img1.style.clipPath = 'inset(0 100% 0 0)';
             img2.style.clipPath = 'inset(0 100% 0 0)';
         }
-
-        // Tiempo de espera de la 1ª imagen intacto:
         const TIEMPO_ESPERA_PRIMERA_IMAGEN = 900;
 
         setTimeout(() => {
             if (!img1) return;
 
-            // Revela la primera imagen en barrido
             img1.style.clipPath = 'inset(0 0 0 0)';
 
-            // Bucle de transición sin dejar huecos visibles
             comboInterval = setInterval(() => {
                 if (!img1 || !img2) return;
 

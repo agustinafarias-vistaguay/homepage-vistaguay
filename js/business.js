@@ -125,7 +125,6 @@
 
         if (!baseUi || !btnSolicitud || !backdrop) return;
 
-        // ESTADO 0: RESET INICIAL (Blur y Opacidad cero para UI Base y Botón)
         baseUi.classList.add('blur-md', 'opacity-0');
         baseUi.classList.remove('blur-0', 'opacity-100');
 
@@ -155,7 +154,6 @@
             solicitudAnimTimers.push(t);
         };
 
-        // Paso 1: Aparecen SIMULTÁNEAMENTE aclarando el blur (Base UI + Botón)
         schedule(() => {
             baseUi.classList.remove('blur-md', 'opacity-0');
             baseUi.classList.add('blur-0', 'opacity-100');
@@ -164,7 +162,6 @@
             btnSolicitud.classList.add('blur-0', 'opacity-100');
         }, 200);
 
-        // Paso 2: Efecto POP en el botón
         schedule(() => {
             btnSolicitud.style.transform = 'scale(1.15)';
         }, 1900);
@@ -173,18 +170,15 @@
             btnSolicitud.style.transform = 'scale(1)';
         }, 2300);
 
-        // Paso 3: Oscurecimiento de pantalla (Backdrop Blur)
         schedule(() => {
             backdrop.classList.remove('opacity-0');
         }, 3200);
 
-        // Paso 4: Aparece Modal Formulario
         schedule(() => {
             modalForm.classList.remove('opacity-0', 'scale-90');
             modalForm.classList.add('opacity-100', 'scale-100');
         }, 3500);
 
-        // Paso 5: Selección a verde de la tarjeta
         schedule(() => {
             if (cardSelected) {
                 cardSelected.classList.remove('opacity-0', 'scale-95');
@@ -192,7 +186,6 @@
             }
         }, 5100);
 
-        // Paso 6: Efecto POP en botón "Solicitar Vuelo" (Sincronizado exactamente a 400ms)
         schedule(() => {
             if (btnSolicitar) btnSolicitar.style.transform = 'scale(1.15)';
         }, 6200);
@@ -201,7 +194,6 @@
             if (btnSolicitar) btnSolicitar.style.transform = 'scale(1)';
         }, 6600);
 
-        // Paso 7: Transición a Modal de Éxito y Checkmark
         schedule(() => {
             modalForm.classList.remove('opacity-100', 'scale-100');
             modalForm.classList.add('opacity-0', 'scale-95');
@@ -217,7 +209,6 @@
             }, 250);
         }, 7800);
 
-        // Paso 8: Desvanece todo el contenido interno y desliza limpiamente a la Card 02
         schedule(() => {
             baseUi.classList.add('opacity-0');
             btnSolicitud.classList.add('opacity-0');
@@ -226,7 +217,6 @@
             modalSuccess.classList.remove('opacity-100', 'scale-100');
             modalSuccess.classList.add('opacity-0', 'scale-90');
 
-            // Espera 300ms a que complete el fundido a negro/blanco y cambia de tarjeta
             schedule(() => {
                 goToSlide(1);
                 startAutoRotation();

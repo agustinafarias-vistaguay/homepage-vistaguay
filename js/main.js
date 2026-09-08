@@ -9,15 +9,26 @@
  */
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
-    const icon = document.getElementById('hamburger-icon');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
     if (!menu) return;
 
-    if (menu.classList.contains('hidden')) {
-        menu.classList.remove('hidden');
-        if (icon) icon.textContent = 'close';
-    } else {
-        menu.classList.add('hidden');
-        if (icon) icon.textContent = 'menu';
+    const isClosed = menu.classList.toggle('hidden');
+
+    if (iconMenu && iconClose) {
+        if (isClosed) {
+            iconMenu.classList.remove('opacity-0', 'pointer-events-none');
+            iconMenu.classList.add('opacity-100');
+
+            iconClose.classList.remove('opacity-100');
+            iconClose.classList.add('opacity-0', 'pointer-events-none');
+        } else {
+            iconMenu.classList.remove('opacity-100');
+            iconMenu.classList.add('opacity-0', 'pointer-events-none');
+
+            iconClose.classList.remove('opacity-0', 'pointer-events-none');
+            iconClose.classList.add('opacity-100');
+        }
     }
 }
 
@@ -45,13 +56,10 @@ function toggleDownloadModal() {
     }
 }
 
-// Bind functions to the global window object to prevent reference errors from inline HTML events
 window.toggleMobileMenu = toggleMobileMenu;
 window.toggleDownloadModal = toggleDownloadModal;
 
-// Initialize triggers and scroll observers
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. YouTube Video Lazy Loading
     const videoIframe = document.getElementById('featured-video');
     if (videoIframe) {
         const videoObserver = new IntersectionObserver((entries, obs) => {
@@ -65,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         videoObserver.observe(videoIframe);
     }
 
-    // 2. Scroll Reveal Animations (con Throttling mediante requestAnimationFrame)
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
         reveals.forEach(element => {
@@ -88,10 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    revealOnScroll(); // Run initially
+    revealOnScroll();
 });
 
-// Exponer la función globalmente para el evento onclick del footer
 window.copyEmailToClipboard = function (event, email) {
     event.preventDefault();
 

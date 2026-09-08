@@ -1,6 +1,6 @@
 /**
  * @file testimonials.js
- * @description Controls the 3D-focused slide carousel with auto-play, hover pause, list tripling loop, and dots indicators.
+ * @description Controls the 3D slide carousel with central scaling using getIcon('quote').
  */
 
 (function () {
@@ -18,28 +18,23 @@
         { quote: "Vistaguay me permite hacer vuelos para productores cerca de mi ubicación. Yo solo cargo las imágenes y cobro por mi vuelo. Si tenés un dron y querés aprovecharlo, te recomiendo sumarte", name: "Pablo Bettini", role: "Piloto de Dron, Vistaguay Expert" }
     ];
 
-    let activeTestimonialIndex = testimonials.length; // Start at Set 2 (first real testimonial slide)
+    let activeTestimonialIndex = testimonials.length;
     let testimonialInterval = null;
     let isTransitioning = false;
 
-    /**
-     * Triples the list and populates the carousel track element inside DOM.
-     * @returns {void}
-     */
     function initTestimonials() {
         const track = document.getElementById('testimonial-track');
         if (!track) return;
         track.innerHTML = '';
 
-        // Triple the list to enable continuous looping in both directions
         const loopList = [...testimonials, ...testimonials, ...testimonials];
 
         loopList.forEach((item) => {
             const cardDiv = document.createElement('div');
-            cardDiv.className = `p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 flex flex-col justify-between min-h-[180px] w-[230px] sm:w-[270px] md:w-[300px] shrink-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] select-none`;
+            cardDiv.className = `testimonial-card flex flex-col justify-between min-h-[180px] w-[230px] sm:w-[270px] md:w-[300px] shrink-0 select-none`;
             cardDiv.innerHTML = `
             <div>
-                <span class="material-symbols-outlined text-primary text-lg sm:text-xl font-bold mb-1">format_quote</span>
+                ${getIcon('quote', 'w-6 h-6 text-primary mb-2 shrink-0')}
                 <p class="text-sm text-slate-600 leading-normal italic mb-6">"${item.quote}"</p>
             </div>
             <div class="flex items-center gap-4">
@@ -48,7 +43,7 @@
                 </div>
                 <div>
                     <p class="text-sm font-bold text-slate-800">${item.name}</p>
-                    <p class="text-sm sm:text-smtext-slate-500 font-medium">${item.role}</p>
+                    <p class="text-xs text-slate-500 font-medium">${item.role}</p>
                 </div>
             </div>
         `;
@@ -63,11 +58,6 @@
         });
     }
 
-    /**
-     * Recalculates card spacing, active scaling classes, active shadows, and translates the carousel track.
-     * @param {boolean} [animate=true] - Whether to apply CSS transitions or translate instantly.
-     * @returns {void}
-     */
     function renderTestimonials(animate = true) {
         const track = document.getElementById('testimonial-track');
         if (!track) return;
@@ -93,11 +83,13 @@
 
             card.style.transition = animate ? 'all 500ms cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
 
-            const baseClass = `p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 flex flex-col justify-between min-h-[180px] w-[230px] sm:w-[270px] md:w-[300px] shrink-0 select-none`;
+            const baseClass = `testimonial-card flex flex-col justify-between min-h-[180px] w-[230px] sm:w-[270px] md:w-[300px] shrink-0 select-none`;
 
             if (isActive) {
-                card.className = `${baseClass} scale-105 sm:scale-110 z-20 border-2 border-primary shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
+                // Tarjeta Central: Escala destacada
+                card.className = `${baseClass} scale-105 sm:scale-110 z-20 !border-2 !border-primary shadow-[0_20px_50px_rgba(71,194,120,0.22)] bg-white opacity-100`;
             } else {
+                // Tarjetas Laterales: Reducidas y atenuadas
                 card.className = `${baseClass} scale-95 z-10 border border-slate-200 bg-slate-50 opacity-70 shadow-none`;
             }
         }
@@ -116,10 +108,6 @@
         }
     }
 
-    /**
-     * Transitions to the next testimonial slide and handles looping boundaries.
-     * @returns {void}
-     */
     function nextTestimonial() {
         if (isTransitioning) return;
         isTransitioning = true;
@@ -130,16 +118,12 @@
         setTimeout(() => {
             if (activeTestimonialIndex >= testimonials.length * 2) {
                 activeTestimonialIndex -= testimonials.length;
-                renderTestimonials(false); // Silent jump
+                renderTestimonials(false);
             }
             isTransitioning = false;
         }, 500);
     }
 
-    /**
-     * Transitions to the previous testimonial slide and handles looping boundaries.
-     * @returns {void}
-     */
     function prevTestimonial() {
         if (isTransitioning) return;
         isTransitioning = true;
@@ -150,16 +134,12 @@
         setTimeout(() => {
             if (activeTestimonialIndex < testimonials.length) {
                 activeTestimonialIndex += testimonials.length;
-                renderTestimonials(false); // Silent jump
+                renderTestimonials(false);
             }
             isTransitioning = false;
         }, 500);
     }
 
-    /**
-     * Starts automatic slide cycling at standard intervals.
-     * @returns {void}
-     */
     function startTestimonialCycling() {
         if (testimonialInterval) clearInterval(testimonialInterval);
         testimonialInterval = setInterval(() => {
@@ -167,11 +147,6 @@
         }, 4000);
     }
 
-    /**
-     * Jumps to a specific testimonial index clicked via navigation dots indicator.
-     * @param {number} index - Target testimonial index.
-     * @returns {void}
-     */
     function jumpToTestimonial(index) {
         if (isTransitioning) return;
         pauseTestimonialCycling();
@@ -185,10 +160,6 @@
         }, 500);
     }
 
-    /**
-     * Pauses automatic cycling timer.
-     * @returns {void}
-     */
     function pauseTestimonialCycling() {
         if (testimonialInterval) {
             clearInterval(testimonialInterval);
@@ -196,12 +167,10 @@
         }
     }
 
-    // Bind interactive click functions to global window object
     window.jumpToTestimonial = jumpToTestimonial;
     window.nextTestimonial = nextTestimonial;
     window.prevTestimonial = prevTestimonial;
 
-    // Initialize on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         initTestimonials();
         renderTestimonials();
@@ -226,12 +195,9 @@
             });
         }
 
-        // Recalculate positions on resize to prevent translation gaps
         window.addEventListener('resize', () => {
             renderTestimonials(false);
         });
     });
-
-    window.jumpToTestimonial = jumpToTestimonial;
 
 })();

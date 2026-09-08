@@ -54,6 +54,35 @@ Para solicitar cambios a un asistente de IA (Antigravity, Cursor, Copilot, ChatG
 
 ---
 
+## Optimización de Imágenes
+Se ha implementado un script de optimización para comprimir imágenes y mejorar los tiempos de carga. El script reduce el tamaño de las imágenes a menos de 200 KB.
+
+### Ubicación del script
+Descargá `optimize_images.py` desde Google Drive en la ruta:
+`Vistaguay` ➔ `Área Producto` ➔ `Herramientas`
+
+### Uso
+* Copiá el archivo `optimize_images.py` a la raíz de este proyecto.
+   * Instalá la dependencia necesaria (solo la primera vez):
+     ```bash
+     pip install Pillow
+     ```
+   * Ejecutá el script desde la terminal:
+     ```bash
+     # En Windows:
+     py optimize_images.py
+
+     # En Mac / Linux:
+     python3 optimize_images.py
+     ```
+
+### Notas
+- El script busca imágenes en la carpeta `images/` y subcarpetas.
+- Omitirá archivos SVG y archivos que ya tengan `-origin` en el nombre.
+- Para que el reemplazo de archivos funcione correctamente, se recomienda cerrar cualquier programa que pueda estar utilizando las imágenes (ej: vista previa).
+
+---
+
 ## Ejecución en Entorno Local
 
 Para evitar bloqueos de seguridad CORS al leer `data/pilots.json` con `fetch()`, iniciá la web mediante un servidor local:

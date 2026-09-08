@@ -21,7 +21,6 @@
             const elapsed = timestamp - startTime;
             const progress = Math.min(elapsed / duration, 1);
 
-            // Ease out quad
             const easeProgress = progress * (2 - progress);
             const currentValue = Math.floor(easeProgress * target);
 
@@ -37,7 +36,6 @@
         requestAnimationFrame(updateCount);
     }
 
-    // Create an intersection observer to trigger counters when they scroll into view
     const counterObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -47,7 +45,6 @@
         });
     }, { threshold: 0.1 });
 
-    // Automatically search and register observer for all counter elements on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         const counters = document.querySelectorAll('.counter');
         counters.forEach(counter => counterObserver.observe(counter));
