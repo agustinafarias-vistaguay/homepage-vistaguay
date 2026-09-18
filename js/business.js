@@ -1,7 +1,3 @@
-/**
- * @file business.js
- * @description Paneo automático tipo carrusel con reejecución limpia de animación al hacer clic.
- */
 (function () {
     let solicitudAnimTimers = [];
 
@@ -21,7 +17,6 @@
 
         let currentIndex = 0;
         let timer = null;
-        const intervalTime = 10500; // Tiempo suficiente para completar el flujo
 
         function goToSlide(nextIndex, forceReset = false) {
             if (nextIndex === currentIndex && !forceReset) return;
@@ -32,7 +27,7 @@
             if (nextIndex !== currentIndex) {
                 nextImg.style.transition = 'none';
                 nextImg.className = 'biz-img absolute max-h-[360px] w-auto object-contain translate-x-full opacity-0 z-10';
-                nextImg.offsetHeight; // Reflow
+                nextImg.offsetHeight;
 
                 const transitionStyle = 'all 700ms cubic-bezier(0.4, 0, 0.2, 1)';
                 currentImg.style.transition = transitionStyle;
@@ -62,37 +57,34 @@
 
             currentIndex = nextIndex;
 
+            clearSolicitudTimers();
+            if (typeof window.clearDashTimers === 'function') window.clearDashTimers();
+            if (typeof window.clearBrandTimers === 'function') window.clearBrandTimers();
+
+            // Disparo de animación según la tarjeta activa
             if (currentIndex === 0) {
                 runSolicitudAnimation();
-            } else {
-                clearSolicitudTimers();
+            } else if (currentIndex === 1) {
+                if (typeof window.runDashboardAnimation === 'function') window.runDashboardAnimation();
+            } else if (currentIndex === 2) {
+                if (typeof window.runBrandAnimation === 'function') window.runBrandAnimation();
             }
         }
 
-        function startAutoRotation() {
-            stopAutoRotation();
-            timer = setInterval(() => {
-                const next = (currentIndex + 1) % cards.length;
-                goToSlide(next);
-            }, intervalTime);
-        }
-
         function stopAutoRotation() {
-            if (timer) clearInterval(timer);
+            if (timer) clearTimeout(timer);
         }
 
         cards.forEach((card) => {
             card.addEventListener('click', () => {
                 const idx = parseInt(card.getAttribute('data-index'), 10);
-                goToSlide(idx, idx === 0);
-                startAutoRotation();
+                goToSlide(idx, true);
             });
         });
 
         [cardsContainer, imageContainer].forEach(element => {
             if (element) {
                 element.addEventListener('mouseenter', stopAutoRotation);
-                element.addEventListener('mouseleave', startAutoRotation);
             }
         });
 
@@ -100,15 +92,19 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (currentIndex === 0) runSolicitudAnimation();
-                    startAutoRotation();
+                    else if (currentIndex === 1 && typeof window.runDashboardAnimation === 'function') window.runDashboardAnimation();
+                    else if (currentIndex === 2 && typeof window.runBrandAnimation === 'function') window.runBrandAnimation();
                 } else {
                     stopAutoRotation();
                     clearSolicitudTimers();
+                    if (typeof window.clearDashTimers === 'function') window.clearDashTimers();
+                    if (typeof window.clearBrandTimers === 'function') window.clearBrandTimers();
                 }
             });
         }, { threshold: 0.25 });
 
         observer.observe(section);
+        window.bizGoToSlide = goToSlide;
     });
 
     function runSolicitudAnimation() {
@@ -218,8 +214,7 @@
             modalSuccess.classList.add('opacity-0', 'scale-90');
 
             schedule(() => {
-                goToSlide(1);
-                startAutoRotation();
+                if (window.bizGoToSlide) window.bizGoToSlide(1);
             }, 300);
         }, 10800);
     }

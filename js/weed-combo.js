@@ -37,7 +37,9 @@ let comboInterval = null;
             demoLayer.innerHTML = `
             <button onclick="closeComboDemoModal()" aria-label="Cerrar demo" 
                 class="absolute top-3 right-3 z-50 text-white/80 hover:text-white bg-black/60 hover:bg-black/90 w-9 h-9 rounded-full flex items-center justify-center transition-colors backdrop-blur-md cursor-pointer">
-                <span class="material-symbols-outlined text-2xl font-bold">close</span>
+                <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
             </button>
 
             <div class="relative w-full max-w-[480px] sm:max-w-[570px] lg:max-w-[630px] -translate-y-[20%] flex items-center justify-center">
