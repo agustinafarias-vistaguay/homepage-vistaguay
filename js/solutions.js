@@ -100,7 +100,7 @@
         special: {
             title: "Proyectos concretos de monitoreo, altimetría y otras labores",
             desc: "Desarrollamos e integramos algoritmos específicos adaptados a cultivos regionales, ganadería y estudios topográficos complejos que requieren analítica a medida.",
-            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCLq_jMLNgQfEdwr5c24Cnu1RuzYyRFfHyJsMUvnBIuZBJ1i8yykbwWgNlXnK1em3DS04mIufJNLC7NtAMIJOEn-HORuRY5sIvtJZTNgD7MQRDVf1YAR04X97biwf_Gn_Nvhf9M3qlTWLftKIlqEj-NAwhBXjjYKCLpy_yBGCehxIReK8bz04gyPwOfGj3TFCribVoLWXov6KJ9WpEnwVq8bgWjKE9Bi0jEeuZ5gFwQ7gUSorFJ738d1gb_vY6kf4wpQ7IaWtIlawNp",
+            image: "images/special-projects.png",
             ctaText: "Contactanos"
         }
     };

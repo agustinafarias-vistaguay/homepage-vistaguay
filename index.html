@@ -299,11 +299,8 @@
                             <div class="text-base sm:text-lg font-extrabold text-primary mb-1">06</div>
                             <div id="process-icon-6"
                                 class="process-icon-circle relative z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-emerald-50 border border-primary/20 flex items-center justify-center mb-2.5 transition-all duration-300">
-
                                 <span id="process-symbol-6" data-icon="check_circle" data-icon-class="w-5 h-5"
-                                    class="text-primary transition-colors duration-300 flex items-center justify-center">
-                                </span>
-
+                                    class="text-primary transition-colors duration-300 flex items-center justify-center"></span>
                             </div>
                             <h3 id="process-title-6"
                                 class="text-sm font-bold text-slate-900 mb-1 leading-snug transition-colors">Acción en
@@ -315,12 +312,14 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-6 sm:p-8 w-full text-center">
+                <!-- Contenedor del video achicado en desktop con max-w-3xl y max-w-2xl para la pantalla del iframe -->
+                <div
+                    class="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 sm:p-7 w-full max-w-3xl mx-auto text-center">
                     <p class="text-sm font-semibold text-slate-700 mb-4">
                         Un recorrido visual por nuestra plataforma y ecosistema en acción.
                     </p>
                     <div
-                        class="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-900">
+                        class="relative w-full max-w-2xl mx-auto aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-900 shadow-md">
                         <iframe id="featured-video" class="w-full h-full"
                             data-src="https://www.youtube.com/embed/TP_SOfIKqRk?autoplay=1&mute=1&cc_load_policy=1&hl=es&cc_lang_pref=es&rel=0&modestbranding=1&iv_load_policy=3&loop=1&playlist=TP_SOfIKqRk"
                             title="Descubrí cómo Vistaguay transforma la gestión agrícola" frameborder="0"
@@ -368,13 +367,27 @@
         <div class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
             <div
                 class="bg-surface rounded-3xl shadow-lg overflow-hidden reveal border border-outline-variant/20 p-5 md:p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Se ajustó lg:gap-x-12 y lg:gap-y-3 para controlar el espacio horizontal y vertical por separado -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-x-12 lg:gap-y-3 items-center">
 
-                    <div class="w-full h-full min-h-[360px] lg:min-h-[440px] flex items-center justify-center p-2 sm:p-4 relative overflow-hidden order-2 lg:order-1"
+                    <!-- 1. TÍTULO Y SUBTÍTULO (lg:self-end para pegarse hacia las cards en desktop) -->
+                    <div class="order-1 lg:order-2 lg:row-start-1 lg:col-start-2 flex flex-col justify-end lg:self-end">
+                        <h2 class="text-xl md:text-2xl font-extrabold text-on-surface tracking-tight mb-1 sm:mb-2">
+                            Vistaguay <span class="text-primary font-bold">Business</span>
+                        </h2>
+                        <p class="text-sm text-slate-600 mb-0 lg:mb-1 leading-relaxed">
+                            Potenciamos la gestión de grandes empresas y agroinsumos con una interfaz adaptada a tus
+                            operaciones.
+                        </p>
+                    </div>
+
+                    <!-- 2. IMÁGENES / ANIMACIÓN -->
+                    <div class="w-full h-full min-h-[240px] sm:min-h-[320px] lg:min-h-[440px] flex items-center justify-center p-0 sm:p-4 relative overflow-hidden order-2 lg:order-1 lg:row-span-2 lg:col-start-1"
                         id="biz-image-container">
 
+                        <!-- ANIMACIÓN 0: SOLICITUD -->
                         <div id="biz-img-0"
-                            class="biz-img absolute inset-0 w-full h-full flex items-center justify-center p-2 sm:p-4 transition-all duration-700 ease-in-out translate-x-0 opacity-100 z-10">
+                            class="biz-img absolute inset-0 w-full h-full flex items-center justify-center p-1 sm:p-4 transition-all duration-700 ease-in-out translate-x-0 opacity-100 z-10">
                             <div
                                 class="relative w-full max-w-[460px] sm:max-w-[500px] rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-white">
                                 <img id="anim-base-ui" src="images/business/solicitud/base-ui.svg" alt="Base Dashboard"
@@ -412,55 +425,40 @@
                             </div>
                         </div>
 
+                        <!-- ANIMACIÓN 1: DASHBOARD -->
                         <div id="biz-img-1"
-                            class="biz-img absolute inset-0 w-full h-full flex items-center justify-center p-2 sm:p-4 transition-all duration-700 ease-in-out translate-x-full opacity-0 z-0">
-
+                            class="biz-img absolute inset-0 w-full h-full flex items-center justify-center p-1 sm:p-4 transition-all duration-700 ease-in-out translate-x-full opacity-0 z-0">
                             <div
                                 class="relative w-full max-w-[460px] sm:max-w-[500px] rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-white">
-
-                                <!-- ================= ESCENA 1: MODO CLARO ================= -->
                                 <div id="dash-scene-1"
                                     class="relative w-full h-auto transition-opacity duration-700 z-10 bg-white">
-                                    <!-- UI Base (z-0) -->
                                     <img id="dash-base-ui" src="images/business/dashboard/base-ui.svg" alt="Base Light"
                                         class="w-full h-auto block transition-all duration-700 z-0">
-
-                                    <!-- WRAPPER UNIFICADO (z-30: Tarjeta + Botón juntos) -->
                                     <div id="dash-menu-wrapper-1"
                                         class="absolute top-[10%] right-[3%] w-[32%] h-auto opacity-0 scale-75 origin-top-right transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform-gpu z-30 rounded-lg overflow-hidden">
-
-                                        <!-- Tarjeta base del menú -->
                                         <img src="images/business/dashboard/dash-menu-light.svg" alt="Menú"
                                             class="w-full h-auto block">
-
-                                        <!-- Botón Ver Panel (Posicionado de forma relativa al menú) -->
                                         <img id="dash-btn-panel" src="images/business/dashboard/btn-panel-control.svg"
                                             alt="Ver Panel"
                                             class="absolute top-[10%] left-[6%] w-[88%] h-auto transition-transform duration-300 transform-gpu z-10">
                                     </div>
                                 </div>
-
                                 <div id="dash-scene-2"
                                     class="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-700 z-20 bg-[#161b22] rounded-2xl overflow-hidden">
                                     <img src="images/business/dashboard/dash-bg-dark.svg" alt="Fondo Dark"
                                         class="absolute inset-0 w-full h-full object-cover z-0">
-
                                     <div id="dash-backdrop-2"
                                         class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm opacity-0 transition-all duration-700 ease-in-out z-20 pointer-events-none rounded-2xl">
                                     </div>
-
                                     <img id="dash-chart-1" src="images/business/dashboard/dash-chart-1.svg"
                                         alt="Chart 1"
                                         class="absolute top-[14%] left-[4%] w-[92%] h-auto transition-all duration-700 ease-in-out transform-gpu z-10">
-
                                     <img id="dash-chart-2" src="images/business/dashboard/dash-chart-2.svg"
                                         alt="Chart 2"
                                         class="absolute top-[46.5%] left-[4%] w-[92%] h-auto transition-all duration-700 ease-in-out transform-gpu z-10">
-
                                     <img id="dash-chart-3" src="images/business/dashboard/dash-chart-3.svg"
                                         alt="Chart 3"
                                         class="absolute top-[68%] left-[4%] w-[92%] h-auto transition-all duration-700 ease-in-out transform-gpu z-10">
-
                                     <div id="dash-menu-wrapper-2"
                                         class="absolute top-[10%] right-[3%] w-[32%] h-auto opacity-0 scale-75 origin-top-right transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform-gpu z-40 rounded-lg overflow-hidden">
                                         <img src="images/business/dashboard/dash-menu-dark.svg" alt="Dropdown"
@@ -468,7 +466,6 @@
                                         <img id="dash-btn-descargar" src="images/business/dashboard/btn-descargar.svg"
                                             alt="Descargar"
                                             class="absolute top-[10%] left-[6%] w-[88%] h-auto transition-transform duration-300 transform-gpu z-10">
-
                                         <div id="dash-menu-overlay"
                                             class="absolute inset-0 bg-[#161b22] flex items-center justify-center opacity-0 transition-opacity duration-500 pointer-events-none z-20">
                                             <img id="dash-icon-check" src="images/business/dashboard/icon-check.svg"
@@ -478,25 +475,18 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
-                        <!-- CARD 2: BRAND / MARCA -->
+                        <!-- ANIMACIÓN 2: MARCA -->
                         <div id="biz-img-2"
-                            class="biz-img absolute inset-0 w-full h-full flex items-center justify-center p-2 sm:p-4 transition-all duration-700 ease-in-out translate-x-full opacity-0 z-0">
-
-                            <!-- Contenedor ajustado a la proporción exacta de la maqueta móvil -->
+                            class="biz-img absolute inset-0 w-full h-full flex items-center justify-center p-1 sm:p-4 transition-all duration-700 ease-in-out translate-x-full opacity-0 z-0">
                             <div
-                                class="relative h-[330px] sm:h-[360px] aspect-[9/19] rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-white">
-
-                                <!-- Base mobile con object-cover para abarcar el 100% del contenedor sin bordes blancos -->
+                                class="relative h-[230px] sm:h-[320px] lg:h-[360px] aspect-[9/19] rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-white">
                                 <img id="brand-base-ui" src="images/business/marca/mobile-base.svg" alt="Base Mobile"
                                     class="w-full h-full object-cover block blur-md opacity-0 transition-all duration-700 z-0">
-
                                 <div id="brand-backdrop"
                                     class="absolute inset-0 bg-slate-950/40 opacity-0 transition-opacity duration-700 z-10 pointer-events-none">
                                 </div>
-
                                 <div id="brand-card-wrapper"
                                     class="absolute top-[57%] left-[4.5%] w-[75%] h-auto rounded-lg overflow-hidden z-20 blur-md opacity-0 transition-all duration-700 shadow-[0_2px_6px_rgba(0,0,0,0.12)]">
                                     <img src="images/business/marca/card-banner.svg" alt="Banner Asegura tu campo"
@@ -505,24 +495,19 @@
                                         class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-[-25deg] -translate-x-[150%] z-30">
                                     </div>
                                 </div>
-
                                 <img id="brand-btn-ver" src="images/business/marca/btn-ver-mas.svg" alt="Ver más"
                                     class="absolute top-[73%] left-[7%] w-[42%] h-auto z-30 blur-md opacity-0 transition-all duration-700">
-
                                 <div id="brand-bottomsheet"
                                     class="absolute bottom-0 left-0 w-full h-[85%] bg-white rounded-t-2xl overflow-hidden z-40 translate-y-full transition-all duration-700 ease-out flex flex-col">
                                     <div id="brand-pill"
                                         class="w-8 h-1 bg-slate-300 rounded-full mx-auto mt-2 mb-1 shrink-0 z-10 transition-opacity duration-300">
                                     </div>
-
                                     <div class="relative w-full h-full overflow-hidden">
                                         <img id="brand-landing" src="images/business/marca/landing-content.svg"
                                             alt="Landing" class="w-full h-auto block transition-all duration-500">
-
                                         <img id="brand-btn-cta" src="images/business/marca/btn-cta-landing.svg"
                                             alt="CTA"
                                             class="absolute bottom-[15%] left-[18%] w-[64%] h-auto opacity-0 scale-75 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform-gpu z-50">
-
                                         <div id="brand-loader"
                                             class="absolute inset-0 bg-white flex flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-300 pointer-events-none z-60">
                                             <div id="brand-spinner"
@@ -541,74 +526,75 @@
 
                     </div>
 
-                    <div class="flex flex-col justify-between space-y-6 order-1 lg:order-2">
-                        <div>
-                            <h2 class="text-xl md:text-2xl font-extrabold text-on-surface tracking-tight mb-2">
-                                Vistaguay <span class="text-primary font-bold">Business</span>
-                            </h2>
-                            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
-                                Potenciamos la gestión de grandes empresas y agroinsumos con una interfaz adaptada a tus
-                                operaciones.
-                            </p>
+                    <!-- 3. CARDS Y PAGINADO (lg:self-start para arrancar inmediatamente debajo del texto) -->
+                    <div
+                        class="order-3 lg:order-2 lg:row-start-2 lg:col-start-2 w-full overflow-hidden lg:self-start lg:pt-1">
+                        <div class="flex lg:flex-col overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-4 lg:gap-0 lg:space-y-3.5 pb-1 lg:pb-0"
+                            id="biz-cards-container">
 
-                            <div class="space-y-3.5" id="biz-cards-container">
-                                <div data-index="0"
-                                    class="biz-card group cursor-pointer p-4 rounded-2xl border transition-all duration-500 bg-primary text-white border-primary shadow-md">
-                                    <div class="flex items-start gap-3.5">
-                                        <div
-                                            class="biz-icon-box w-9 h-9 rounded-xl bg-white/20 text-white flex items-center justify-center shrink-0 transition-colors mt-0.5">
-                                            <span data-icon="bolt" data-icon-class="w-5 h-5"></span>
-                                        </div>
-                                        <div>
-                                            <h4 class="biz-title text-sm font-bold leading-tight mb-1">
-                                                Solicitudes rápidas y asignación delegada
-                                            </h4>
-                                            <p class="biz-desc text-sm opacity-90 leading-relaxed">
-                                                Cargás el lote desde una interfaz simplificada y nosotros coordinamos al
-                                                piloto certificado ideal.
-                                            </p>
-                                        </div>
+                            <div data-index="0"
+                                class="biz-card w-full min-w-full lg:min-w-0 snap-center group cursor-pointer p-4 rounded-2xl border transition-all duration-500 bg-primary text-white border-primary shadow-md">
+                                <div class="flex items-start gap-3.5">
+                                    <div
+                                        class="biz-icon-box w-9 h-9 rounded-xl bg-white/20 text-white flex items-center justify-center shrink-0 transition-colors mt-0.5">
+                                        <span data-icon="bolt" data-icon-class="w-5 h-5"></span>
                                     </div>
-                                </div>
-
-                                <div data-index="1"
-                                    class="biz-card group cursor-pointer p-4 rounded-2xl border transition-all duration-500 bg-white border-slate-200/80 text-slate-800 hover:border-primary/50">
-                                    <div class="flex items-start gap-3.5">
-                                        <div
-                                            class="biz-icon-box w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 transition-colors mt-0.5">
-                                            <span data-icon="analytics" data-icon-class="w-5 h-5"></span>
-                                        </div>
-                                        <div>
-                                            <h4 class="biz-title text-sm font-bold text-slate-900 leading-tight mb-1">
-                                                Tableros de control y reportes custom
-                                            </h4>
-                                            <p class="biz-desc text-sm text-slate-600 leading-relaxed">
-                                                Consolidación de hectáreas voladas, métricas clave y reportes
-                                                exportables con tu marca.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div data-index="2"
-                                    class="biz-card group cursor-pointer p-4 rounded-2xl border transition-all duration-500 bg-white border-slate-200/80 text-slate-800 hover:border-primary/50">
-                                    <div class="flex items-start gap-3.5">
-                                        <div
-                                            class="biz-icon-box w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 transition-colors mt-0.5">
-                                            <span data-icon="campaign" data-icon-class="w-5 h-5"></span>
-                                        </div>
-                                        <div>
-                                            <h4 class="biz-title text-sm font-bold text-slate-900 leading-tight mb-1">
-                                                Presencia de marca en plataforma
-                                            </h4>
-                                            <p class="biz-desc text-sm text-slate-600 leading-relaxed">
-                                                Visibilidad directa hacia productores y asesores mediante banners
-                                                publicitarios estratégicos.
-                                            </p>
-                                        </div>
+                                    <div>
+                                        <h4 class="biz-title text-sm font-bold leading-tight mb-1">Solicitudes rápidas y
+                                            asignación delegada</h4>
+                                        <p class="biz-desc text-sm opacity-90 leading-relaxed">Cargás el lote desde una
+                                            interfaz simplificada y nosotros coordinamos al piloto certificado ideal.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+
+                            <div data-index="1"
+                                class="biz-card w-full min-w-full lg:min-w-0 snap-center group cursor-pointer p-4 rounded-2xl border transition-all duration-500 bg-white border-slate-200/80 text-slate-800 hover:border-primary/50">
+                                <div class="flex items-start gap-3.5">
+                                    <div
+                                        class="biz-icon-box w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 transition-colors mt-0.5">
+                                        <span data-icon="analytics" data-icon-class="w-5 h-5"></span>
+                                    </div>
+                                    <div>
+                                        <h4 class="biz-title text-sm font-bold text-slate-900 leading-tight mb-1">
+                                            Tableros de control y reportes custom</h4>
+                                        <p class="biz-desc text-sm text-slate-600 leading-relaxed">Consolidación de
+                                            hectáreas voladas, métricas clave y reportes exportables con tu marca.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-index="2"
+                                class="biz-card w-full min-w-full lg:min-w-0 snap-center group cursor-pointer p-4 rounded-2xl border transition-all duration-500 bg-white border-slate-200/80 text-slate-800 hover:border-primary/50">
+                                <div class="flex items-start gap-3.5">
+                                    <div
+                                        class="biz-icon-box w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 transition-colors mt-0.5">
+                                        <span data-icon="campaign" data-icon-class="w-5 h-5"></span>
+                                    </div>
+                                    <div>
+                                        <h4 class="biz-title text-sm font-bold text-slate-900 leading-tight mb-1">
+                                            Presencia de marca en plataforma</h4>
+                                        <p class="biz-desc text-sm text-slate-600 leading-relaxed">Visibilidad directa
+                                            hacia productores y asesores mediante banners publicitarios estratégicos.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Paginador móvil -->
+                        <div id="biz-pagination" class="flex lg:hidden justify-center items-center gap-1.5 mt-2">
+                            <button aria-label="Ir a sección 1"
+                                class="biz-dot w-6 h-1.5 rounded-full bg-primary transition-all duration-300"
+                                onclick="scrollToBizCard(0)"></button>
+                            <button aria-label="Ir a sección 2"
+                                class="biz-dot w-1.5 h-1.5 rounded-full bg-slate-300 transition-all duration-300"
+                                onclick="scrollToBizCard(1)"></button>
+                            <button aria-label="Ir a sección 3"
+                                class="biz-dot w-1.5 h-1.5 rounded-full bg-slate-300 transition-all duration-300"
+                                onclick="scrollToBizCard(2)"></button>
                         </div>
                     </div>
 
@@ -616,7 +602,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="py-10 md:py-12 bg-slate-50" id="expert">
         <div class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
